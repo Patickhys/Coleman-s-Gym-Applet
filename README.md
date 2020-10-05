@@ -6,6 +6,8 @@ This application aims to provide advice on beginner to intermidiate level streng
 An user can use this app to generate a persoanlised workout progame based on their personal preference on the frequency, intensity and volume of their wokrouts.
 An user can be anyone who is looking to start building thier strengthen or anyone who is looking for a comprehensive and custormizable traning program.
 
+## Functionalities
+
 Here is a list of functionalities, suggested by my fellow fitness enthusiasts, that this application will try to provide:
 - food intake tracking
 - traning tracking
