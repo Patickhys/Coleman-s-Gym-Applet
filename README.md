@@ -2,20 +2,21 @@
 
 ## A personal workout app
 
-This application aims to provide advice on beginner to intermidiate level strength training.
-An user can use this app to generate a persoanlised workout progame based on their personal preference on the frequency, intensity and volume of their wokrouts.
+This application aims to provide advice on *beginner* to *intermediate* level strength training.
+An user can use this app to generate a personalised workout pregame based on their personal preference on the frequency, intensity and volume of their wokrouts.
 
 ## Target audience
 
-An user can be anyone who is looking to start building thier strengthen or anyone who is looking for a comprehensive and custormizable traning program.
+An user can be anyone who is looking to start building their strength or anyone who is looking for a comprehensive and custormizable traning program.
 
-## Functionalities
+## User Stories
 
-Here is a list of functionalities, suggested by my fellow fitness enthusiasts, that this application will try to provide:
-- food intake tracking
-- traning tracking
-- bodyweight and various measurements tracking
-- generating a complete workout routine based on user preference on the frequency, intensity and volume of wokrouts.
+- As a user, I want to be able to track my food intake.
+- As a user, I want to be able to track my the training I have done. 
+- As a user, I want to be able to keep track of my weight and various measurements.
+- As a user, I want to be able to generate a complete workout routine based on user preference on the frequency, intensity and volume of wokrouts.
 - etc.
 
-Speical thanks to Raymond W, Memory J for their input.
+
+
+Special thanks to Raymond W, Memory J for their input.
