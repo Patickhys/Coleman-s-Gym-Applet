@@ -5,7 +5,7 @@
 This application aims to provide advice on beginner to intermidiate level strength training.
 An user can use this app to generate a persoanlised workout progame based on their personal preference on the frequency, intensity and volume of their wokrouts.
 
-## Target users
+## Target audience
 
 An user can be anyone who is looking to start building thier strengthen or anyone who is looking for a comprehensive and custormizable traning program.
 
