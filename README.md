@@ -19,4 +19,3 @@ An user can be anyone who is looking to start building their strength or anyone 
 
 
 
-Special thanks to Raymond W, Memory J for their input.
