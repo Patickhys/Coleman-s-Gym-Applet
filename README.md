@@ -14,8 +14,7 @@ An user can be anyone who is looking to start building their strength or anyone 
 - As a user, I want to be able to track my food intake.
 - As a user, I want to be able to track my the training I have done. 
 - As a user, I want to be able to keep track of my weight and various measurements.
-- As a user, I want to be able to generate a complete workout routine based on user preference on the frequency, intensity and volume of wokrouts.
-- etc.
+
 
 
 

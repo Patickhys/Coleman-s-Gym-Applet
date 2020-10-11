@@ -5,30 +5,37 @@ import java.util.List;
 // Represents a log of daily food intakes, each entry is one day
 
 public class FoodTracking {
-    List<DailyCalories> log;
+    List<DailyFood> log;
     int TotalCalories = 0;
     int numLogs = 0;
 
     public FoodTracking(){
         log = new ArrayList<>();
     }
+
     // getters
     public int getTotalCalories(){return TotalCalories;}
     public int getNumLogs(){return numLogs;}
+
+    // EFFECTS: return the entry in the given position, begins at 0
+    public DailyFood getEntry(int i){
+        DailyFood entry = log.get(i);
+        return entry;
+    }
 
     // REQUIRES: a valid Daily Calories
     // MODIFIES: this
     // EFFECTS: add a DailyCalories to the intake log, Update TotalCalories and numLogs
 
-    public void addEntry(DailyCalories c) {
-        log.add(c);
-        TotalCalories+= c.getCalories();
+    public void addEntry(DailyFood c) {
+        TotalCalories += c.getCalories();
         numLogs ++;
+        log.add(c);
     }
 
     // EFFECTS: Find the average Calories consumed per day and return it
-    public int findDailyCalories(){
-        int DailyCalories = TotalCalories / numLogs;
+    public double findDailyCalories(){
+        double DailyCalories = TotalCalories / numLogs;
         return DailyCalories;
     }
 

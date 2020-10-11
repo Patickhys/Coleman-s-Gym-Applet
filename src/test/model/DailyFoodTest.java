@@ -5,15 +5,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DailyCaloriesTest {
-    DailyCalories myDiet;
+public class DailyFoodTest {
+    DailyFood myDiet;
     int rice = 150;
     int chicken = 200;
     int avocado = 100;
 
     @BeforeEach
     void runBefore(){
-    myDiet = new DailyCalories();
+    myDiet = new DailyFood();
     }
 
     @Test

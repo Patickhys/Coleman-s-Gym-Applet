@@ -2,7 +2,7 @@ package model;
 
 // Represents the food intake of a person, composed of carbohydrates, protein and fats (in grams)
 
-public class DailyCalories {
+public class DailyFood {
     private int carbs;                  // carbohydrates consumed in grams
     private int protein;                // protein consumed in grams
     private int fat;                    // fats consumed in grams
@@ -10,7 +10,7 @@ public class DailyCalories {
 
     // EFFECTS: make a new DailyFoodIntake, assuming the user has consumed nothing yet;
 
-    public DailyCalories(){
+    public DailyFood(){
        carbs = 0;
        protein = 0;
        fat = 0;
