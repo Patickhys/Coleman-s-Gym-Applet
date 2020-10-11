@@ -30,12 +30,12 @@ public class FoodTrackingTest {
     void testAddEntry(){
         log.addEntry(day1);
         assertEquals(day1,log.getEntry(0));
-        assertTrue(log.TotalCalories == day1.getCalories());
+        assertTrue(log.getTotalCalories() == day1.getCalories());
         log.addEntry(day2);
-        assertTrue(log.TotalCalories == day1.getCalories() + day2.getCalories());
+        assertTrue(log.getTotalCalories() == day1.getCalories() + day2.getCalories());
         assertEquals(day2,log.getEntry(1));
         log.addEntry(day3);
-        assertTrue(log.TotalCalories == day1.getCalories() + day2.getCalories() + day3.getCalories());
+        assertTrue(log.getTotalCalories() == day1.getCalories() + day2.getCalories() + day3.getCalories());
         assertEquals(day3,log.getEntry(2));
     }
     @Test
@@ -44,6 +44,6 @@ public class FoodTrackingTest {
         log.addEntry(day2);
         log.addEntry(day3);
         int totalCal = day1.getCalories() + day2.getCalories() + day3.getCalories();
-        assertEquals(totalCal / log.numLogs ,log.findDailyCalories());
+        assertEquals(totalCal / log.getNumLogs()  ,log.findDailyCalories());
     }
 }

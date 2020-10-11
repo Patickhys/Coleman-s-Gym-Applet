@@ -9,7 +9,7 @@ import static java.math.RoundingMode.CEILING;
 
 public class Measurements {
     public double weightInKg;
-    public double heightInCm;
+    public final double heightInCm;
 
     // REQUIRES: weight to be in kg and height to be in cm
     // EFFECTS: make a new measurement

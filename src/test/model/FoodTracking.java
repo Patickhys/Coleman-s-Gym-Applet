@@ -4,18 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 // Represents a log of daily food intakes, each entry is one day
 
-public class FoodTracking {
+public class FoodTracking{
     List<DailyFood> log;
-    int TotalCalories = 0;
-    int numLogs = 0;
 
     public FoodTracking(){
         log = new ArrayList<>();
     }
 
-    // getters
-    public int getTotalCalories(){return TotalCalories;}
-    public int getNumLogs(){return numLogs;}
+    // EFFECTS: return the total calories in the log
+    public int getTotalCalories(){
+        int TotalCalories = 0;
+        for (DailyFood d : log){
+            TotalCalories += d.getCalories();
+        }
+        return TotalCalories;}
+
+    // EFFECTS: return the number of entries in the log
+    public int getNumLogs(){
+        int numLogs = log.size();
+        return numLogs;}
 
     // EFFECTS: return the entry in the given position, begins at 0
     public DailyFood getEntry(int i){
@@ -28,14 +35,12 @@ public class FoodTracking {
     // EFFECTS: add a DailyCalories to the intake log, Update TotalCalories and numLogs
 
     public void addEntry(DailyFood c) {
-        TotalCalories += c.getCalories();
-        numLogs ++;
         log.add(c);
     }
 
-    // EFFECTS: Find the average Calories consumed per day and return it
+    // EFFECTS: return the average Calories consumed per day and
     public double findDailyCalories(){
-        double DailyCalories = TotalCalories / numLogs;
+        double DailyCalories = getTotalCalories() / log.size();
         return DailyCalories;
     }
 
