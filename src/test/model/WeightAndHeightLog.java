@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 // Represents a log of measurements, maximum one per day
 
-public class WeightAndHeightTracking {
+public class WeightAndHeightLog {
     ArrayList<WeightAndHeight> log;
 
-    public WeightAndHeightTracking() {
+    public WeightAndHeightLog() {
         log = new ArrayList<>();
     }
 

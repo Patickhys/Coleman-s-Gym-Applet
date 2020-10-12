@@ -2,12 +2,13 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 // Represents a log of daily food intakes, each entry is one day
 
-public class FoodTracking{
+public class FoodLog {
     List<Food> log;
 
-    public FoodTracking(){
+    public FoodLog(){
         log = new ArrayList<>();
     }
 
@@ -26,6 +27,7 @@ public class FoodTracking{
 
     // EFFECTS: return the entry in the given position, begins at 0
     public Food getEntry(int i){
+        i--;
         Food entry = log.get(i);
         return entry;
     }

@@ -1,9 +1,11 @@
-package model;
+package model.tests;
 
+import model.Food;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+// Testing the Food Class
 
 public class FoodTest {
     Food myDiet;

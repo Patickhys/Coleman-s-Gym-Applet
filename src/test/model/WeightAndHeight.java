@@ -13,11 +13,11 @@ public class WeightAndHeight {
 
     // REQUIRES: weight to be in kg and height to be in cm
     // EFFECTS: make a new measurement
-
     public WeightAndHeight(double weight, double height){
     weightInKg = weight;
     heightInCm = height;
     }
+
     // EFFECTS: return the BMI of this measurement
     public double findBMI(){
         double heightInM = heightInCm / 100;

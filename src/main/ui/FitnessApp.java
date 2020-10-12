@@ -36,8 +36,7 @@ public class FitnessApp {
         System.out.println("1.Nutrition Record");
         System.out.println("2. Training Record");
         System.out.println("3. Measurement Record");
-        System.out.println("4. Create a new Workout Program");
-        System.out.printf("5. Exit");
+        System.out.printf("0. Exit");
         while (true) {
             Scanner option = new Scanner(System.in);
             if (option.nextLine().equals("1")) {
@@ -46,9 +45,7 @@ public class FitnessApp {
                 trainingMenu();
             } else if (option.nextLine().equals("3")) {
                 measurementMenu();
-            } else if (option.nextLine().equals("4")) {
-                workoutMenu();
-            } else if (option.nextLine().equals("5")) {
+            } else if (option.nextLine().equals("0")) {
                 System.exit(1);
             }
             System.out.printf("Please entry an valid option!");
@@ -56,8 +53,6 @@ public class FitnessApp {
     }
 
 
-    protected void workoutMenu() {
-    }
 
     protected void trainingMenu() {
         System.out.println("Please select an option!");
