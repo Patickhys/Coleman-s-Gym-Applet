@@ -5,7 +5,7 @@ import java.util.List;
 // Represents a log of daily food intakes, each entry is one day
 
 public class FoodTracking{
-    List<DailyFood> log;
+    List<Food> log;
 
     public FoodTracking(){
         log = new ArrayList<>();
@@ -14,7 +14,7 @@ public class FoodTracking{
     // EFFECTS: return the total calories in the log
     public int getTotalCalories(){
         int TotalCalories = 0;
-        for (DailyFood d : log){
+        for (Food d : log){
             TotalCalories += d.getCalories();
         }
         return TotalCalories;}
@@ -25,8 +25,8 @@ public class FoodTracking{
         return numLogs;}
 
     // EFFECTS: return the entry in the given position, begins at 0
-    public DailyFood getEntry(int i){
-        DailyFood entry = log.get(i);
+    public Food getEntry(int i){
+        Food entry = log.get(i);
         return entry;
     }
 
@@ -34,7 +34,7 @@ public class FoodTracking{
     // MODIFIES: this
     // EFFECTS: add a DailyCalories to the intake log, Update TotalCalories and numLogs
 
-    public void addEntry(DailyFood c) {
+    public void addEntry(Food c) {
         log.add(c);
     }
 

@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MeasurementsTest {
+public class WeightAndHeightTest {
     double weight = 50.0;  // weight in grams
     double height = 160.0;     // height in cm
-    Measurements mySize;
+    WeightAndHeight mySize;
     @BeforeEach
     void makeMeasurement(){
-       mySize = new Measurements(weight,height);
+       mySize = new WeightAndHeight(weight,height);
     }
     @Test
     void testFindBMI(){

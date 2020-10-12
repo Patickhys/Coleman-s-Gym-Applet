@@ -9,17 +9,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FoodTrackingTest {
     FoodTracking log;
-    DailyFood day1;
-    DailyFood day2;
-    DailyFood day3;
+    Food day1;
+    Food day2;
+    Food day3;
     int rice = 150;
     int chicken = 200;
     int avocado = 100;
     @BeforeEach
     void makeLog(){
-        day1 = new DailyFood();
-        day2 = new DailyFood();
-        day3 = new DailyFood();
+        day1 = new Food();
+        day2 = new Food();
+        day3 = new Food();
         day1.eatAMeal(2*rice,chicken,avocado);
         day2.eatAMeal(rice, 2* chicken, avocado);
         day3.eatAMeal(rice,chicken,2* avocado);
