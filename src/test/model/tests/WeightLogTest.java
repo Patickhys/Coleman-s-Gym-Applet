@@ -50,9 +50,9 @@ public class WeightLogTest {
     }
     @Test
     void testViewAllMeasurements(){
-        String report = day1.report() + "/n"
-                + day2.report() + "/n"
-                + day3.report() + "/n";
+        String report = "1. " + day1.report() + "\n"
+                + "2. " + day2.report() + "\n"
+                + "3. " +  day3.report() + "\n";
         assertEquals(report,log.viewAllMeasurements());
     }
 }

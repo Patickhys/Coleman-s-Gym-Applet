@@ -5,7 +5,7 @@ package model;
 
 public class Weight {
     public double weightInKg;
-    public final double heightInCm;
+    public double heightInCm;
 
     // REQUIRES: weight to be in kg and height to be in cm
     // EFFECTS: make a new measurement

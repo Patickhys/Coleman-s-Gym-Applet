@@ -5,7 +5,7 @@ import java.util.ArrayList;
 // Represents a log of measurements, maximum one per day
 
 public class WeightLog {
-    ArrayList<Weight> log;
+    public ArrayList<Weight> log;
 
     public WeightLog() {
         log = new ArrayList<>();
@@ -48,8 +48,10 @@ public class WeightLog {
     // EFFECTS: return a string made up of all weight reports from the log
     public String viewAllMeasurements() {
         String allMeasurements = "";
+        int number = 1;
         for (Weight w : log) {
-            allMeasurements = allMeasurements + w.report() + "/n";
+            allMeasurements = allMeasurements + number + ". "  + w.report() + "\n";
+            number++;
         }
         return allMeasurements;
     }

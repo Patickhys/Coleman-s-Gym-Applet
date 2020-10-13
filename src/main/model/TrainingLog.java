@@ -55,8 +55,10 @@ public class TrainingLog {
 
     public String viewPastTraining() {
         String allTrainings = "";
+        int number = 1;
         for (Training e : log) {
-            allTrainings = allTrainings + e.reportExercise() + " /n";
+            allTrainings = allTrainings + number + ". " + e.reportExercise() + "\n";
+            number++;
         }
         return allTrainings;
     }

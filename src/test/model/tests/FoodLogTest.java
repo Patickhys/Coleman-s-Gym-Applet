@@ -52,9 +52,9 @@ public class FoodLogTest {
         log.addEntry(day2);
         log.addEntry(day3);
         String result;
-        result = day1.reportMeal() + "/n"
-                + day2.reportMeal() + "/n"
-                + day3.reportMeal() + "/n";
+        result = "1. " + day1.reportMeal() + "\n"
+                + "2. " + day2.reportMeal() + "\n"
+                + "3. " + day3.reportMeal() + "\n";
         assertEquals(result, log.viewPastMeals());
     }
 }

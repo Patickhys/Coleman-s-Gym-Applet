@@ -7,20 +7,20 @@ import java.util.Scanner;
 import model.*;
 
 public class FitnessApp {
-    private String userName;
-    private String userSex = "userSex";
+    protected String userName;
+    protected String userSex;
     private int userHeight;
     private double userWeight;
-    private TrainingLog trainingLog;
-    private FoodLog mealLog;
-    private WeightLog weightLog;
+    public TrainingLog trainingLog;
+    public FoodLog mealLog;
+    public WeightLog weightLog;
 
     public FitnessApp() {
         trainingLog = new TrainingLog();
+        mealLog = new FoodLog();
+        weightLog = new WeightLog();
         initializeUser();
-        while (true) {
-            mainMenu();
-        }
+        mainMenu();
     }
 
     // MODIFIES: this
@@ -44,6 +44,7 @@ public class FitnessApp {
         userWeight = Double.parseDouble(weightStr);
     }
 
+    // EFFECTS: provides a main menu to all the sub-menus
     public void mainMenu() {
         while (true) {
             System.out.println("Please select an option!");
@@ -67,48 +68,58 @@ public class FitnessApp {
 
     // REQUIRES: an option must be valid string that describe an user option
     // EFFECTS: a helpful method for submenus
-
     public void secondaryMenu(String option1, String option2) {
         System.out.println("Please select an option!");
         System.out.println(option1);
         System.out.println(option2);
     }
+    // EFFECTS: a sub-menu for trainings
 
-    protected void trainingMenu() {
+    public void trainingMenu() {
         secondaryMenu("1. Enter a training session", "2. View my training history");
         Scanner option = new Scanner(System.in);
-        if (option.nextLine().equals("1")) {
+        int choice = option.nextInt();
+        if (choice == 1) {
             makeNewTraining();
-        } else if (option.nextLine().equals("2")) {
+        } else if (choice == 2) {
             viewPastTraining();
         }
     }
 
+    // EFFECTS: a sub-menu for nutrition
     public void nutritionMenu() {
         secondaryMenu("1. Enter a meal", "2. View my meals");
         Scanner option = new Scanner(System.in);
-        if (option.nextLine().equals("1")) {
+        int choice = option.nextInt();
+        if (choice == 1) {
             makeNewMeal();
-        } else if (option.nextLine().equals("2")) {
+        } else if (choice == 2) {
             viewPastMeals();
         }
     }
 
+    // EFFECTS: a sub-menu for measurements
     public void measurementMenu() {
         secondaryMenu("1. Enter a measurement", "2. View my measurements");
         Scanner option = new Scanner(System.in);
-        if (option.nextLine().equals("1")) {
+        int choice = option.nextInt();
+        if (choice == 1) {
             makeMeasurement();
-        } else if (option.nextLine().equals("2")) {
+        } else if (choice == 2) {
             viewPastMeasurements();
         }
     }
 
+    // REQUIRES: weightLog has at least one entry
+    // EFFECTS: help method that prints out Measurement analysis
     public void viewPastMeasurements() {
-        weightLog.viewAllMeasurements();
-        weightLog.analyzeTrend();
+        System.out.println((weightLog.viewAllMeasurements()));
+        System.out.println(weightLog.analyzeTrend());
     }
 
+    // REQUIRES: user answers the question nicely
+    // MODIFIES: this
+    // EFFECTS: make a new Weight();
     public void makeMeasurement() {
         Scanner answer = new Scanner(System.in);
         System.out.println("How much do you weight in kg");
@@ -120,6 +131,9 @@ public class FitnessApp {
         weightLog.addEntry(newEntry);
     }
 
+    // REQUIRES: user answers the question nicely
+    // MODIFIES: this
+    // EFFECTS: make a new Food();
     public void makeNewMeal() {
         Scanner answer = new Scanner(System.in);
         System.out.println("How much carbs in grams did you eat?");
@@ -134,10 +148,15 @@ public class FitnessApp {
         mealLog.addEntry(newMeal);
     }
 
+    // REQUIRES: mealLog has at least one entry
+    // EFFECTS: print out all meals in mealLog;
     public void viewPastMeals() {
         System.out.println((mealLog.viewPastMeals()));
     }
 
+    // REQUIRES: user answers the question nicely
+    // MODIFIES: this
+    // EFFECTS: make a new Training();
     public void makeNewTraining() {
         Scanner answer = new Scanner(System.in);
         System.out.println("What exercise did you do?");
@@ -152,6 +171,8 @@ public class FitnessApp {
         trainingLog.addEntry(newTraining);
     }
 
+    // REQUIRES: trainingLog has at least one entry
+    // EFFECTS: print out all trainings in mealLog;
     public void viewPastTraining() {
         System.out.println(trainingLog.viewPastTraining());
     }

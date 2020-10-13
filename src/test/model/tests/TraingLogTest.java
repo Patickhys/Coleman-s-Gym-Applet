@@ -51,9 +51,9 @@ public class TraingLogTest {
     @Test
     void testViewPastTraining(){
         String result = "";
-        result = BenchPress.reportExercise() + "/n"
-                + Rowing.reportExercise() + "/n"
-                + Yoga.reportExercise() + "/n";
+        result = "1. " + BenchPress.reportExercise() + "\n"
+                + "2. " + Rowing.reportExercise() + "\n"
+                + "3. " + Yoga.reportExercise() + "\n";
         assertEquals(result, log.viewPastTraining());
     }
 

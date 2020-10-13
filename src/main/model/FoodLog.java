@@ -1,12 +1,12 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 // Represents a log of daily food intakes, each entry is one day
 
 public class FoodLog {
-    List<Food> log;
+    public ArrayList<Food> log;
 
     public FoodLog() {
         log = new ArrayList<>();
@@ -50,8 +50,10 @@ public class FoodLog {
 
     public String viewPastMeals() {
         String allMeals = "";
+        int number = 1;
         for (Food f : log) {
-            allMeals = allMeals + f.reportMeal() + "/n";
+            allMeals = allMeals + number + ". " + f.reportMeal() + "\n";
+            number++;
         }
         return allMeals;
     }
