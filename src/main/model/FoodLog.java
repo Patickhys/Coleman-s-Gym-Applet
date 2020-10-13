@@ -23,15 +23,13 @@ public class FoodLog {
 
     // EFFECTS: return the number of entries in the log
     public int getNumLogs() {
-        int numLogs = log.size();
-        return numLogs;
+        return log.size();
     }
 
     // EFFECTS: return the entry in the given position, begins at 0
     public Food getEntry(int i) {
         i--;
-        Food entry = log.get(i);
-        return entry;
+        return log.get(i);
     }
 
     // REQUIRES: a valid Daily Calories
@@ -44,8 +42,7 @@ public class FoodLog {
 
     // EFFECTS: return the average Calories consumed per day and
     public double findDailyCalories() {
-        double dailyCalories = getTotalCalories() / log.size();
-        return dailyCalories;
+        return getTotalCalories() / log.size();
     }
 
     public String viewPastMeals() {
