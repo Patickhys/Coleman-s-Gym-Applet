@@ -28,7 +28,7 @@ public class TrainingTest {
     }
     @Test
     void testReportExercise(){
-        String result = "You did " + BenchPress.name + "for " + BenchPress.duration + " minutes. It burned "
+        String result = "You did " + BenchPress.name + " for " + BenchPress.duration + " minutes. It burned "
                 + BenchPress.calories + " calories.";
         assertEquals(result, BenchPress.reportExercise());
     }

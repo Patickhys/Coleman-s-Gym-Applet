@@ -53,7 +53,8 @@ public class TraingLogTest {
         String result = "";
         result = "1. " + BenchPress.reportExercise() + "\n"
                 + "2. " + Rowing.reportExercise() + "\n"
-                + "3. " + Yoga.reportExercise() + "\n";
+                + "3. " + Yoga.reportExercise() + "\n"
+                + "A total of " + log.getTotalCalories() + " calories.";
         assertEquals(result, log.viewPastTraining());
     }
 

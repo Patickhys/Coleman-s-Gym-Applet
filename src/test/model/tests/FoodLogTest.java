@@ -43,7 +43,7 @@ public class FoodLogTest {
         log.addEntry(day2);
         log.addEntry(day3);
         int totalCal = day1.getCalories() + day2.getCalories() + day3.getCalories();
-        assertEquals(totalCal / log.getNumLogs()  ,log.findDailyCalories());
+        assertEquals(totalCal / log.getLogSize()  ,log.findDailyCalories());
     }
 
     @Test
@@ -52,9 +52,11 @@ public class FoodLogTest {
         log.addEntry(day2);
         log.addEntry(day3);
         String result;
+        int cal = log.getTotalCalories();
         result = "1. " + day1.reportMeal() + "\n"
                 + "2. " + day2.reportMeal() + "\n"
-                + "3. " + day3.reportMeal() + "\n";
+                + "3. " + day3.reportMeal() + "\n"
+                + "A total of " + cal + " calories." ;
         assertEquals(result, log.viewPastMeals());
     }
 }

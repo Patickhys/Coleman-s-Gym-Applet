@@ -19,7 +19,7 @@ public class TrainingLog {
     }
 
     // REQUIRES: pos must be 1 <= pos <= log.size()
-    // EFFECTS: return the exercise at postion given
+    // EFFECTS: return the exercise at position given
 
     public Training getExerciseAtPos(int pos) {
         pos--;
@@ -60,6 +60,7 @@ public class TrainingLog {
             allTrainings = allTrainings + number + ". " + e.reportExercise() + "\n";
             number++;
         }
+        allTrainings = allTrainings + "A total of " + getTotalCalories() + " calories.";
         return allTrainings;
     }
 }

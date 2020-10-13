@@ -49,7 +49,8 @@ public class FoodTest {
 
     @Test
     void testReportMeal(){
-        String result = "You had 0g of carbs, 0g of protein, and 0g of fat.";
+        int cal = myDiet.getCalories();
+        String result = "You had 0g of carbs, 0g of protein, and 0g of fat." + "A total of " + cal + " calories.";
         assertEquals(result,myDiet.reportMeal());
     }
 

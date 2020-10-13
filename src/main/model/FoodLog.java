@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 // Represents a log of daily food intakes, each entry is one day
 
-public class FoodLog {
+public class FoodLog extends CaloriesLog {
     public ArrayList<Food> log;
 
     public FoodLog() {
@@ -13,6 +13,7 @@ public class FoodLog {
     }
 
     // EFFECTS: return the total calories in the log
+    @Override
     public int getTotalCalories() {
         int totalCalories = 0;
         for (Food d : log) {
@@ -22,7 +23,8 @@ public class FoodLog {
     }
 
     // EFFECTS: return the number of entries in the log
-    public int getNumLogs() {
+    @Override
+    public int getLogSize() {
         return log.size();
     }
 
@@ -52,6 +54,8 @@ public class FoodLog {
             allMeals = allMeals + number + ". " + f.reportMeal() + "\n";
             number++;
         }
+        int cal = getTotalCalories();
+        allMeals = allMeals + "A total of " + cal + " calories.";
         return allMeals;
     }
 }

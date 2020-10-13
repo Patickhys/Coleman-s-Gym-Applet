@@ -47,7 +47,9 @@ public class Food {
     }
 
     public String reportMeal() {
-        String meal = "You had " + carbs + "g of carbs, " + protein + "g of protein, and " +  fat + "g of fat.";
+        int cal = getCalories();
+        String meal = "You had " + carbs + "g of carbs, " + protein + "g of protein, and " +  fat + "g of fat."
+                + "A total of " + cal + " calories.";
         return meal;
     }
 }

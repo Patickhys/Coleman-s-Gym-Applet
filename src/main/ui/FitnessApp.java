@@ -73,8 +73,8 @@ public class FitnessApp {
         System.out.println(option1);
         System.out.println(option2);
     }
-    // EFFECTS: a sub-menu for trainings
 
+    // EFFECTS: a sub-menu for trainings
     public void trainingMenu() {
         secondaryMenu("1. Enter a training session", "2. View my training history");
         Scanner option = new Scanner(System.in);

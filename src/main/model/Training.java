@@ -21,7 +21,7 @@ public class Training {
     }
 
     public String reportExercise() {
-        String exercise = "You did " + name + "for " + duration + " minutes. It burned " + calories + " calories.";
+        String exercise = "You did " + name + " for " + duration + " minutes. It burned " + calories + " calories.";
         return exercise;
     }
 }

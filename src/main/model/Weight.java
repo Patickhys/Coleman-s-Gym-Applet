@@ -19,7 +19,6 @@ public class Weight {
         double heightInM = heightInCm / 100;
         double heightSquared = heightInM * heightInM;
         double bmi = weightInKg / heightSquared;
-        String.format("%.1g%n", bmi);
         return bmi;
     }
 

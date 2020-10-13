@@ -19,7 +19,7 @@ public class WeightTest {
     @Test
     void testFindBMI(){
        double heightInMSquared = Math.pow(height /100,2);
-        assertEquals(weight/ heightInMSquared, mySize.findBMI());
+        assertEquals( weight/ heightInMSquared, mySize.findBMI());
     }
     @Test
     void testReport(){
