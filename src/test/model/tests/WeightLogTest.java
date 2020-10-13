@@ -1,22 +1,22 @@
 package model.tests;
 
-import model.WeightAndHeight;
-import model.WeightAndHeightLog;
+import model.Weight;
+import model.WeightLog;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class WeightAndHeightLogTest {
-    WeightAndHeightLog log;
-    WeightAndHeight day1 = new WeightAndHeight(50,160);
-    WeightAndHeight day2 = new WeightAndHeight(49,160);
-    WeightAndHeight day3 = new WeightAndHeight(48,160);
-    WeightAndHeight day4 = new WeightAndHeight(51,160);
+public class WeightLogTest {
+    WeightLog log;
+    Weight day1 = new Weight(50,160);
+    Weight day2 = new Weight(49,160);
+    Weight day3 = new Weight(48,160);
+    Weight day4 = new Weight(51,160);
 
     @BeforeEach
     void makeALog(){
-        log = new WeightAndHeightLog();
+        log = new WeightLog();
         log.addEntry(day1);
         log.addEntry(day2);
         log.addEntry(day3);
@@ -47,5 +47,12 @@ public class WeightAndHeightLogTest {
         assertEquals(3,log.getNumEntries());
         log.addEntry(day4);
         assertEquals(4,log.getNumEntries());
+    }
+    @Test
+    void testViewAllMeasurements(){
+        String report = day1.report() + "/n"
+                + day2.report() + "/n"
+                + day3.report() + "/n";
+        assertEquals(report,log.viewAllMeasurements());
     }
 }

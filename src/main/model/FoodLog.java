@@ -8,25 +8,27 @@ import java.util.List;
 public class FoodLog {
     List<Food> log;
 
-    public FoodLog(){
+    public FoodLog() {
         log = new ArrayList<>();
     }
 
     // EFFECTS: return the total calories in the log
-    public int getTotalCalories(){
-        int TotalCalories = 0;
-        for (Food d : log){
-            TotalCalories += d.getCalories();
+    public int getTotalCalories() {
+        int totalCalories = 0;
+        for (Food d : log) {
+            totalCalories += d.getCalories();
         }
-        return TotalCalories;}
+        return totalCalories;
+    }
 
     // EFFECTS: return the number of entries in the log
-    public int getNumLogs(){
+    public int getNumLogs() {
         int numLogs = log.size();
-        return numLogs;}
+        return numLogs;
+    }
 
     // EFFECTS: return the entry in the given position, begins at 0
-    public Food getEntry(int i){
+    public Food getEntry(int i) {
         i--;
         Food entry = log.get(i);
         return entry;
@@ -41,9 +43,16 @@ public class FoodLog {
     }
 
     // EFFECTS: return the average Calories consumed per day and
-    public double findDailyCalories(){
-        double DailyCalories = getTotalCalories() / log.size();
-        return DailyCalories;
+    public double findDailyCalories() {
+        double dailyCalories = getTotalCalories() / log.size();
+        return dailyCalories;
     }
 
+    public String viewPastMeals() {
+        String allMeals = "";
+        for (Food f : log) {
+            allMeals = allMeals + f.reportMeal() + "/n";
+        }
+        return allMeals;
+    }
 }

@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 // Represents a log of measurements, maximum one per day
 
-public class WeightAndHeightLog {
-    ArrayList<WeightAndHeight> log;
+public class WeightLog {
+    ArrayList<Weight> log;
 
-    public WeightAndHeightLog() {
+    public WeightLog() {
         log = new ArrayList<>();
     }
 
     // REQUIRES: m must be a valid measurement
     // MODIFIES: this
     // EFFECTS: add an entry to the log
-    public void addEntry(WeightAndHeight m) {
+    public void addEntry(Weight m) {
         log.add(m);
     }
 
@@ -31,8 +31,9 @@ public class WeightAndHeightLog {
             result = "You lost " + progress + "kg, Keep up the good work!";
         } else if (progress < 0) {
             result = "You gained " + -progress + "kg, Don't give up!";
-        } else
+        } else {
             result = "Looks like your weight has not changed.";
+        }
 
         return result;
     }
@@ -42,4 +43,15 @@ public class WeightAndHeightLog {
         int num = log.size();
         return num;
     }
+
+    // REQUIRES: log has at least one entry
+    // EFFECTS: return a string made up of all weight reports from the log
+    public String viewAllMeasurements() {
+        String allMeasurements = "";
+        for (Weight w : log) {
+            allMeasurements = allMeasurements + w.report() + "/n";
+        }
+        return allMeasurements;
+    }
+
 }

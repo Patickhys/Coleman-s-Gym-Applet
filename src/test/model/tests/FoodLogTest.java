@@ -19,12 +19,9 @@ public class FoodLogTest {
     int avocado = 100;
     @BeforeEach
     void makeLog(){
-        day1 = new Food();
-        day2 = new Food();
-        day3 = new Food();
-        day1.eatAMeal(2*rice,chicken,avocado);
-        day2.eatAMeal(rice, 2* chicken, avocado);
-        day3.eatAMeal(rice,chicken,2* avocado);
+        day1 = new Food(2*rice,chicken,avocado);
+        day2 = new Food(rice, 2* chicken, avocado);
+        day3 = new Food(rice,chicken,2* avocado);
         log = new FoodLog();
     }
 
@@ -47,5 +44,17 @@ public class FoodLogTest {
         log.addEntry(day3);
         int totalCal = day1.getCalories() + day2.getCalories() + day3.getCalories();
         assertEquals(totalCal / log.getNumLogs()  ,log.findDailyCalories());
+    }
+
+    @Test
+    void testViewPastMeals(){
+        log.addEntry(day1);
+        log.addEntry(day2);
+        log.addEntry(day3);
+        String result;
+        result = day1.reportMeal() + "/n"
+                + day2.reportMeal() + "/n"
+                + day3.reportMeal() + "/n";
+        assertEquals(result, log.viewPastMeals());
     }
 }

@@ -1,20 +1,19 @@
-package model;
+package model.tests;
 
+import model.Training;
+import model.TrainingLog;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.time.Year;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TraingLogTest {
     TrainingLog log;
-    Exercise BenchPress = new Exercise("BenchPress",50, 10);
-    Exercise Rowing = new Exercise("Rowing", 360, 30);
-    Exercise Yoga = new Exercise("Yoga", 120,60);
-    int totalCal = BenchPress.Calories + Rowing.Calories + Yoga.Calories;
-    int totalDuration = BenchPress.Duration + Rowing.Duration + Yoga.Duration;
-    double halfhour = 30.0;
+    Training BenchPress = new Training("BenchPress",50, 10);
+    Training Rowing = new Training("Rowing", 360, 30);
+    Training Yoga = new Training("Yoga", 120,60);
+    int totalCal = BenchPress.calories + Rowing.calories + Yoga.calories;
+    int totalDuration = BenchPress.duration + Rowing.duration + Yoga.duration;
 
     @BeforeEach
     void makeNewLog(){
@@ -48,6 +47,14 @@ public class TraingLogTest {
         double yogaIntensity = Yoga.findIntensity();
         double result = (benchPressIntensity + rowingIntensity + yogaIntensity) / 3;
         assertEquals(result,log.getAvgIntensity());
+    }
+    @Test
+    void testViewPastTraining(){
+        String result = "";
+        result = BenchPress.reportExercise() + "/n"
+                + Rowing.reportExercise() + "/n"
+                + Yoga.reportExercise() + "/n";
+        assertEquals(result, log.viewPastTraining());
     }
 
 }

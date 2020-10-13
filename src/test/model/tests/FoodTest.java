@@ -15,7 +15,7 @@ public class FoodTest {
 
     @BeforeEach
     void runBefore(){
-    myDiet = new Food();
+    myDiet = new Food(0,0,0);
     }
 
     @Test
@@ -45,6 +45,12 @@ public class FoodTest {
         myDiet.eatAMeal(rice,chicken,avocado);
         int calories = 4 * rice + 4 * chicken + 9 * avocado;
         assertEquals(calories,myDiet.getCalories());
+    }
+
+    @Test
+    void testReportMeal(){
+        String result = "You had 0g of carbs, 0g of protein, and 0g of fat.";
+        assertEquals(result,myDiet.reportMeal());
     }
 
 }
