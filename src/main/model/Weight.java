@@ -7,7 +7,7 @@ public class Weight {
     public double weightInKg;
     public double heightInCm;
 
-    // REQUIRES: weight to be in kg and height to be in cm
+    // REQUIRES: weight to be in kg and height to be in cm, both > 0
     // EFFECTS: make a new measurement
     public Weight(double weight, double height) {
         weightInKg = weight;

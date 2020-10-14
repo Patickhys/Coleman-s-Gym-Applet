@@ -8,7 +8,8 @@ public class Food {
     public int fat;                    // fats consumed in grams
 
 
-    // EFFECTS: make a new DailyFoodIntake, assuming the user has consumed nothing yet;
+    // REQUIRES: all int must be non-negative
+    // EFFECTS: make a new DailyFoodIntake, assuming the user has consumed nothing yet
 
     public Food(int carbs, int protein, int fat) {
         this.carbs = carbs;

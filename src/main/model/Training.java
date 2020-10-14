@@ -6,6 +6,9 @@ public class Training {
     public int calories;
     public int duration; // in minutes
 
+    // REQUIRES: calories and duration must be > 0
+    // MODIFIES: this
+    // EFFECTS: make a new Training with name calories and duration
     public Training(String name, int calories, int duration) {
         this.name = name;
         this.calories = calories;
@@ -20,6 +23,7 @@ public class Training {
         return intensity;
     }
 
+    // EFFECTS: return a string that describes the exercise
     public String reportExercise() {
         String exercise = "You did " + name + " for " + duration + " minutes. It burned " + calories + " calories.";
         return exercise;

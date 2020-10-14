@@ -53,6 +53,7 @@ public class TrainingLog {
         return avgIntensity;
     }
 
+    // EFFECTS: return a string that is a numbered report of all the trainings in the log
     public String viewPastTraining() {
         String allTrainings = "";
         int number = 1;
