@@ -14,6 +14,7 @@ public class FitnessApp {
     public TrainingLog trainingLog;
     public FoodLog mealLog;
     public WeightLog weightLog;
+    private Scanner input;
 
     public FitnessApp() {
         trainingLog = new TrainingLog();
@@ -45,30 +46,50 @@ public class FitnessApp {
     }
 
     // EFFECTS: provides a main menu to all the sub-menus
-    public void mainMenu() {
-        while (true) {
-            System.out.println("Please select an option!");
-            System.out.println("1. Nutrition Record");
-            System.out.println("2. Training Record");
-            System.out.println("3. Measurement Record");
-            System.out.println("0. Exit");
-            Scanner option = new Scanner(System.in);
-            int choice = option.nextInt();
-            if (choice == 1) {
-                nutritionMenu();
-            } else if (choice == 2) {
-                trainingMenu();
-            } else if (choice == 3) {
-                measurementMenu();
-            } else if (choice == 0) {
-                System.exit(1);
+    private void mainMenu() {
+        boolean run = true;
+        int choice = 0;
+        input = new Scanner(System.in);
+        while (run) {
+            printMainMenu();
+            choice = input.nextInt();
+            if (choice == 0) {
+                run = false;
+            } else {
+                processMainMenuChoice(choice);
             }
+        }
+        System.out.println("See you next time!");
+    }
+
+    // REQUIRES: a valid user input
+    // EFFECTS: process the input by the user
+
+    private void processMainMenuChoice(int choice) {
+        if (choice == 1) {
+            nutritionMenu();
+        } else if (choice == 2) {
+            trainingMenu();
+        } else if (choice == 3) {
+            measurementMenu();
         }
     }
 
+    // EFFECTS: prints out the main menu
+    private void printMainMenu() {
+        System.out.println("Please select an option!");
+        System.out.println("1. Nutrition Record");
+        System.out.println("2. Training Record");
+        System.out.println("3. Measurement Record");
+        System.out.println("4. Save File");
+        System.out.println("5. Load File");
+        System.out.println("0. Exit");
+    }
+
+
     // REQUIRES: an option must be valid string that describe an user option
     // EFFECTS: a helpful method for submenus
-    public void secondaryMenu(String option1, String option2) {
+    public void processSecondaryMenu(String option1, String option2) {
         System.out.println("Please select an option!");
         System.out.println(option1);
         System.out.println(option2);
@@ -76,7 +97,7 @@ public class FitnessApp {
 
     // EFFECTS: a sub-menu for trainings
     public void trainingMenu() {
-        secondaryMenu("1. Enter a training session", "2. View my training history");
+        processSecondaryMenu("1. Enter a training session", "2. View my training history");
         Scanner option = new Scanner(System.in);
         int choice = option.nextInt();
         if (choice == 1) {
@@ -88,7 +109,7 @@ public class FitnessApp {
 
     // EFFECTS: a sub-menu for nutrition
     public void nutritionMenu() {
-        secondaryMenu("1. Enter a meal", "2. View my meals");
+        processSecondaryMenu("1. Enter a meal", "2. View my meals");
         Scanner option = new Scanner(System.in);
         int choice = option.nextInt();
         if (choice == 1) {
@@ -100,7 +121,7 @@ public class FitnessApp {
 
     // EFFECTS: a sub-menu for measurements
     public void measurementMenu() {
-        secondaryMenu("1. Enter a measurement", "2. View my measurements");
+        processSecondaryMenu("1. Enter a measurement", "2. View my measurements");
         Scanner option = new Scanner(System.in);
         int choice = option.nextInt();
         if (choice == 1) {
