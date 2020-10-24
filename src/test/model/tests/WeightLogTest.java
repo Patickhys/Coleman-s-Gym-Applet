@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WeightLogTest {
     WeightLog log;
+    String userName = "Patrick";
     Weight day1 = new Weight(50,160);
     Weight day2 = new Weight(49,160);
     Weight day3 = new Weight(48,160);
@@ -16,7 +17,7 @@ public class WeightLogTest {
 
     @BeforeEach
     void makeALog(){
-        log = new WeightLog();
+        log = new WeightLog(userName);
         log.addEntry(day1);
         log.addEntry(day2);
         log.addEntry(day3);

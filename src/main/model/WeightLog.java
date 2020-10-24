@@ -1,14 +1,23 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 // Represents a log of measurements, maximum one per day
 
-public class WeightLog {
+public class WeightLog extends  Log{
     public ArrayList<Weight> log;
+    String userName;
 
     public WeightLog() {
         log = new ArrayList<>();
+    }
+
+    public WeightLog(String userName) {
+        log = new ArrayList<>();
+        this.userName = userName;
     }
 
     // REQUIRES: m must be a valid measurement
@@ -56,4 +65,13 @@ public class WeightLog {
         return allMeasurements;
     }
 
+    @Override
+    JSONObject toJson() {
+        return null;
+    }
+
+    @Override
+    JSONArray entriesToJson() {
+        return null;
+    }
 }

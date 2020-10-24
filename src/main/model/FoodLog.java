@@ -1,19 +1,34 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
 // Represents a log of daily food intakes, each entry is one day
 
-public class FoodLog extends CaloriesLog {
+public class FoodLog extends Log {
     public ArrayList<Food> log;
+    String userName;
+
+    // MODIFIES: this
+    // EFFECTS: make a new FoodLog
 
     public FoodLog() {
         log = new ArrayList<>();
     }
 
+    // REQUIRES: a valid userName from FitnessApp
+    // MODIFIES: this
+    // EFFECTS: make a new FoodLog with the user's name
+
+    public FoodLog(String userName) {
+        log = new ArrayList<>();
+        this.userName = userName;
+    }
+
     // EFFECTS: return the total calories in the log
-    @Override
     public int getTotalCalories() {
         int totalCalories = 0;
         for (Food d : log) {
@@ -23,7 +38,6 @@ public class FoodLog extends CaloriesLog {
     }
 
     // EFFECTS: return the number of entries in the log
-    @Override
     public int getLogSize() {
         return log.size();
     }
@@ -57,5 +71,24 @@ public class FoodLog extends CaloriesLog {
         int cal = getTotalCalories();
         allMeals = allMeals + "A total of " + cal + " calories.";
         return allMeals;
+    }
+
+    @Override
+    JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", "Food Log for " + userName);
+        json.put("Entries", entriesToJson());
+        return json;
+    }
+
+    @Override
+    JSONArray entriesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Food f : log) {
+            jsonArray.put(f.toJson());
+        }
+
+        return jsonArray;
     }
 }

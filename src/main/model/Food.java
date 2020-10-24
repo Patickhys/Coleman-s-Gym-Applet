@@ -2,7 +2,10 @@ package model;
 
 // Represents the food intake of a person, composed of carbohydrates, protein and fats (in grams)
 
-public class Food {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Food implements Writable {
     public int carbs;                  // carbohydrates consumed in grams
     public int protein;                // protein consumed in grams
     public int fat;                    // fats consumed in grams
@@ -52,6 +55,15 @@ public class Food {
         String meal = "You had " + carbs + "g of carbs, " + protein + "g of protein, and " +  fat + "g of fat."
                 + "A total of " + cal + " calories.";
         return meal;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Carbs", carbs + " g");
+        json.put("Protein", protein + " g");
+        json.put("Fat", fat + " g");
+        json.put("Calories", getCalories() + " cal");
+        return json;
     }
 }
 

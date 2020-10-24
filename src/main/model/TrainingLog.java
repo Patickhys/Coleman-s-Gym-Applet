@@ -1,14 +1,25 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
-public class TrainingLog {
+public class TrainingLog extends Log {
     ArrayList<Training> log;
+    String userName;
 
     // MODIFIES: this
     // EFFECTS: make a new TrainingLog
     public TrainingLog() {
         log = new ArrayList<>();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: make a new TrainingLog with the User's name
+    public TrainingLog(String name) {
+        log = new ArrayList<>();
+        userName = name;
     }
 
     // REQUIRES: e must be a valid exercise
@@ -63,5 +74,24 @@ public class TrainingLog {
         }
         allTrainings = allTrainings + "A total of " + getTotalCalories() + " calories.";
         return allTrainings;
+    }
+
+    @Override
+    JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", "Training Log for " + userName);
+        json.put("Entries", entriesToJson());
+        return json;
+    }
+
+    @Override
+    JSONArray entriesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Training t : log) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }

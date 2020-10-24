@@ -17,12 +17,14 @@ public class FoodLogTest {
     int rice = 150;
     int chicken = 200;
     int avocado = 100;
+    String userName = "Patrick";
+
     @BeforeEach
     void makeLog(){
         day1 = new Food(2*rice,chicken,avocado);
         day2 = new Food(rice, 2* chicken, avocado);
         day3 = new Food(rice,chicken,2* avocado);
-        log = new FoodLog();
+        log = new FoodLog(userName);
     }
 
     @Test

@@ -1,6 +1,6 @@
 // REFERENCE: code in this package refers to JsonSerializationDemo
 
-package presistence;
+package persistence;
 
 import org.json.JSONObject;
 

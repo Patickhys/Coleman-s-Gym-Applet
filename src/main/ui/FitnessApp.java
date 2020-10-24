@@ -17,9 +17,6 @@ public class FitnessApp {
     private Scanner input;
 
     public FitnessApp() {
-        trainingLog = new TrainingLog();
-        mealLog = new FoodLog();
-        weightLog = new WeightLog();
         initializeUser();
         mainMenu();
     }
@@ -43,6 +40,9 @@ public class FitnessApp {
         Scanner weight = new Scanner(System.in);
         String weightStr = weight.nextLine();
         userWeight = Double.parseDouble(weightStr);
+        trainingLog = new TrainingLog(userName);
+        mealLog = new FoodLog(userName);
+        weightLog = new WeightLog(userName);
     }
 
     // EFFECTS: provides a main menu to all the sub-menus

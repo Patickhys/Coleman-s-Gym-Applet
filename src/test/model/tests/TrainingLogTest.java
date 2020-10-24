@@ -7,17 +7,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TraingLogTest {
+public class TrainingLogTest {
     TrainingLog log;
     Training BenchPress = new Training("BenchPress",50, 10);
     Training Rowing = new Training("Rowing", 360, 30);
     Training Yoga = new Training("Yoga", 120,60);
     int totalCal = BenchPress.calories + Rowing.calories + Yoga.calories;
     int totalDuration = BenchPress.duration + Rowing.duration + Yoga.duration;
+    String userName = "Patrick";
 
     @BeforeEach
     void makeNewLog(){
-        log = new TrainingLog();
+        log = new TrainingLog(userName);
         log.addEntry(BenchPress);
         log.addEntry(Rowing);
         log.addEntry(Yoga);

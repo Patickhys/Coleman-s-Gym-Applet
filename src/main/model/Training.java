@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Presents an exercise that has a name, calories burnt, and duration in minutes
-public class Training {
+public class Training implements Writable {
     public String name;
     public int calories;
     public int duration; // in minutes
@@ -27,5 +30,10 @@ public class Training {
     public String reportExercise() {
         String exercise = "You did " + name + " for " + duration + " minutes. It burned " + calories + " calories.";
         return exercise;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        return null;
     }
 }
