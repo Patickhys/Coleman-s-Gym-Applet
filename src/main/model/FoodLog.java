@@ -92,3 +92,4 @@ public class FoodLog extends Log {
         return jsonArray;
     }
 }
+// 10/24/2020
