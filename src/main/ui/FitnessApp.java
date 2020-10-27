@@ -262,7 +262,7 @@ public class FitnessApp {
     // EFFECTS: loads foodLog from file
     private void loadFoodLog() {
         try {
-            foodLog = jsonReader.read();
+            foodLog = jsonReader.readFoodLog();
             System.out.println("Loaded " + foodLog.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
@@ -273,7 +273,7 @@ public class FitnessApp {
     // EFFECTS: loads TrainingLog from file
     private void loadTrainingLog() {
         try {
-            trainingLog = jsonReader.read();
+            trainingLog = jsonReader.readTrainingLog();
             System.out.println("Loaded " + trainingLog.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
@@ -284,7 +284,7 @@ public class FitnessApp {
     // EFFECTS: loads WeightLog from file
     private void loadWeightLog() {
         try {
-            weightLog = jsonReader.read();
+            weightLog = jsonReader.readWeightLog();
             System.out.println("Loaded " + weightLog.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);

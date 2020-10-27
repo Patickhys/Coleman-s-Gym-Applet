@@ -21,13 +21,32 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads FoodLog from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public Log read() throws IOException {
+    public Log readFoodLog() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseFoodLog(jsonObject);
     }
+
+    // EFFECTS: reads TrainingLog from file and returns it;
+    // throws IOException if an error occurs reading data from file
+    public Log readTrainingLog() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseTrainingLog(jsonObject);
+    }
+
+    // EFFECTS: reads WeightLog from file and returns it;
+    // throws IOException if an error occurs reading data from file
+    public Log readWeightLog() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseWeightLog(jsonObject);
+    }
+
+
+
 
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
@@ -43,7 +62,20 @@ public class JsonReader {
     // EFFECTS: parses FoodLog from JSON object and returns it
     private Log parseFoodLog(JSONObject jsonObject) {
         Log log = new FoodLog();
-        addFoodEntry(log, jsonObject);
+        addFoodEntries(log, jsonObject);
+        return log;
+    }
+
+    // EFFECTS: parses TrainingLog from JSON object and returns it
+    private Log parseTrainingLog(JSONObject jsonObject) {
+        Log log = new TrainingLog();
+        addTrainingEntries(log, jsonObject);
+        return log;
+    }
+    // EFFECTS: parses FoodLog from JSON object and returns it
+    private Log parseWeightLog(JSONObject jsonObject) {
+        Log log = new WeightLog();
+        addWeightEntries(log, jsonObject);
         return log;
     }
 
@@ -54,6 +86,26 @@ public class JsonReader {
         for (Object json : jsonArray) {
             JSONObject nextEntry = (JSONObject) json;
             addFoodEntry(log, nextEntry);
+        }
+    }
+
+    // MODIFIES: TrainingLog
+    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    private void addTrainingEntries(Log log, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("logs");
+        for (Object json : jsonArray) {
+            JSONObject nextEntry = (JSONObject) json;
+            addTrainingEntry(log, nextEntry);
+        }
+    }
+
+    // MODIFIES: WeightLog
+    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    private void addWeightEntries(Log log, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("logs");
+        for (Object json : jsonArray) {
+            JSONObject nextEntry = (JSONObject) json;
+            addWeightEntry(log, nextEntry);
         }
     }
 
@@ -69,7 +121,7 @@ public class JsonReader {
 
     // MODIFIES: TrainingLog
     // EFFECTS: parses training from JSON object and adds it to TrainingLog
-    private void addTrainingEntry(TrainingLog log, JSONObject jsonObject) {
+    private void addTrainingEntry(Log log, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         int calories = jsonObject.getInt("calories");
         int duration = jsonObject.getInt("duration");
@@ -79,7 +131,7 @@ public class JsonReader {
 
     // MODIFIES: WeightLog
     // EFFECTS: parses food from JSON object and adds it to FoodLog
-    private void addWeightEntry(WeightLog log, JSONObject jsonObject) {
+    private void addWeightEntry(Log log, JSONObject jsonObject) {
         double weight = jsonObject.getDouble("weight");
         double height = jsonObject.getDouble("height");
         Weight w = new Weight(weight,height);
