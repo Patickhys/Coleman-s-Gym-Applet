@@ -32,8 +32,13 @@ public class Training implements Writable {
         return exercise;
     }
 
+    // EFFECTS: make Training into a JsonObject
     @Override
     public JSONObject toJson() {
-        return null;
+        JSONObject json = new JSONObject();
+        json.put("Exercise", name);
+        json.put("Calories", calories);
+        json.put("Duration", duration);
+        return json;
     }
 }

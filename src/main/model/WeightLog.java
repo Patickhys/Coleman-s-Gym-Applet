@@ -7,9 +7,11 @@ import java.util.ArrayList;
 
 // Represents a log of measurements, maximum one per day
 
-public class WeightLog extends  Log{
+public class WeightLog extends  Log {
     public ArrayList<Weight> log;
     String userName;
+    Type type;
+
 
     public WeightLog() {
         log = new ArrayList<>();
@@ -18,6 +20,7 @@ public class WeightLog extends  Log{
     public WeightLog(String userName) {
         log = new ArrayList<>();
         this.userName = userName;
+        type = Type.TRAINING;
     }
 
     // REQUIRES: m must be a valid measurement
@@ -47,6 +50,21 @@ public class WeightLog extends  Log{
         return result;
     }
 
+    @Override
+    public String viewPastMeals() {
+        return null;
+    }
+
+    @Override
+    public String viewPastTraining() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
     // EFFECTS: return the number of entries in the log
     public int getNumEntries() {
         int num = log.size();
@@ -66,12 +84,30 @@ public class WeightLog extends  Log{
     }
 
     @Override
-    JSONObject toJson() {
-        return null;
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", "Food Log for " + userName);
+        json.put("Entries", entriesToJson());
+        return json;
     }
 
     @Override
     JSONArray entriesToJson() {
-        return null;
+        JSONArray jsonArray = new JSONArray();
+
+        for (Weight weight : log) {
+            jsonArray.put(weight.toJson());
+        }
+
+        return jsonArray;
+    }
+    @Override
+    public void addEntry(Food food) {
+
+    }
+
+    @Override
+    public void addEntry(Training training) {
+
     }
 }

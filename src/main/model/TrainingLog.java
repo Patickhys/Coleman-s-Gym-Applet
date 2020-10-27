@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class TrainingLog extends Log {
     ArrayList<Training> log;
     String userName;
+    private Type type;
 
     // MODIFIES: this
     // EFFECTS: make a new TrainingLog
@@ -20,6 +21,7 @@ public class TrainingLog extends Log {
     public TrainingLog(String name) {
         log = new ArrayList<>();
         userName = name;
+        type = Type.TRAINING;
     }
 
     // REQUIRES: e must be a valid exercise
@@ -27,6 +29,29 @@ public class TrainingLog extends Log {
     // EFFECTS: add an entry to log
     public void addEntry(Training e) {
         log.add(e);
+    }
+
+    @Override
+    public void addEntry(Weight weight) {}
+
+    @Override
+    public void addEntry(Food food) {
+    }
+
+
+    @Override
+    public String viewAllMeasurements() {
+        return null;
+    }
+
+    @Override
+    public String analyzeTrend() {
+        return null;
+    }
+
+    @Override
+    public String viewPastMeals() {
+        return null;
     }
 
     // REQUIRES: pos must be 1 <= pos <= log.size()
@@ -77,7 +102,12 @@ public class TrainingLog extends Log {
     }
 
     @Override
-    JSONObject toJson() {
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", "Training Log for " + userName);
         json.put("Entries", entriesToJson());
@@ -94,4 +124,7 @@ public class TrainingLog extends Log {
 
         return jsonArray;
     }
+
+
+
 }

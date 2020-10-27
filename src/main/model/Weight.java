@@ -3,9 +3,14 @@ package model;
 // Represents various measurements provided by the user
 
 
+import org.json.JSONObject;
+
+import static model.Type.WEIGHT;
+
 public class Weight {
     public double weightInKg;
     public double heightInCm;
+    public Type type = WEIGHT;
 
     // REQUIRES: weight to be in kg and height to be in cm, both > 0
     // EFFECTS: make a new measurement
@@ -26,5 +31,12 @@ public class Weight {
     public String report() {
         String report = "Your BMI is " + findBMI() + " at " + weightInKg + " kg.";
         return report;
+    }
+
+    // EFFECTS: Make weight into a JSONObject
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Weight", weightInKg);
+        return json;
     }
 }

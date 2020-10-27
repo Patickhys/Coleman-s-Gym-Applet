@@ -1,22 +1,32 @@
 package ui;
 
+// Json related code is referred to the JsonSerialization Demo
 //Represents a new FitnessApp, initials the app
 
-import java.util.Scanner;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 public class FitnessApp {
     protected String userName;
     protected String userSex;
     private int userHeight;
     private double userWeight;
-    public TrainingLog trainingLog;
-    public FoodLog mealLog;
-    public WeightLog weightLog;
+    public Log trainingLog;
+    public Log foodLog;
+    public Log weightLog;
     private Scanner input;
+    private static final String JSON_STORE = "./data/savedLog.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     public FitnessApp() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         initializeUser();
         mainMenu();
     }
@@ -36,12 +46,8 @@ public class FitnessApp {
         Scanner height = new Scanner(System.in);
         String heightStr = height.nextLine();
         userHeight = Integer.parseInt(heightStr);
-        System.out.println("Please enter your weight in kg!");
-        Scanner weight = new Scanner(System.in);
-        String weightStr = weight.nextLine();
-        userWeight = Double.parseDouble(weightStr);
         trainingLog = new TrainingLog(userName);
-        mealLog = new FoodLog(userName);
+        foodLog = new FoodLog(userName);
         weightLog = new WeightLog(userName);
     }
 
@@ -72,6 +78,10 @@ public class FitnessApp {
             trainingMenu();
         } else if (choice == 3) {
             measurementMenu();
+        } else if (choice == 4) {
+            saveFiles();
+        } else if (choice == 5) {
+            loadFile();
         }
     }
 
@@ -89,14 +99,14 @@ public class FitnessApp {
 
     // REQUIRES: an option must be valid string that describe an user option
     // EFFECTS: a helpful method for submenus
-    public void processSecondaryMenu(String option1, String option2) {
+    private void processSecondaryMenu(String option1, String option2) {
         System.out.println("Please select an option!");
         System.out.println(option1);
         System.out.println(option2);
     }
 
     // EFFECTS: a sub-menu for trainings
-    public void trainingMenu() {
+    private void trainingMenu() {
         processSecondaryMenu("1. Enter a training session", "2. View my training history");
         Scanner option = new Scanner(System.in);
         int choice = option.nextInt();
@@ -108,7 +118,7 @@ public class FitnessApp {
     }
 
     // EFFECTS: a sub-menu for nutrition
-    public void nutritionMenu() {
+    private void nutritionMenu() {
         processSecondaryMenu("1. Enter a meal", "2. View my meals");
         Scanner option = new Scanner(System.in);
         int choice = option.nextInt();
@@ -120,7 +130,7 @@ public class FitnessApp {
     }
 
     // EFFECTS: a sub-menu for measurements
-    public void measurementMenu() {
+    private void measurementMenu() {
         processSecondaryMenu("1. Enter a measurement", "2. View my measurements");
         Scanner option = new Scanner(System.in);
         int choice = option.nextInt();
@@ -133,7 +143,7 @@ public class FitnessApp {
 
     // REQUIRES: weightLog has at least one entry
     // EFFECTS: help method that prints out Measurement analysis
-    public void viewPastMeasurements() {
+    private void viewPastMeasurements() {
         System.out.println((weightLog.viewAllMeasurements()));
         System.out.println(weightLog.analyzeTrend());
     }
@@ -141,13 +151,10 @@ public class FitnessApp {
     // REQUIRES: user answers the question nicely
     // MODIFIES: this
     // EFFECTS: make a new Weight();
-    public void makeMeasurement() {
+    private void makeMeasurement() {
         Scanner answer = new Scanner(System.in);
         System.out.println("How much do you weight in kg");
         userWeight = answer.nextInt();
-        answer = new Scanner(System.in);
-        System.out.println("How tall are you in cm?");
-        userHeight = answer.nextInt();
         Weight newEntry = new Weight(userWeight, userHeight);
         weightLog.addEntry(newEntry);
     }
@@ -155,7 +162,7 @@ public class FitnessApp {
     // REQUIRES: user answers the question nicely
     // MODIFIES: this
     // EFFECTS: make a new Food();
-    public void makeNewMeal() {
+    private void makeNewMeal() {
         Scanner answer = new Scanner(System.in);
         System.out.println("How much carbs in grams did you eat?");
         int carbs = answer.nextInt();
@@ -166,19 +173,19 @@ public class FitnessApp {
         System.out.println("How much fat in grams did you eat?");
         int fat = answer.nextInt();
         Food newMeal = new Food(carbs, protein, fat);
-        mealLog.addEntry(newMeal);
+        foodLog.addEntry(newMeal);
     }
 
     // REQUIRES: mealLog has at least one entry
     // EFFECTS: print out all meals in mealLog;
-    public void viewPastMeals() {
-        System.out.println((mealLog.viewPastMeals()));
+    private void viewPastMeals() {
+        System.out.println((foodLog.viewPastMeals()));
     }
 
     // REQUIRES: user answers the question nicely
     // MODIFIES: this
     // EFFECTS: make a new Training();
-    public void makeNewTraining() {
+    private void makeNewTraining() {
         Scanner answer = new Scanner(System.in);
         System.out.println("What exercise did you do?");
         String name = answer.nextLine();
@@ -194,8 +201,94 @@ public class FitnessApp {
 
     // REQUIRES: trainingLog has at least one entry
     // EFFECTS: print out all trainings in mealLog;
-    public void viewPastTraining() {
+    private void viewPastTraining() {
         System.out.println(trainingLog.viewPastTraining());
+    }
+
+    // MODIFIES: this
+    // EFFECTS: load logs from file
+    private void loadFile() {
+        loadFoodLog();
+        loadTrainingLog();
+        loadWeightLog();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: save logs to file
+    private void saveFiles() {
+        saveFoodLog();
+        saveTrainingLog();
+        saveWeightLog();
+    }
+
+    // EFFECTS: saves the foodLog to file
+    private void saveFoodLog() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(foodLog);
+            jsonWriter.close();
+            System.out.println("Saved " + foodLog.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: saves the TrainingLog to file
+    private void saveTrainingLog() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(trainingLog);
+            jsonWriter.close();
+            System.out.println("Saved " + trainingLog.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: saves the WeightLog to file
+    private void saveWeightLog() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(weightLog);
+            jsonWriter.close();
+            System.out.println("Saved " + weightLog.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: loads foodLog from file
+    private void loadFoodLog() {
+        try {
+            foodLog = jsonReader.read();
+            System.out.println("Loaded " + foodLog.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads TrainingLog from file
+    private void loadTrainingLog() {
+        try {
+            trainingLog = jsonReader.read();
+            System.out.println("Loaded " + trainingLog.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads WeightLog from file
+    private void loadWeightLog() {
+        try {
+            weightLog = jsonReader.read();
+            System.out.println("Loaded " + weightLog.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
 

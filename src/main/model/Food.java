@@ -5,10 +5,14 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import static model.Type.*;
+
 public class Food implements Writable {
-    public int carbs;                  // carbohydrates consumed in grams
-    public int protein;                // protein consumed in grams
-    public int fat;                    // fats consumed in grams
+    private int carbs;                  // carbohydrates consumed in grams
+    private int protein;                // protein consumed in grams
+    private int fat;                    // fats consumed in grams
+    private final Type type = FOOD;
+
 
 
     // REQUIRES: all int must be non-negative
@@ -57,6 +61,7 @@ public class Food implements Writable {
         return meal;
     }
 
+    // EFFECTS: Make food into a JSONObject
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Carbs", carbs + " g");

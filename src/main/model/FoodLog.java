@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class FoodLog extends Log {
     public ArrayList<Food> log;
-    String userName;
+    String name;
 
     // MODIFIES: this
     // EFFECTS: make a new FoodLog
@@ -23,9 +23,9 @@ public class FoodLog extends Log {
     // MODIFIES: this
     // EFFECTS: make a new FoodLog with the user's name
 
-    public FoodLog(String userName) {
+    public FoodLog(String name) {
         log = new ArrayList<>();
-        this.userName = userName;
+        this.name = name + " 's food log.";
     }
 
     // EFFECTS: return the total calories in the log
@@ -42,6 +42,11 @@ public class FoodLog extends Log {
         return log.size();
     }
 
+    // EFFECTS: return the name of this log
+    public String getName() {
+        return name;
+    }
+
     // EFFECTS: return the entry in the given position, begins at 0
     public Food getEntry(int i) {
         i--;
@@ -54,6 +59,22 @@ public class FoodLog extends Log {
 
     public void addEntry(Food c) {
         log.add(c);
+    }
+
+    @Override
+    public void addEntry(Training training) {}
+
+    @Override
+    public void addEntry(Weight weight) {}
+
+    @Override
+    public String viewAllMeasurements() {
+        return null;
+    }
+
+    @Override
+    public String analyzeTrend() {
+        return null;
     }
 
     // EFFECTS: return the average Calories consumed per day and
@@ -74,9 +95,14 @@ public class FoodLog extends Log {
     }
 
     @Override
-    JSONObject toJson() {
+    public String viewPastTraining() {
+        return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", "Food Log for " + userName);
+        json.put("name", "Food Log for " + name);
         json.put("Entries", entriesToJson());
         return json;
     }
@@ -92,4 +118,3 @@ public class FoodLog extends Log {
         return jsonArray;
     }
 }
-// 10/24/2020
