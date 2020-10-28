@@ -1,0 +1,8 @@
+{
+    "name": "Pat's food log",
+    "Entries": [{
+        "Carbs": 20,
+        "Fat": 40,
+        "Protein": 30
+    }]
+}

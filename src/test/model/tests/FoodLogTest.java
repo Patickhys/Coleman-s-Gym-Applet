@@ -2,6 +2,8 @@ package model.tests;
 
 import model.Food;
 import model.FoodLog;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -60,5 +62,29 @@ public class FoodLogTest {
                 + "3. " + day3.reportMeal() + "\n"
                 + "A total of " + cal + " calories." ;
         assertEquals(result, log.viewPastMeals());
+    }
+
+    @Test
+    void testToJson(){
+        log.addEntry(day1);
+        log.addEntry(day2);
+        log.addEntry(day3);
+        JSONObject json = new JSONObject();
+        json.put("name", userName);
+        json.put("Entries", log.entriesToJson());
+        assertTrue(userName==json.get("name"));
+        assertEquals( log.entriesToJson(),json.get("Entries"));
+    }
+
+    @Test
+    void testEntriesToJson() {
+        log.addEntry(day1);
+        log.addEntry(day2);
+        log.addEntry(day3);
+        JSONArray jsonArray = log.entriesToJson();
+        assertTrue(3 == jsonArray.length());
+        assertEquals(day1.toJson().get("Entries"),jsonArray.getJSONObject(0).get("Entries"));
+
+
     }
 }

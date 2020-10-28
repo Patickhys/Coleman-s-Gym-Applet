@@ -36,7 +36,8 @@ public class Weight {
     // EFFECTS: Make weight into a JSONObject
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Weight", weightInKg);
+        json.put("Weight", weightInKg + " kg");
+        json.put("Height", heightInCm + " cm");
         return json;
     }
 }

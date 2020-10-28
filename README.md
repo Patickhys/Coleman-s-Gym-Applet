@@ -14,9 +14,9 @@ A user can be anyone who is looking to start building their strength or anyone w
 - As a user, I want to be able to keep a log of my food intake.
 - As a user, I want to be able to keep a log of the trainings I have done. 
 - As a user, I want to be able to keep track of my weight change.
-- As a user, I want to be able to view all of my log entries in a meaningful way.
+- As a user, I want to be able to view all of my log entries.
 
-- As a user, I want to be able to save my training log and food log to file.
-- As a user, I want to be able to reload my file so as to update them again.
+- As a user, I want to be able to save my food log to file.
+- As a user, I want to be able to reload my file to update them again.
 
 

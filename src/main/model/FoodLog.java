@@ -25,7 +25,7 @@ public class FoodLog extends Log {
 
     public FoodLog(String name) {
         log = new ArrayList<>();
-        this.name = name + " 's food log.";
+        this.name = name + "'s food log";
     }
 
     // EFFECTS: return the total calories in the log
@@ -99,16 +99,21 @@ public class FoodLog extends Log {
         return null;
     }
 
+    // setter
+    public void setName(String name) {
+        this.name = name + "'s food log.";
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", "Food Log for " + name);
+        json.put("name", name);
         json.put("Entries", entriesToJson());
         return json;
     }
 
     @Override
-    JSONArray entriesToJson() {
+    public JSONArray entriesToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Food f : log) {

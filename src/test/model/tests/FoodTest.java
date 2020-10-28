@@ -1,6 +1,7 @@
 package model.tests;
 
 import model.Food;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -53,5 +54,13 @@ public class FoodTest {
         String result = "You had 0g of carbs, 0g of protein, and 0g of fat." + "A total of " + cal + " calories.";
         assertEquals(result,myDiet.reportMeal());
     }
+
+    @Test
+    void testToJson(){
+        assertEquals(0,myDiet.toJson().get("Carbs"));
+        assertEquals(0,myDiet.toJson().get("Protein"));
+        assertEquals(0,myDiet.toJson().get("Fat"));
+    }
+
 
 }

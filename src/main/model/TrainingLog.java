@@ -20,7 +20,7 @@ public class TrainingLog extends Log {
     // EFFECTS: make a new TrainingLog with the User's name
     public TrainingLog(String name) {
         log = new ArrayList<>();
-        userName = name;
+        userName = name + "'s training log.";;
         type = Type.TRAINING;
     }
 
@@ -103,7 +103,7 @@ public class TrainingLog extends Log {
 
     @Override
     public String getName() {
-        return null;
+        return userName;
     }
 
     @Override

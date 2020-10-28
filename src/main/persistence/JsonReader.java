@@ -72,6 +72,7 @@ public class JsonReader {
         addTrainingEntries(log, jsonObject);
         return log;
     }
+
     // EFFECTS: parses FoodLog from JSON object and returns it
     private Log parseWeightLog(JSONObject jsonObject) {
         Log log = new WeightLog();
@@ -82,7 +83,7 @@ public class JsonReader {
     // MODIFIES: FoodLog
     // EFFECTS: parses thingies from JSON object and adds them to workroom
     private void addFoodEntries(Log log, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("logs");
+        JSONArray jsonArray = jsonObject.getJSONArray("Entries");
         for (Object json : jsonArray) {
             JSONObject nextEntry = (JSONObject) json;
             addFoodEntry(log, nextEntry);
@@ -92,7 +93,7 @@ public class JsonReader {
     // MODIFIES: TrainingLog
     // EFFECTS: parses thingies from JSON object and adds them to workroom
     private void addTrainingEntries(Log log, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("logs");
+        JSONArray jsonArray = jsonObject.getJSONArray("Entries");
         for (Object json : jsonArray) {
             JSONObject nextEntry = (JSONObject) json;
             addTrainingEntry(log, nextEntry);
@@ -102,7 +103,7 @@ public class JsonReader {
     // MODIFIES: WeightLog
     // EFFECTS: parses thingies from JSON object and adds them to workroom
     private void addWeightEntries(Log log, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("logs");
+        JSONArray jsonArray = jsonObject.getJSONArray("Entries");
         for (Object json : jsonArray) {
             JSONObject nextEntry = (JSONObject) json;
             addWeightEntry(log, nextEntry);
@@ -112,9 +113,9 @@ public class JsonReader {
     // MODIFIES: FoodLog
     // EFFECTS: parses food from JSON object and adds it to FoodLog
     private void addFoodEntry(Log log, JSONObject jsonObject) {
-        int carbs = jsonObject.getInt("carbs");
-        int protein = jsonObject.getInt("protein");
-        int fat = jsonObject.getInt("fat");
+        int carbs = jsonObject.getInt("Carbs");
+        int protein = jsonObject.getInt("Protein");
+        int fat = jsonObject.getInt("Fat");
         Food food = new Food(carbs, protein,fat);
         log.addEntry(food);
     }
@@ -122,9 +123,9 @@ public class JsonReader {
     // MODIFIES: TrainingLog
     // EFFECTS: parses training from JSON object and adds it to TrainingLog
     private void addTrainingEntry(Log log, JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
-        int calories = jsonObject.getInt("calories");
-        int duration = jsonObject.getInt("duration");
+        String name = jsonObject.getString("Exercise");
+        int calories = jsonObject.getInt("Calories");
+        int duration = jsonObject.getInt("Duration");
         Training training = new Training(name,calories,duration);
         log.addEntry(training);
     }
@@ -132,8 +133,8 @@ public class JsonReader {
     // MODIFIES: WeightLog
     // EFFECTS: parses food from JSON object and adds it to FoodLog
     private void addWeightEntry(Log log, JSONObject jsonObject) {
-        double weight = jsonObject.getDouble("weight");
-        double height = jsonObject.getDouble("height");
+        double weight = jsonObject.getDouble("Weight");
+        double height = jsonObject.getDouble("Height");
         Weight w = new Weight(weight,height);
         log.addEntry(w);
     }

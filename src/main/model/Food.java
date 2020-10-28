@@ -64,10 +64,9 @@ public class Food implements Writable {
     // EFFECTS: Make food into a JSONObject
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Carbs", carbs + " g");
-        json.put("Protein", protein + " g");
-        json.put("Fat", fat + " g");
-        json.put("Calories", getCalories() + " cal");
+        json.put("Carbs", carbs);
+        json.put("Protein", protein);
+        json.put("Fat", fat);
         return json;
     }
 }

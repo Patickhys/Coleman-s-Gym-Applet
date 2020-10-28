@@ -19,7 +19,7 @@ public class WeightLog extends  Log {
 
     public WeightLog(String userName) {
         log = new ArrayList<>();
-        this.userName = userName;
+        this.userName = userName + "'s weight log";
         type = Type.TRAINING;
     }
 
@@ -29,6 +29,12 @@ public class WeightLog extends  Log {
     public void addEntry(Weight m) {
         log.add(m);
     }
+
+    @Override
+    public void addEntry(Food food) {}
+
+    @Override
+    public void addEntry(Training training) {}
 
     // REQUIRES: assume the log has at least one entry
     // EFFECTS: return an analysis of the measurements logged so far
@@ -62,7 +68,7 @@ public class WeightLog extends  Log {
 
     @Override
     public String getName() {
-        return null;
+        return userName;
     }
 
     // EFFECTS: return the number of entries in the log
@@ -101,13 +107,5 @@ public class WeightLog extends  Log {
 
         return jsonArray;
     }
-    @Override
-    public void addEntry(Food food) {
 
-    }
-
-    @Override
-    public void addEntry(Training training) {
-
-    }
 }
