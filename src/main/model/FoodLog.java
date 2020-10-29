@@ -63,6 +63,25 @@ public class FoodLog extends Log {
         log.add(c);
     }
 
+    @Override
+    public void addEntry(Training training) {
+
+    }
+
+    @Override
+    public void addEntry(Weight weight) {
+
+    }
+
+    @Override
+    public String viewAllMeasurements() {
+        return null;
+    }
+
+    @Override
+    public String analyzeTrend() {
+        return null;
+    }
 
 
     // EFFECTS: return the average Calories consumed per day and
