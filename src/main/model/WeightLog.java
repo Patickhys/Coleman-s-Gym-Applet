@@ -27,11 +27,13 @@ public class WeightLog extends  Log {
         log.add(m);
     }
 
+/*
     @Override
     public void addEntry(Food food) {}
 
     @Override
     public void addEntry(Training training) {}
+*/
 
     // REQUIRES: assume the log has at least one entry
     // EFFECTS: return an analysis of the measurements logged so far
@@ -53,7 +55,7 @@ public class WeightLog extends  Log {
         return result;
     }
 
-    @Override
+   /* @Override
     public String viewPastMeals() {
         return null;
     }
@@ -67,7 +69,7 @@ public class WeightLog extends  Log {
     public String getName() {
         return userName;
     }
-
+*/
     // EFFECTS: return the number of entries in the log
     public int getNumEntries() {
         int num = log.size();

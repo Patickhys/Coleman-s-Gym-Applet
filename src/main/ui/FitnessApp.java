@@ -16,9 +16,9 @@ public class FitnessApp {
     protected String userSex;
     private int userHeight;
     private double userWeight;
-    public Log trainingLog;
-    public Log foodLog;
-    public Log weightLog;
+    public TrainingLog trainingLog;
+    public FoodLog foodLog;
+    public WeightLog weightLog;
     private Scanner input;
     private static final String JSON_STORE_FOOD = "./data/savedFoodLog.json";
     private static final String JSON_STORE_TRAINING = "./data/savedTrainingLog.json";
@@ -235,7 +235,7 @@ public class FitnessApp {
         }
     }
 
-    // EFFECTS: saves the TrainingLog to file
+/*    // EFFECTS: saves the TrainingLog to file
     private void saveTrainingLog() {
         try {
             jsonWriter.open();
@@ -257,7 +257,7 @@ public class FitnessApp {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE_WEIGHT);
         }
-    }
+    }*/
 
 
     // MODIFIES: this

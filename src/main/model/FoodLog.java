@@ -63,7 +63,7 @@ public class FoodLog extends Log {
         log.add(c);
     }
 
-    @Override
+    /*@Override
     public void addEntry(Training training) {
 
     }
@@ -82,7 +82,7 @@ public class FoodLog extends Log {
     public String analyzeTrend() {
         return null;
     }
-
+*/
 
     // EFFECTS: return the average Calories consumed per day and
     public double findDailyCalories() {
@@ -107,15 +107,17 @@ public class FoodLog extends Log {
         return Collections.unmodifiableList(log);
     }
 
-    @Override
+/*    @Override
     public String viewPastTraining() {
         return null;
-    }
+    }*/
 
+/*
     // setter
     public void setName(String name) {
         this.name = name + "'s food log.";
     }
+*/
 
     @Override
     public JSONObject toJson() {

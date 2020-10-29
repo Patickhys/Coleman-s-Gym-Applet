@@ -26,7 +26,7 @@ public class JsonReader {
 
     // EFFECTS: reads FoodLog from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public Log readFoodLog() throws IOException {
+    public FoodLog readFoodLog() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseFoodLog(jsonObject);
@@ -65,8 +65,8 @@ public class JsonReader {
     }
 
     // EFFECTS: parses FoodLog from JSON object and returns it
-    private Log parseFoodLog(JSONObject jsonObject) {
-        Log log = new FoodLog(jsonObject.getString("name"));
+    private FoodLog parseFoodLog(JSONObject jsonObject) {
+        FoodLog log = new FoodLog(jsonObject.getString("name"));
         addFoodEntries(log, jsonObject);
         return log;
     }
@@ -87,7 +87,7 @@ public class JsonReader {
 
     // MODIFIES: FoodLog
     // EFFECTS: parses thingies from JSON object and adds them to workroom
-    private void addFoodEntries(Log log, JSONObject jsonObject) {
+    private void addFoodEntries(FoodLog log, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Entries");
         for (Object json : jsonArray) {
             JSONObject nextEntry = (JSONObject) json;
@@ -119,7 +119,7 @@ public class JsonReader {
 
     // MODIFIES: FoodLog
     // EFFECTS: parses food from JSON object and adds it to FoodLog
-    private void addFoodEntry(Log log, JSONObject jsonObject) {
+    private void addFoodEntry(FoodLog log, JSONObject jsonObject) {
         int carbs = jsonObject.getInt("Carbs");
         int protein = jsonObject.getInt("Protein");
         int fat = jsonObject.getInt("Fat");

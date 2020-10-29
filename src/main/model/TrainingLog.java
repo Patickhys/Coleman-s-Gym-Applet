@@ -19,7 +19,8 @@ public class TrainingLog extends Log {
     // EFFECTS: make a new TrainingLog with the User's name
     public TrainingLog(String name) {
         log = new ArrayList<>();
-        userName = name + "'s training log.";;
+        userName = name + "'s training log.";
+        ;
     }
 
     // REQUIRES: e must be a valid exercise
@@ -28,6 +29,7 @@ public class TrainingLog extends Log {
     public void addEntry(Training e) {
         log.add(e);
     }
+/*
 
     @Override
     public void addEntry(Weight weight) {}
@@ -51,6 +53,7 @@ public class TrainingLog extends Log {
     public String viewPastMeals() {
         return null;
     }
+*/
 
     // REQUIRES: pos must be 1 <= pos <= log.size()
     // EFFECTS: return the exercise at position given
@@ -99,10 +102,10 @@ public class TrainingLog extends Log {
         return allTrainings;
     }
 
-    @Override
-    public String getName() {
+
+    /*public String getName() {
         return userName;
-    }
+    }*/
 
     @Override
     public JSONObject toJson() {
@@ -122,7 +125,6 @@ public class TrainingLog extends Log {
 
         return jsonArray;
     }
-
 
 
 }

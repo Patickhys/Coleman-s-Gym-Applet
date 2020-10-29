@@ -13,7 +13,7 @@ public abstract class Log {
     // EFFECTS: returns things in this workroom as a JSON array
     abstract JSONArray entriesToJson();
 
-    // EFFECTS: add an Entry to the this food log
+   /* // EFFECTS: add an Entry to the this food log
     public abstract void addEntry(Food food);
 
     // EFFECTS: add an Entry to the this training log
@@ -37,5 +37,5 @@ public abstract class Log {
     // EFFECTS: get Name from this
     public abstract String getName();
 
-
+*/
 }

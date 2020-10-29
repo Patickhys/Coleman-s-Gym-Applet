@@ -2,6 +2,7 @@
 
 package persistence;
 
+import model.FoodLog;
 import model.Log;
 import org.json.JSONObject;
 
@@ -27,7 +28,7 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of workroom to file
-    public void write(Log log) {
+    public void write(FoodLog log) {
         JSONObject json = log.toJson();
         saveToFile(json.toString(TAB));
     }
