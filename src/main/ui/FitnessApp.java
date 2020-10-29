@@ -229,7 +229,7 @@ public class FitnessApp {
             jsonWriter.open();
             jsonWriter.write(foodLog);
             jsonWriter.close();
-            System.out.println("Saved " + foodLog.getName() + " to " + JSON_STORE_FOOD);
+            System.out.println("Saved FoodLog"); //+ foodLog.getName() + " to " + JSON_STORE_FOOD);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE_FOOD);
         }
@@ -271,7 +271,7 @@ public class FitnessApp {
         }
     }
 
-    // MODIFIES: this
+   /* // MODIFIES: this
     // EFFECTS: loads TrainingLog from file
     private void loadTrainingLog() {
         try {
@@ -291,7 +291,7 @@ public class FitnessApp {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE_WEIGHT);
         }
-    }
+    }*/
 }
 
 

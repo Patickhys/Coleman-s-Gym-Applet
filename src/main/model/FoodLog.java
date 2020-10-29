@@ -4,6 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 // Represents a log of daily food intakes, each entry is one day
@@ -12,12 +14,12 @@ public class FoodLog extends Log {
     public ArrayList<Food> log;
     String name;
 
-    // MODIFIES: this
+    /*// MODIFIES: this
     // EFFECTS: make a new FoodLog
 
     public FoodLog() {
         log = new ArrayList<>();
-    }
+    }*/
 
     // REQUIRES: a valid userName from FitnessApp
     // MODIFIES: this
@@ -25,7 +27,7 @@ public class FoodLog extends Log {
 
     public FoodLog(String name) {
         log = new ArrayList<>();
-        this.name = name + "'s food log";
+        this.name = name;
     }
 
     // EFFECTS: return the total calories in the log
@@ -61,27 +63,14 @@ public class FoodLog extends Log {
         log.add(c);
     }
 
-    @Override
-    public void addEntry(Training training) {}
 
-    @Override
-    public void addEntry(Weight weight) {}
-
-    @Override
-    public String viewAllMeasurements() {
-        return null;
-    }
-
-    @Override
-    public String analyzeTrend() {
-        return null;
-    }
 
     // EFFECTS: return the average Calories consumed per day and
     public double findDailyCalories() {
         return getTotalCalories() / log.size();
     }
 
+    // EFFECTSl: returns a string of a meal report of all past meals
     public String viewPastMeals() {
         String allMeals = "";
         int number = 1;
@@ -92,6 +81,11 @@ public class FoodLog extends Log {
         int cal = getTotalCalories();
         allMeals = allMeals + "A total of " + cal + " calories.";
         return allMeals;
+    }
+
+    // EFFECTS: returns an unmodifiable list of foods in this log
+    public List<Food> getFoods() {
+        return Collections.unmodifiableList(log);
     }
 
     @Override
@@ -107,7 +101,7 @@ public class FoodLog extends Log {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", name);
+        json.put("name", name  + "'s food log");
         json.put("Entries", entriesToJson());
         return json;
     }

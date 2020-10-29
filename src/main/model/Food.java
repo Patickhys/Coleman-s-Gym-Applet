@@ -5,13 +5,12 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import static model.Type.*;
+
 
 public class Food implements Writable {
     private int carbs;                  // carbohydrates consumed in grams
     private int protein;                // protein consumed in grams
     private int fat;                    // fats consumed in grams
-    private final Type type = FOOD;
 
 
 

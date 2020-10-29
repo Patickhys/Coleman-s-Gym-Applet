@@ -9,21 +9,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class WeightTest {
     double weight = 50.0;  // weight in grams
     double height = 160.0;     // height in cm
-    Weight mySize;
+    Weight myWeight;
 
     @BeforeEach
     void makeMeasurement(){
-       mySize = new Weight(weight,height);
+       myWeight = new Weight(weight,height);
     }
 
     @Test
     void testFindBMI(){
        double heightInMSquared = Math.pow(height /100,2);
-        assertEquals( weight/ heightInMSquared, mySize.findBMI());
+        assertEquals( weight/ heightInMSquared, myWeight.findBMI());
     }
     @Test
     void testReport(){
-        String report = "Your BMI is " + mySize.findBMI() + " at " + mySize.weightInKg + " kg.";
-        assertEquals(report,mySize.report());
+        String report = "Your BMI is " + myWeight.findBMI() + " at " + myWeight.weightInKg + " kg.";
+        assertEquals(report, myWeight.report());
+    }
+    @Test
+    void testToJson(){
+        assertEquals(50.0,myWeight.toJson().get("Weight"));
+        assertEquals(160.0,myWeight.toJson().get("Height"));
     }
 }

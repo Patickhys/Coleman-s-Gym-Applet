@@ -2,10 +2,13 @@ package model.tests;
 
 import model.Training;
 import model.TrainingLog;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TrainingLogTest {
     TrainingLog log;
@@ -57,6 +60,30 @@ public class TrainingLogTest {
                 + "3. " + Yoga.reportExercise() + "\n"
                 + "A total of " + log.getTotalCalories() + " calories.";
         assertEquals(result, log.viewPastTraining());
+    }
+
+    @Test
+    void testToJson(){
+        TrainingLog sample = new TrainingLog();
+        sample.addEntry(BenchPress);
+        sample.addEntry(Rowing);
+        sample.addEntry(Yoga);
+        JSONObject json = log.toJson();
+        json.put("name", userName);
+        json.put("Entries", log.entriesToJson());
+        assertTrue(userName==json.get("name"));
+        assertEquals( log.entriesToJson().toString(),json.get("Entries").toString());
+    }
+
+    @Test
+    void testEntriesToJson() {
+        TrainingLog sample = new TrainingLog();
+        sample.addEntry(BenchPress);
+        sample.addEntry(Rowing);
+        sample.addEntry(Yoga);
+        JSONArray jsonArray = log.entriesToJson();
+        assertTrue(3 == jsonArray.length());
+        assertEquals(BenchPress.toJson().toString(),jsonArray.get(0).toString());
     }
 
 }

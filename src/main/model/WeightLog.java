@@ -10,8 +10,6 @@ import java.util.ArrayList;
 public class WeightLog extends  Log {
     public ArrayList<Weight> log;
     String userName;
-    Type type;
-
 
     public WeightLog() {
         log = new ArrayList<>();
@@ -20,7 +18,6 @@ public class WeightLog extends  Log {
     public WeightLog(String userName) {
         log = new ArrayList<>();
         this.userName = userName + "'s weight log";
-        type = Type.TRAINING;
     }
 
     // REQUIRES: m must be a valid measurement
@@ -98,7 +95,7 @@ public class WeightLog extends  Log {
     }
 
     @Override
-    JSONArray entriesToJson() {
+    public JSONArray entriesToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Weight weight : log) {

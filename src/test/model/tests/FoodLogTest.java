@@ -69,11 +69,11 @@ public class FoodLogTest {
         log.addEntry(day1);
         log.addEntry(day2);
         log.addEntry(day3);
-        JSONObject json = new JSONObject();
+        JSONObject json = log.toJson();
         json.put("name", userName);
         json.put("Entries", log.entriesToJson());
         assertTrue(userName==json.get("name"));
-        assertEquals( log.entriesToJson(),json.get("Entries"));
+        assertEquals( log.entriesToJson().toString(),json.get("Entries").toString());
     }
 
     @Test
@@ -83,8 +83,6 @@ public class FoodLogTest {
         log.addEntry(day3);
         JSONArray jsonArray = log.entriesToJson();
         assertTrue(3 == jsonArray.length());
-        assertEquals(day1.toJson().get("Entries"),jsonArray.getJSONObject(0).get("Entries"));
-
-
+        assertEquals(day1.toJson().toString(),jsonArray.get(0).toString());
     }
 }

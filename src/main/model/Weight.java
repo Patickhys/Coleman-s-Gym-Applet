@@ -5,12 +5,11 @@ package model;
 
 import org.json.JSONObject;
 
-import static model.Type.WEIGHT;
 
 public class Weight {
     public double weightInKg;
     public double heightInCm;
-    public Type type = WEIGHT;
+
 
     // REQUIRES: weight to be in kg and height to be in cm, both > 0
     // EFFECTS: make a new measurement
@@ -36,8 +35,8 @@ public class Weight {
     // EFFECTS: Make weight into a JSONObject
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Weight", weightInKg + " kg");
-        json.put("Height", heightInCm + " cm");
+        json.put("Weight", weightInKg);
+        json.put("Height", heightInCm);
         return json;
     }
 }

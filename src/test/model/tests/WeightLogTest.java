@@ -1,11 +1,15 @@
 package model.tests;
 
+import model.TrainingLog;
 import model.Weight;
 import model.WeightLog;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WeightLogTest {
     WeightLog log;
@@ -55,5 +59,29 @@ public class WeightLogTest {
                 + "2. " + day2.report() + "\n"
                 + "3. " +  day3.report() + "\n";
         assertEquals(report,log.viewAllMeasurements());
+    }
+
+    @Test
+    void testToJson(){
+        WeightLog sample = new WeightLog();
+        sample.addEntry(day1);
+        sample.addEntry(day2);
+        sample.addEntry(day3);
+        JSONObject json = log.toJson();
+        json.put("name", userName);
+        json.put("Entries", log.entriesToJson());
+        assertTrue(userName==json.get("name"));
+        assertEquals( log.entriesToJson().toString(),json.get("Entries").toString());
+    }
+
+    @Test
+    void testEntriesToJson() {
+        WeightLog sample = new WeightLog();
+        sample.addEntry(day1);
+        sample.addEntry(day2);
+        sample.addEntry(day3);
+        JSONArray jsonArray = log.entriesToJson();
+        assertTrue(3 == jsonArray.length());
+        assertEquals(day1.toJson().toString(),jsonArray.get(0).toString());
     }
 }

@@ -33,4 +33,11 @@ public class TrainingTest {
         assertEquals(result, BenchPress.reportExercise());
     }
 
+    @Test
+    void testToJson(){
+        assertEquals("BenchPress",BenchPress.toJson().get("Exercise"));
+        assertEquals(50,BenchPress.toJson().get("Calories"));
+        assertEquals(10,BenchPress.toJson().get("Duration"));
+    }
+
 }
