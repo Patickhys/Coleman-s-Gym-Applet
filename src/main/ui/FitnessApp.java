@@ -4,16 +4,19 @@ package ui;
 //Represents a new FitnessApp, initials the app
 
 
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import javax.swing.*;
+
 import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-public class FitnessApp {
-    protected String userName;
-    protected String userSex;
+public class FitnessApp extends JFrame {
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 700;
     private int userHeight;
     private double userWeight;
     public TrainingLog trainingLog;
@@ -29,36 +32,43 @@ public class FitnessApp {
     private JsonReader jsonReaderTraining;
     private JsonWriter jsonWriterWeight;
     private JsonReader jsonReaderWeight;
+    private User user;
 
     public FitnessApp() {
+        initializeFields();
+        initializeGraphics();
+        mainMenu();
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS:  initialize all fields
+
+    private void initializeFields() {
         jsonWriterFood = new JsonWriter(JSON_STORE_FOOD);
         jsonReaderFood = new JsonReader(JSON_STORE_FOOD);
         jsonWriterTraining = new JsonWriter(JSON_STORE_TRAINING);
         jsonReaderTraining = new JsonReader(JSON_STORE_TRAINING);
         jsonWriterWeight = new JsonWriter(JSON_STORE_WEIGHT);
         jsonReaderWeight = new JsonReader(JSON_STORE_WEIGHT);
-        initializeUser();
-        mainMenu();
+        user = new User();
+        user.initializeUser();
+        userHeight = user.getHeight();
+        trainingLog = new TrainingLog(user.getName());
+        foodLog = new FoodLog(user.getName());
+        weightLog = new WeightLog(user.getName());
     }
 
     // MODIFIES: this
-    // EFFECTS: create a new user profile
-    public void initializeUser() {
-        System.out.println("Welcome to COLEMAN's");
-        System.out.println("Please enter your name!");
-        Scanner name = new Scanner(System.in);
-        userName = name.nextLine();
-        System.out.println("Hello, " + userName + "!");
-        System.out.println("Please indicate your sex!");
-        Scanner sex = new Scanner(System.in);
-        userSex = sex.nextLine();
-        System.out.println("Please enter your height in cm!");
-        Scanner height = new Scanner(System.in);
-        String heightStr = height.nextLine();
-        userHeight = Integer.parseInt(heightStr);
-        trainingLog = new TrainingLog(userName);
-        foodLog = new FoodLog(userName);
-        weightLog = new WeightLog(userName);
+    // EFFECTS:  draws the JFrame window where this FitnessApp will operate
+    private void initializeGraphics() {
+        setLayout(new BorderLayout());
+        setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        createTools();
+        addNewDrawing();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     // EFFECTS: provides a main menu to all the sub-menus
@@ -279,7 +289,7 @@ public class FitnessApp {
         }
     }
 
-     // MODIFIES: this
+    // MODIFIES: this
     // EFFECTS: loads TrainingLog from file
     private void loadTrainingLog() {
         try {
