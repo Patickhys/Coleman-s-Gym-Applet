@@ -4,6 +4,8 @@ package persistence;
 
 import model.FoodLog;
 import model.Log;
+import model.TrainingLog;
+import model.WeightLog;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -13,6 +15,9 @@ public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
     private String destination;
+    private static final String JSON_STORE_FOOD = "./data/savedFoodLog.json";
+    private static final String JSON_STORE_TRAINING = "./data/savedTrainingLog.json";
+    private static final String JSON_STORE_WEIGHT = "./data/savedWeightLog.json";
 
     // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {
@@ -27,8 +32,22 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of FoodLog to file
     public void write(FoodLog log) {
+        JSONObject json = log.toJson();
+        saveToFile(json.toString(TAB));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: writes JSON representation of TrainingLog to file
+    public void write(TrainingLog log) {
+        JSONObject json = log.toJson();
+        saveToFile(json.toString(TAB));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: writes JSON representation of WeightLog to file
+    public void write(WeightLog log) {
         JSONObject json = log.toJson();
         saveToFile(json.toString(TAB));
     }

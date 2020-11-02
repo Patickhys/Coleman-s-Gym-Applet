@@ -4,10 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TrainingLog extends Log {
     ArrayList<Training> log;
-    String userName;
+    String name;
 
     // MODIFIES: this
     // EFFECTS: make a new TrainingLog
@@ -17,9 +19,9 @@ public class TrainingLog extends Log {
 
     // MODIFIES: this
     // EFFECTS: make a new TrainingLog with the User's name
-    public TrainingLog(String name) {
+    public TrainingLog(String userName) {
         log = new ArrayList<>();
-        userName = name + "'s training log.";
+        this.name = userName;
         ;
     }
 
@@ -29,31 +31,7 @@ public class TrainingLog extends Log {
     public void addEntry(Training e) {
         log.add(e);
     }
-/*
 
-    @Override
-    public void addEntry(Weight weight) {}
-
-    @Override
-    public void addEntry(Food food) {
-    }
-
-
-    @Override
-    public String viewAllMeasurements() {
-        return null;
-    }
-
-    @Override
-    public String analyzeTrend() {
-        return null;
-    }
-
-    @Override
-    public String viewPastMeals() {
-        return null;
-    }
-*/
 
     // REQUIRES: pos must be 1 <= pos <= log.size()
     // EFFECTS: return the exercise at position given
@@ -102,15 +80,19 @@ public class TrainingLog extends Log {
         return allTrainings;
     }
 
+    // EFFECTS: returns an unmodifiable list of foods in this log
+    public List<Training> getTrainings() {
+        return Collections.unmodifiableList(log);
+    }
 
-    /*public String getName() {
-        return userName;
-    }*/
+    public String getName() {
+        return name;
+    }
 
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", "Training Log for " + userName);
+        json.put("name", "Training Log for " + name);
         json.put("Entries", entriesToJson());
         return json;
     }

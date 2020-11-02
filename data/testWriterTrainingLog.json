@@ -1,0 +1,15 @@
+{
+    "name": "Training Log for Patrick",
+    "Entries": [
+        {
+            "Exercise": "Bench Press",
+            "Duration": 30,
+            "Calories": 150
+        },
+        {
+            "Exercise": "Squats",
+            "Duration": 10,
+            "Calories": 50
+        }
+    ]
+}

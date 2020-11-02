@@ -4,6 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 // Represents a log of measurements, maximum one per day
 
@@ -17,7 +19,7 @@ public class WeightLog extends  Log {
 
     public WeightLog(String userName) {
         log = new ArrayList<>();
-        this.userName = userName + "'s weight log";
+        this.userName = userName;
     }
 
     // REQUIRES: m must be a valid measurement
@@ -55,21 +57,11 @@ public class WeightLog extends  Log {
         return result;
     }
 
-   /* @Override
-    public String viewPastMeals() {
-        return null;
-    }
 
-    @Override
-    public String viewPastTraining() {
-        return null;
-    }
-
-    @Override
     public String getName() {
         return userName;
     }
-*/
+
     // EFFECTS: return the number of entries in the log
     public int getNumEntries() {
         int num = log.size();
@@ -88,10 +80,15 @@ public class WeightLog extends  Log {
         return allMeasurements;
     }
 
+    // EFFECTS: returns an unmodifiable list of foods in this log
+    public List<Weight> getWeights() {
+        return Collections.unmodifiableList(log);
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", "Food Log for " + userName);
+        json.put("name", "Weigh Log for " + userName);
         json.put("Entries", entriesToJson());
         return json;
     }

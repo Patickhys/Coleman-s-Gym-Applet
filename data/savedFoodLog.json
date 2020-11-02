@@ -1,15 +1,8 @@
 {
-    "name": "Pat's food log",
-    "Entries": [
-        {
-            "Carbs": 10,
-            "Fat": 30,
-            "Protein": 20
-        },
-        {
-            "Carbs": 40,
-            "Fat": 60,
-            "Protein": 50
-        }
-    ]
+    "name": "Patrick's food log",
+    "Entries": [{
+        "Carbs": 50,
+        "Fat": 10,
+        "Protein": 30
+    }]
 }

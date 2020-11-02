@@ -1,0 +1,15 @@
+{
+    "name": "Patrick's food log",
+    "Entries": [
+        {
+            "Carbs": 10,
+            "Fat": 30,
+            "Protein": 20
+        },
+        {
+            "Carbs": 0,
+            "Fat": 0,
+            "Protein": 50
+        }
+    ]
+}
