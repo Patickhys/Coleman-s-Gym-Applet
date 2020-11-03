@@ -1,20 +1,23 @@
 package ui;
-
 // Json related code is referred to the JsonSerialization Demo
 //Represents a new FitnessApp, initials the app
-
-
-import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
-import javax.swing.*;
 
 import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import ui.tools.FoodTool;
+import ui.tools.Tool;
 
-public class FitnessApp extends JFrame {
+import javax.swing.*;
+import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class FitnessAppGUI extends JFrame {
+
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 700;
     private int userHeight;
@@ -33,8 +36,9 @@ public class FitnessApp extends JFrame {
     private JsonWriter jsonWriterWeight;
     private JsonReader jsonReaderWeight;
     private User user;
+    private List<Tool> tools;
 
-    public FitnessApp() {
+    public FitnessAppGUI() {
         initializeFields();
         initializeGraphics();
         mainMenu();
@@ -51,6 +55,7 @@ public class FitnessApp extends JFrame {
         jsonReaderTraining = new JsonReader(JSON_STORE_TRAINING);
         jsonWriterWeight = new JsonWriter(JSON_STORE_WEIGHT);
         jsonReaderWeight = new JsonReader(JSON_STORE_WEIGHT);
+        tools = new ArrayList<Tool>();
         user = new User();
         user.initializeUser();
         userHeight = user.getHeight();
@@ -65,10 +70,36 @@ public class FitnessApp extends JFrame {
         setLayout(new BorderLayout());
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
         createTools();
-        addNewDrawing();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    // MODIFIES: this
+    // EFFECTS:  a helper method which declares and instantiates all tools
+    private void createTools() {
+        JPanel toolArea = new JPanel();
+        toolArea.setLayout(new GridLayout(0, 1));
+        toolArea.setSize(new Dimension(0, 0));
+        add(toolArea, BorderLayout.SOUTH);
+
+        FoodTool foodTool = new FoolTool(this, toolArea);
+        tools.add(foodTool);
+
+        TrainingTool trainingTool = new TrainingTool(this, toolArea);
+        tools.add(trainingTool);
+
+        WeightTool weightTool = new WeightTool(this, toolArea);
+        tools.add(weightTool);
+
+        SaveTool saveTool = new SaveTool(this, toolArea);
+        tools.add(saveTool);
+
+        LoadTool loadTool = new LoadTool(this, toolArea);
+        tools.add(loadTool);
+
+        ExitTool exitTool = new ExitTool(this, toolArea);
+        tools.add(exitTool);*/
     }
 
     // EFFECTS: provides a main menu to all the sub-menus
@@ -311,6 +342,4 @@ public class FitnessApp extends JFrame {
         }
     }
 }
-
-
 
