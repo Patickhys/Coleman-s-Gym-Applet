@@ -36,12 +36,22 @@ public class FitnessAppGUI extends JFrame {
     private JsonWriter jsonWriterWeight;
     private JsonReader jsonReaderWeight;
     private User user;
+    private Tool activeTool;
     private List<Tool> tools;
 
     public FitnessAppGUI() {
         initializeFields();
         initializeGraphics();
         mainMenu();
+    }
+
+    // MODIFIES: this
+    // EFFECTS:  sets the given tool as the activeTool
+    public  void setActiveTool(Tool tool) {
+        if (activeTool != null)
+            activeTool.deactivate();
+        tool.activate();
+        activeTool = tool;
     }
 
 
@@ -55,6 +65,7 @@ public class FitnessAppGUI extends JFrame {
         jsonReaderTraining = new JsonReader(JSON_STORE_TRAINING);
         jsonWriterWeight = new JsonWriter(JSON_STORE_WEIGHT);
         jsonReaderWeight = new JsonReader(JSON_STORE_WEIGHT);
+        activeTool = null;
         tools = new ArrayList<Tool>();
         user = new User();
         user.initializeUser();
