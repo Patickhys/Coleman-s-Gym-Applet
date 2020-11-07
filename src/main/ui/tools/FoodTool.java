@@ -1,6 +1,4 @@
 package ui.tools;
-
-import ui.FitnessAppConsole;
 import ui.FitnessAppGUI;
 
 import javax.swing.*;
@@ -8,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FoodTool extends Tool {
-    public FoodTool(FitnessAppConsole fitnessApp, JComponent parent) {
+    public FoodTool(FitnessAppGUI fitnessApp, JComponent parent) {
         super(fitnessApp, parent);
     }
 
@@ -30,29 +28,20 @@ public class FoodTool extends Tool {
     // EFFECTS:  associate button with new ClickHandler
     @Override
     protected void addListener() {
-        button.addActionListener(new ShapeToolClickHandler());
-    }
-
-    // EFFECTS: adds a listener for this tool
-    private void addListener(){
         button.addActionListener(new FoodToolClickHandler());
     }
 
 
-    // MODIFIES: parent
-    // EFFECTS:  adds the given button to the parent component
-    @Override
-    protected void addToParent(JComponent parent) {
 
-    }
+    private class FoodToolClickHandler implements ActionListener {
 
-    private class ShapeToolClickHandler implements ActionListener {
-
-        // EFFECTS: sets active tool to the shape tool
+        // EFFECTS: sets active tool to the Food tool
         //          called by the framework when the tool is clicked
         @Override
         public void actionPerformed(ActionEvent e) {
-            FitnessAppGUI.setActiveTool(FoodTool.this);
+            fitnessApp.setActiveTool(FoodTool.this);
         }
     }
+
+
 }

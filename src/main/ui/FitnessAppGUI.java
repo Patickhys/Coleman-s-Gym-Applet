@@ -5,8 +5,8 @@ package ui;
 import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
-import ui.tools.FoodTool;
-import ui.tools.Tool;
+import ui.tools.*;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,7 +47,7 @@ public class FitnessAppGUI extends JFrame {
 
     // MODIFIES: this
     // EFFECTS:  sets the given tool as the activeTool
-    public  void setActiveTool(Tool tool) {
+    public void setActiveTool(Tool tool) {
         if (activeTool != null)
             activeTool.deactivate();
         tool.activate();
@@ -94,7 +94,7 @@ public class FitnessAppGUI extends JFrame {
         toolArea.setSize(new Dimension(0, 0));
         add(toolArea, BorderLayout.SOUTH);
 
-        FoodTool foodTool = new FoolTool(this, toolArea);
+        FoodTool foodTool = new FoodTool(this, toolArea);
         tools.add(foodTool);
 
         TrainingTool trainingTool = new TrainingTool(this, toolArea);

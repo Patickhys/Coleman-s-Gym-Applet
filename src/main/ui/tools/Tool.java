@@ -3,22 +3,25 @@
 package ui.tools;
 
 
-import ui.FitnessAppConsole;
+import ui.FitnessAppGUI;
 
 import javax.swing.*;
 
 public abstract class Tool {
     protected JButton button;
-    protected FitnessAppConsole fitnessApp;
+    protected FitnessAppGUI fitnessApp;
     private boolean active;
 
-    public Tool(FitnessAppConsole fitnessApp, JComponent parent) {
+    public Tool(FitnessAppGUI fitnessApp, JComponent parent) {
         this.fitnessApp = fitnessApp;
         createButton(parent);
         addToParent(parent);
         active = false;
-       /* addListener();*/
+        addListener();
     }
+
+    // EFFECTS: adds a listener for this tool
+    protected abstract void addListener();
 
     // MODIFIES: this
     // EFFECTS:  customizes the button used for this tool
@@ -34,7 +37,7 @@ public abstract class Tool {
         return button;
     }
 
-    public FitnessAppConsole getFitnessApp() {
+    public FitnessAppGUI getFitnessApp() {
         return fitnessApp;
     }
 
@@ -54,7 +57,9 @@ public abstract class Tool {
 
     // MODIFIES: parent
     // EFFECTS:  adds the given button to the parent component
-    protected abstract void addToParent(JComponent parent);
+    protected void addToParent(JComponent parent) {
+        parent.add(button);
+    }
 
     // EFFECTS: sets this Tool's active field to true
     public void activate() {
