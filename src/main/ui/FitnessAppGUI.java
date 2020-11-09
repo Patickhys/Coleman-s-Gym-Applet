@@ -1,6 +1,8 @@
 package ui;
+
 // Json related code is referred to the JsonSerialization Demo
 //Represents a new FitnessApp, initials the app
+
 
 import model.*;
 import persistence.JsonReader;
@@ -18,8 +20,8 @@ import java.util.Scanner;
 
 public class FitnessAppGUI extends JFrame {
 
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 700;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
     private int userHeight;
     private double userWeight;
     public TrainingLog trainingLog;
@@ -42,17 +44,12 @@ public class FitnessAppGUI extends JFrame {
     public FitnessAppGUI() {
         initializeFields();
         initializeGraphics();
-        mainMenu();
+        initializeUser();
+
     }
 
     // MODIFIES: this
     // EFFECTS:  sets the given tool as the activeTool
-    public void setActiveTool(Tool tool) {
-        if (activeTool != null)
-            activeTool.deactivate();
-        tool.activate();
-        activeTool = tool;
-    }
 
 
     // MODIFIES: this
@@ -68,6 +65,12 @@ public class FitnessAppGUI extends JFrame {
         activeTool = null;
         tools = new ArrayList<Tool>();
         user = new User();
+
+    }
+    // MODIFIES: this
+    // EFFECTS:  initialize the user
+
+    private void initializeUser() {
         user.initializeUser();
         userHeight = user.getHeight();
         trainingLog = new TrainingLog(user.getName());
@@ -75,15 +78,27 @@ public class FitnessAppGUI extends JFrame {
         weightLog = new WeightLog(user.getName());
     }
 
-    // MODIFIES: this
+
     // EFFECTS:  draws the JFrame window where this FitnessApp will operate
+
     private void initializeGraphics() {
         setLayout(new BorderLayout());
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        welcomeScreen();
         createTools();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: display a welcome image
+    private void welcomeScreen() {
+        JPanel welcomePanel = new WelcomePanel();
+        welcomePanel.setLayout(new BorderLayout());
+        welcomePanel.setSize(1000,500);
+        add(welcomePanel,BorderLayout.CENTER);
     }
 
     // MODIFIES: this
@@ -92,70 +107,29 @@ public class FitnessAppGUI extends JFrame {
         JPanel toolArea = new JPanel();
         toolArea.setLayout(new GridLayout(0, 1));
         toolArea.setSize(new Dimension(0, 0));
-        add(toolArea, BorderLayout.SOUTH);
+        add(toolArea, BorderLayout.EAST);
+        addTools(toolArea);
 
-        FoodTool foodTool = new FoodTool(this, toolArea);
-        tools.add(foodTool);
 
-        TrainingTool trainingTool = new TrainingTool(this, toolArea);
-        tools.add(trainingTool);
+    }
 
-        WeightTool weightTool = new WeightTool(this, toolArea);
-        tools.add(weightTool);
+    // MODIFIES: this
+    // EFFECTS: A helper method to add the tools
+    private void addTools(JPanel toolArea) {
+        AddAMealTool addAMealTool = new AddAMealTool(this, toolArea);
+        tools.add(addAMealTool);
+
+        AddATrainingTool addATrainingTool = new AddATrainingTool(this, toolArea);
+        tools.add(addATrainingTool);
+
+        AddAWeightTool addAWeightTool = new AddAWeightTool(this, toolArea);
+        tools.add(addAWeightTool);
 
         SaveTool saveTool = new SaveTool(this, toolArea);
         tools.add(saveTool);
 
         LoadTool loadTool = new LoadTool(this, toolArea);
         tools.add(loadTool);
-
-        ExitTool exitTool = new ExitTool(this, toolArea);
-        tools.add(exitTool);*/
-    }
-
-    // EFFECTS: provides a main menu to all the sub-menus
-    private void mainMenu() {
-        boolean run = true;
-        int choice = 0;
-        input = new Scanner(System.in);
-        while (run) {
-            printMainMenu();
-            choice = input.nextInt();
-            if (choice == 0) {
-                run = false;
-            } else {
-                processMainMenuChoice(choice);
-            }
-        }
-        System.out.println("See you next time!");
-    }
-
-    // REQUIRES: a valid user input
-    // EFFECTS: process the input by the user
-
-    private void processMainMenuChoice(int choice) {
-        if (choice == 1) {
-            nutritionMenu();
-        } else if (choice == 2) {
-            trainingMenu();
-        } else if (choice == 3) {
-            measurementMenu();
-        } else if (choice == 4) {
-            saveFiles();
-        } else if (choice == 5) {
-            loadFile();
-        }
-    }
-
-    // EFFECTS: prints out the main menu
-    private void printMainMenu() {
-        System.out.println("Please select an option!");
-        System.out.println("1. Nutrition Record");
-        System.out.println("2. Training Record");
-        System.out.println("3. Measurement Record");
-        System.out.println("4. Save File");
-        System.out.println("5. Load File");
-        System.out.println("0. Exit");
     }
 
 
@@ -180,7 +154,7 @@ public class FitnessAppGUI extends JFrame {
     }
 
     // EFFECTS: a sub-menu for nutrition
-    private void nutritionMenu() {
+    public void nutritionMenu() {
         processSecondaryMenu("1. Enter a meal", "2. View my meals");
         Scanner option = new Scanner(System.in);
         int choice = option.nextInt();
@@ -224,7 +198,7 @@ public class FitnessAppGUI extends JFrame {
     // REQUIRES: user answers the question nicely
     // MODIFIES: this
     // EFFECTS: make a new Food();
-    private void makeNewMeal() {
+    public void makeNewMeal() {
         Scanner answer = new Scanner(System.in);
         System.out.println("How much carbs in grams did you eat?");
         int carbs = answer.nextInt();
@@ -269,7 +243,7 @@ public class FitnessAppGUI extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: load logs from file
-    private void loadFile() {
+    public void loadFile() {
         loadFoodLog();
         loadTrainingLog();
         loadWeightLog();
@@ -277,7 +251,7 @@ public class FitnessAppGUI extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: save logs to file
-    private void saveFiles() {
+    public void saveFiles() {
         saveFoodLog();
         saveTrainingLog();
         saveWeightLog();
@@ -289,9 +263,9 @@ public class FitnessAppGUI extends JFrame {
             jsonWriterFood.open();
             jsonWriterFood.write(foodLog);
             jsonWriterFood.close();
-            System.out.println("Saved FoodLog"); //+ foodLog.getName() + " to " + JSON_STORE_FOOD);
+            System.out.println("Saved FoodLog");
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE_FOOD);
+            System.out.println("Unable to write to file");
         }
     }
 
@@ -303,7 +277,7 @@ public class FitnessAppGUI extends JFrame {
             jsonWriterTraining.close();
             System.out.println("Saved " + trainingLog.getName() + " to " + JSON_STORE_TRAINING);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE_TRAINING);
+            System.out.println("Unable to write to file");
         }
     }
 
@@ -315,7 +289,7 @@ public class FitnessAppGUI extends JFrame {
             jsonWriterWeight.close();
             System.out.println("Saved " + weightLog.getName() + " to " + JSON_STORE_WEIGHT);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE_WEIGHT);
+            System.out.println("Unable to write to file");
         }
     }
 
@@ -327,7 +301,7 @@ public class FitnessAppGUI extends JFrame {
             foodLog = jsonReaderFood.readFoodLog();
             System.out.println("Loaded " + foodLog.getName() + " from " + JSON_STORE_FOOD);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE_FOOD);
+            System.out.println("Unable to read from file");
         }
     }
 
@@ -338,7 +312,7 @@ public class FitnessAppGUI extends JFrame {
             trainingLog = jsonReaderTraining.readTrainingLog();
             System.out.println("Loaded " + trainingLog.getName() + " from " + JSON_STORE_TRAINING);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE_TRAINING);
+            System.out.println("Unable to read from file");
         }
     }
 
@@ -349,7 +323,7 @@ public class FitnessAppGUI extends JFrame {
             weightLog = jsonReaderWeight.readWeightLog();
             System.out.println("Loaded " + weightLog.getName() + " from " + JSON_STORE_WEIGHT);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE_WEIGHT);
+            System.out.println("Unable to read from file");
         }
     }
 }

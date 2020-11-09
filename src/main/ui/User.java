@@ -8,13 +8,8 @@ public class User {
     public Scanner scanner;
 
 
-
-
-
     //EFFECTS: construct a new user
     public User() {}
-
-
 
     //EFFECTS: construct a new user
     public User(String name, int height) {
