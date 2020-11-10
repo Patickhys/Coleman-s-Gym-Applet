@@ -1,27 +1,21 @@
 package ui.tools;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 public class WelcomePanel extends JPanel {
-    private Image image;
+
     private static final String WELCOME_IMG = "./data/LightWeightBaby.jpg";
+    private JPanel welcomePanel;
 
+    // EFFECTS: make a new WelcomePanel that displays Ronnie Coleman
     public WelcomePanel() {
-        try {
-            image = ImageIO.read(new File(WELCOME_IMG));
-        } catch (IOException ex) {
-            image = null;
-        }
+        welcomePanel = new JPanel();
+        ImageIcon lightWeightImg = new ImageIcon(WELCOME_IMG);
+        JLabel lightWeightLabel = new JLabel("", lightWeightImg, JLabel.CENTER);
+        welcomePanel.add(lightWeightLabel);
+        welcomePanel.setLayout(new FlowLayout(3));
+        welcomePanel.setPreferredSize(new Dimension(400, 300));
+        add(welcomePanel, BorderLayout.WEST);
     }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(image, 0, 0, this);
-    }
-
 }

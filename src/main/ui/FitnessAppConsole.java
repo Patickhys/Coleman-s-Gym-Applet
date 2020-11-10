@@ -4,13 +4,10 @@ package ui;
 //Represents a new FitnessApp, initials the app
 
 
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import javax.swing.*;
 
 import model.*;
 import ui.tools.*;

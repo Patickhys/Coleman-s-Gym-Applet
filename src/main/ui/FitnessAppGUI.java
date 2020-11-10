@@ -9,7 +9,6 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.tools.*;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -20,17 +19,15 @@ import java.util.Scanner;
 
 public class FitnessAppGUI extends JFrame {
 
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 600;
-    private int userHeight;
-    private double userWeight;
-    public TrainingLog trainingLog;
-    public FoodLog foodLog;
-    public WeightLog weightLog;
-    private Scanner input;
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 800;
     private static final String JSON_STORE_FOOD = "./data/savedFoodLog.json";
     private static final String JSON_STORE_TRAINING = "./data/savedTrainingLog.json";
     private static final String JSON_STORE_WEIGHT = "./data/savedWeightLog.json";
+    private static final String WELCOME_IMG = "./data/LightWeightBaby.jpg";
+    public TrainingLog trainingLog;
+    public FoodLog foodLog;
+    public WeightLog weightLog;
     private JsonWriter jsonWriterFood;
     private JsonReader jsonReaderFood;
     private JsonWriter jsonWriterTraining;
@@ -38,8 +35,10 @@ public class FitnessAppGUI extends JFrame {
     private JsonWriter jsonWriterWeight;
     private JsonReader jsonReaderWeight;
     private User user;
-    private Tool activeTool;
     private List<Tool> tools;
+
+    private WelcomePanel welcomePanel;
+    private TrainingPanel trainingPanel;
 
     public FitnessAppGUI() {
         initializeFields();
@@ -47,10 +46,6 @@ public class FitnessAppGUI extends JFrame {
         initializeUser();
 
     }
-
-    // MODIFIES: this
-    // EFFECTS:  sets the given tool as the activeTool
-
 
     // MODIFIES: this
     // EFFECTS:  initialize all fields
@@ -62,76 +57,80 @@ public class FitnessAppGUI extends JFrame {
         jsonReaderTraining = new JsonReader(JSON_STORE_TRAINING);
         jsonWriterWeight = new JsonWriter(JSON_STORE_WEIGHT);
         jsonReaderWeight = new JsonReader(JSON_STORE_WEIGHT);
-        activeTool = null;
         tools = new ArrayList<Tool>();
         user = new User();
 
+
     }
+
     // MODIFIES: this
     // EFFECTS:  initialize the user
 
     private void initializeUser() {
-        user.initializeUser();
-        userHeight = user.getHeight();
         trainingLog = new TrainingLog(user.getName());
         foodLog = new FoodLog(user.getName());
         weightLog = new WeightLog(user.getName());
     }
 
-
+    // MODIFIES: this
     // EFFECTS:  draws the JFrame window where this FitnessApp will operate
-
     private void initializeGraphics() {
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout(10, 10));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
         welcomeScreen();
+        makeUserPanel();
         createTools();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-    }
 
+    }
 
     // MODIFIES: this
     // EFFECTS: display a welcome image
     private void welcomeScreen() {
-        JPanel welcomePanel = new WelcomePanel();
-        welcomePanel.setLayout(new BorderLayout());
-        welcomePanel.setSize(1000,500);
-        add(welcomePanel,BorderLayout.CENTER);
+        welcomePanel = new WelcomePanel();
+        add(welcomePanel, BorderLayout.WEST);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: make user panel
+    private void makeUserPanel() {
+        add(user.makeUserPanel(), BorderLayout.CENTER);
+
     }
 
     // MODIFIES: this
     // EFFECTS:  a helper method which declares and instantiates all tools
     private void createTools() {
         JPanel toolArea = new JPanel();
-        toolArea.setLayout(new GridLayout(0, 1));
+        toolArea.setLayout(new GridLayout(4, 2));
         toolArea.setSize(new Dimension(0, 0));
         add(toolArea, BorderLayout.EAST);
         addTools(toolArea);
-
-
     }
 
     // MODIFIES: this
     // EFFECTS: A helper method to add the tools
     private void addTools(JPanel toolArea) {
         AddAMealTool addAMealTool = new AddAMealTool(this, toolArea);
-        tools.add(addAMealTool);
-
+        ViewPastMealsTool mealsTool = new ViewPastMealsTool(this, toolArea);
         AddATrainingTool addATrainingTool = new AddATrainingTool(this, toolArea);
-        tools.add(addATrainingTool);
-
+        ViewPastTrainingTool viewPastTrainingTool = new ViewPastTrainingTool(this, toolArea);
         AddAWeightTool addAWeightTool = new AddAWeightTool(this, toolArea);
-        tools.add(addAWeightTool);
-
+        ViewWeightRecordsTool viewWeightRecordsTool = new ViewWeightRecordsTool(this, toolArea);
         SaveTool saveTool = new SaveTool(this, toolArea);
-        tools.add(saveTool);
-
         LoadTool loadTool = new LoadTool(this, toolArea);
+
+        tools.add(addAMealTool);
+        tools.add(mealsTool);
+        tools.add(addATrainingTool);
+        tools.add(viewPastTrainingTool);
+        tools.add(addAWeightTool);
+        tools.add(viewWeightRecordsTool);
+        tools.add(saveTool);
         tools.add(loadTool);
     }
-
 
     // REQUIRES: an option must be valid string that describe an user option
     // EFFECTS: a helpful method for submenus
@@ -152,6 +151,7 @@ public class FitnessAppGUI extends JFrame {
             viewPastTraining();
         }
     }
+
 
     // EFFECTS: a sub-menu for nutrition
     public void nutritionMenu() {
@@ -190,8 +190,8 @@ public class FitnessAppGUI extends JFrame {
     private void makeMeasurement() {
         Scanner answer = new Scanner(System.in);
         System.out.println("How much do you weight in kg");
-        userWeight = answer.nextInt();
-        Weight newEntry = new Weight(userWeight, userHeight);
+        double userWeight = answer.nextInt();
+        Weight newEntry = new Weight(userWeight, user.getHeight());
         weightLog.addEntry(newEntry);
     }
 
@@ -199,6 +199,9 @@ public class FitnessAppGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: make a new Food();
     public void makeNewMeal() {
+        JTextArea prompt = new JTextArea(5, 20);
+        add(prompt, BorderLayout.CENTER);
+
         Scanner answer = new Scanner(System.in);
         System.out.println("How much carbs in grams did you eat?");
         int carbs = answer.nextInt();
@@ -221,18 +224,10 @@ public class FitnessAppGUI extends JFrame {
     // REQUIRES: user answers the question nicely
     // MODIFIES: this
     // EFFECTS: make a new Training();
-    private void makeNewTraining() {
-        Scanner answer = new Scanner(System.in);
-        System.out.println("What exercise did you do?");
-        String name = answer.nextLine();
-        answer = new Scanner(System.in);
-        System.out.println("How many calories did you burn?");
-        int calories = answer.nextInt();
-        answer = new Scanner(System.in);
-        System.out.println("How long in minutes did you exercise?");
-        int duration = answer.nextInt();
-        Training newTraining = new Training(name, calories, duration);
-        trainingLog.addEntry(newTraining);
+    public void makeNewTraining() {
+        trainingPanel.firstQuestion();
+        trainingPanel.secondQuestion();
+        trainingPanel.thirdQuestion();
     }
 
     // REQUIRES: trainingLog has at least one entry
@@ -293,7 +288,6 @@ public class FitnessAppGUI extends JFrame {
         }
     }
 
-
     // MODIFIES: this
     // EFFECTS: loads foodLog from file
     private void loadFoodLog() {
@@ -326,5 +320,6 @@ public class FitnessAppGUI extends JFrame {
             System.out.println("Unable to read from file");
         }
     }
+
 }
 

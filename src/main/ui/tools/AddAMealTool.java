@@ -16,7 +16,7 @@ public class AddAMealTool extends Tool {
     // EFFECTS:  creates new button and adds to parent
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Add A Meal");
+        button = new JButton("Add a meal");
         addToParent(parent);
     }
 

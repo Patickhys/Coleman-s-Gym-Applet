@@ -6,8 +6,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddAWeightTool extends Tool {
-    public AddAWeightTool(FitnessAppGUI fitnessApp, JComponent parent) {
+public class ViewPastMealsTool extends Tool {
+    public ViewPastMealsTool(FitnessAppGUI fitnessApp, JComponent parent) {
         super(fitnessApp, parent);
     }
 
@@ -23,16 +23,16 @@ public class AddAWeightTool extends Tool {
     // EFFECTS:  associate button with new ClickHandler
     @Override
     protected void addListener() {
-        button.addActionListener(new WeightToolClickHandler());
+        button.addActionListener(new MealLogClickHandler());
     }
 
     //EFFECTS: Returns the string for the label.
     private String getLabel() {
-        return "Add a weight";
+        return "View past meals";
     }
 
 
-    public class WeightToolClickHandler implements ActionListener {
+    public class MealLogClickHandler implements ActionListener {
 
         // EFFECTS:
         @Override
