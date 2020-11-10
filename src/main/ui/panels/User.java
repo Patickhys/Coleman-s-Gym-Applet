@@ -1,4 +1,4 @@
-package ui;
+package ui.panels;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +24,8 @@ public class User extends JPanel {
         this.name = name;
         this.height = height;
     }
+
+    // EFFECTS: return a user panel
 
     public JPanel makeUserPanel() {
         userPanel = new JPanel();

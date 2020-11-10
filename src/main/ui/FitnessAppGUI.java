@@ -7,6 +7,9 @@ package ui;
 import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import ui.panels.TrainingPanel;
+import ui.panels.User;
+import ui.panels.WelcomePanel;
 import ui.tools.*;
 
 import javax.swing.*;
@@ -225,9 +228,9 @@ public class FitnessAppGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: make a new Training();
     public void makeNewTraining() {
-        trainingPanel.firstQuestion();
-        trainingPanel.secondQuestion();
-        trainingPanel.thirdQuestion();
+        add(trainingPanel.firstQuestion(),BorderLayout.CENTER);
+        add(trainingPanel.secondQuestion(),BorderLayout.CENTER);
+        add(trainingPanel.thirdQuestion(),BorderLayout.CENTER);
     }
 
     // REQUIRES: trainingLog has at least one entry
