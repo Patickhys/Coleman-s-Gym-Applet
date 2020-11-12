@@ -18,6 +18,7 @@ public class TrainingPanel extends JPanel {
     private ArrayList<String> answerList;
 
     public TrainingPanel() {
+        currentPanel = new JPanel();
         enterButton = new JButton("Enter");
         answerList = new ArrayList<>();
     }
@@ -46,7 +47,7 @@ public class TrainingPanel extends JPanel {
     // EFFECTS: Helper method that makes a panel for the given question
     private JPanel questionPanel(String question) {
         currentPanel = new JPanel();
-        currentPanel.setLayout(new BoxLayout(trainingPanel, BoxLayout.Y_AXIS));
+        currentPanel.setLayout(new BoxLayout(currentPanel, BoxLayout.Y_AXIS));
         currentPanel.setPreferredSize(new Dimension(200, 100));
         textArea = new JTextArea(question);
         textArea.setEditable(false);

@@ -25,7 +25,6 @@ public class FitnessAppGUI extends JFrame {
     private static final String JSON_STORE_FOOD = "./data/savedFoodLog.json";
     private static final String JSON_STORE_TRAINING = "./data/savedTrainingLog.json";
     private static final String JSON_STORE_WEIGHT = "./data/savedWeightLog.json";
-    private static final String WELCOME_IMG = "./data/LightWeightBaby.jpg";
     private static User user;
     public TrainingLog trainingLog;
     public FoodLog foodLog;
@@ -38,10 +37,13 @@ public class FitnessAppGUI extends JFrame {
     private JsonReader jsonReaderWeight;
     private List<Tool> tools;
 
+    private BoxLayout boxLayout;
+
     private JPanel activePanel;
     private JPanel welcomePanel;
-    private JPanel trainingPanel;
-    private  JPanel userPanel;
+    private TrainingPanel trainingPanel;
+    private UserPanel userPanel;
+    private PastMealsPanel pastMealsPanel;
 
     // EFFECTS: make a new App GUI
     public FitnessAppGUI() {
@@ -49,13 +51,6 @@ public class FitnessAppGUI extends JFrame {
         initializeGraphics();
         initializeLogs();
 
-    }
-
-    // REQUIRES: the enter button is clicked
-    // MODIFIES: this
-    // EFFECTS: give the user the input name
-    public static void submitUserName(String name) {
-        user.giveName(name);
     }
 
     // MODIFIES: this
@@ -68,11 +63,13 @@ public class FitnessAppGUI extends JFrame {
         jsonReaderTraining = new JsonReader(JSON_STORE_TRAINING);
         jsonWriterWeight = new JsonWriter(JSON_STORE_WEIGHT);
         jsonReaderWeight = new JsonReader(JSON_STORE_WEIGHT);
-        tools = new ArrayList<Tool>();
+        tools = new ArrayList<>();
         user = new User();
         userPanel = new UserPanel();
         welcomePanel = new WelcomePanel();
         trainingPanel = new TrainingPanel();
+        pastMealsPanel = new PastMealsPanel();
+        activePanel = new JPanel();
     }
 
     // MODIFIES: this
@@ -89,7 +86,8 @@ public class FitnessAppGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS:  draws the JFrame window where this FitnessApp will operate
     private void initializeGraphics() {
-        setLayout(new BorderLayout(10, 10));
+        boxLayout = new BoxLayout(getContentPane(),BoxLayout.Y_AXIS);
+        setLayout(boxLayout);
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
         welcomeScreen();
         makeUserPanel();
@@ -103,13 +101,24 @@ public class FitnessAppGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: display a welcome image
     private void welcomeScreen() {
-        add(welcomePanel, BorderLayout.WEST);
+        add(welcomePanel, boxLayout);
     }
 
     // MODIFIES: this
-    // EFFECTS: make user panel
+    // EFFECTS: make user panel show up
     private void makeUserPanel() {
-        add(userPanel, BorderLayout.CENTER);
+        remove(activePanel);
+        activePanel = userPanel.makeUserPanel();
+        add(activePanel, boxLayout);
+        repaint();
+    }
+
+
+    // REQUIRES: the enter button is clicked
+    // MODIFIES: this
+    // EFFECTS: give the user the input name
+    public static void submitUserName(String name) {
+        user.giveName(name);
     }
 
     // MODIFIES: this
@@ -212,7 +221,7 @@ public class FitnessAppGUI extends JFrame {
     // EFFECTS: make a new Food();
     public void makeNewMeal() {
         JTextArea prompt = new JTextArea(5, 20);
-        add(prompt, BorderLayout.CENTER);
+        add(prompt, boxLayout);
 
         Scanner answer = new Scanner(System.in);
         System.out.println("How much carbs in grams did you eat?");
@@ -230,21 +239,20 @@ public class FitnessAppGUI extends JFrame {
     // REQUIRES: mealLog has at least one entry
     // EFFECTS: print out all meals in mealLog;
     public void viewPastMeals() {
-        JPanel mealPanel = new JPanel();
-        mealPanel.setLayout(new FlowLayout());
-        mealPanel.setPreferredSize(new Dimension(200,100));
-        JTextArea textArea  = new JTextArea(foodLog.viewPastMeals());
-        textArea.setEditable(false);
-        textArea.setFont((new Font("TimesRoman", Font.PLAIN, 22)));
-        add(textArea,mealPanel);
-        add(mealPanel,BorderLayout.CENTER);
+        remove(boxLayout.getTarget());
+        activePanel = pastMealsPanel.makeMealPanel(foodLog);
+        add(activePanel,boxLayout);
+        repaint();
     }
+
 
     // REQUIRES: user answers the question nicely
     // MODIFIES: this
     // EFFECTS: make a new Training();
     public void makeNewTraining() {
-        add(trainingPanel.firstQuestion(),BorderLayout.CENTER);
+        remove(activePanel);
+        repaint();
+        add(trainingPanel.firstQuestion(),boxLayout);
 /*        add(trainingPanel.secondQuestion(),BorderLayout.CENTER);
         add(trainingPanel.thirdQuestion(),BorderLayout.CENTER);*/
     }

@@ -14,7 +14,7 @@ public class WelcomePanel extends JPanel {
         ImageIcon lightWeightImg = new ImageIcon(WELCOME_IMG);
         JLabel lightWeightLabel = new JLabel("", lightWeightImg, JLabel.CENTER);
         welcomePanel.add(lightWeightLabel);
-        welcomePanel.setLayout(new FlowLayout(3));
+        welcomePanel.setLayout(new FlowLayout());
         welcomePanel.setPreferredSize(new Dimension(400, 300));
         add(welcomePanel, BorderLayout.WEST);
     }

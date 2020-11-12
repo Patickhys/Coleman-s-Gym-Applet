@@ -34,7 +34,7 @@ public class ViewPastMealsTool extends Tool {
 
     public class MealLogClickHandler implements ActionListener {
 
-        // EFFECTS:
+        // EFFECTS: call viewPastMeals()
         @Override
         public void actionPerformed(ActionEvent e) {
             fitnessApp.viewPastMeals();
