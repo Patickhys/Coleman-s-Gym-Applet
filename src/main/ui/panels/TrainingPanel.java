@@ -11,14 +11,13 @@ import java.util.ArrayList;
 
 public class TrainingPanel extends JPanel {
     private Training training;
-    private JPanel trainingPanel;
+    private JPanel currentPanel;
     private JTextArea textArea;
     private JButton enterButton;
     private JTextField textField;
     private ArrayList<String> answerList;
 
     public TrainingPanel() {
-        trainingPanel = new JPanel();
         enterButton = new JButton("Enter");
         answerList = new ArrayList<>();
     }
@@ -46,18 +45,19 @@ public class TrainingPanel extends JPanel {
     // MODIFIES:this
     // EFFECTS: Helper method that makes a panel for the given question
     private JPanel questionPanel(String question) {
-        trainingPanel.setLayout(new BoxLayout(trainingPanel, BoxLayout.Y_AXIS));
-        trainingPanel.setPreferredSize(new Dimension(200, 100));
+        currentPanel = new JPanel();
+        currentPanel.setLayout(new BoxLayout(trainingPanel, BoxLayout.Y_AXIS));
+        currentPanel.setPreferredSize(new Dimension(200, 100));
         textArea = new JTextArea(question);
         textArea.setEditable(false);
         textArea.setFont((new Font("TimesRoman", Font.PLAIN, 22)));
         textField = new JTextField("Enter your answer", 10);
         textField.setFont((new Font("TimesRoman", Font.PLAIN, 22)));
         enterButton.addActionListener(new EnterButtonClickerHandler());
-        trainingPanel.add(textArea);
-        trainingPanel.add(textField);
-        trainingPanel.add(enterButton);
-        return trainingPanel;
+        currentPanel.add(textArea);
+        currentPanel.add(textField);
+        currentPanel.add(enterButton);
+        return currentPanel;
     }
 
 

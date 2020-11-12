@@ -37,6 +37,7 @@ public class ViewPastMealsTool extends Tool {
         // EFFECTS:
         @Override
         public void actionPerformed(ActionEvent e) {
+            fitnessApp.viewPastMeals();
         }
     }
 }

@@ -7,9 +7,7 @@ package ui;
 import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
-import ui.panels.TrainingPanel;
-import ui.panels.User;
-import ui.panels.WelcomePanel;
+import ui.panels.*;
 import ui.tools.*;
 
 import javax.swing.*;
@@ -28,6 +26,7 @@ public class FitnessAppGUI extends JFrame {
     private static final String JSON_STORE_TRAINING = "./data/savedTrainingLog.json";
     private static final String JSON_STORE_WEIGHT = "./data/savedWeightLog.json";
     private static final String WELCOME_IMG = "./data/LightWeightBaby.jpg";
+    private static User user;
     public TrainingLog trainingLog;
     public FoodLog foodLog;
     public WeightLog weightLog;
@@ -37,17 +36,26 @@ public class FitnessAppGUI extends JFrame {
     private JsonReader jsonReaderTraining;
     private JsonWriter jsonWriterWeight;
     private JsonReader jsonReaderWeight;
-    private User user;
     private List<Tool> tools;
 
-    private WelcomePanel welcomePanel;
-    private TrainingPanel trainingPanel;
+    private JPanel activePanel;
+    private JPanel welcomePanel;
+    private JPanel trainingPanel;
+    private  JPanel userPanel;
 
+    // EFFECTS: make a new App GUI
     public FitnessAppGUI() {
         initializeFields();
         initializeGraphics();
-        initializeUser();
+        initializeLogs();
 
+    }
+
+    // REQUIRES: the enter button is clicked
+    // MODIFIES: this
+    // EFFECTS: give the user the input name
+    public static void submitUserName(String name) {
+        user.giveName(name);
     }
 
     // MODIFIES: this
@@ -62,18 +70,21 @@ public class FitnessAppGUI extends JFrame {
         jsonReaderWeight = new JsonReader(JSON_STORE_WEIGHT);
         tools = new ArrayList<Tool>();
         user = new User();
-
-
+        userPanel = new UserPanel();
+        welcomePanel = new WelcomePanel();
+        trainingPanel = new TrainingPanel();
     }
 
     // MODIFIES: this
     // EFFECTS:  initialize the user
 
-    private void initializeUser() {
+    private void initializeLogs() {
         trainingLog = new TrainingLog(user.getName());
         foodLog = new FoodLog(user.getName());
         weightLog = new WeightLog(user.getName());
     }
+
+
 
     // MODIFIES: this
     // EFFECTS:  draws the JFrame window where this FitnessApp will operate
@@ -92,15 +103,13 @@ public class FitnessAppGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: display a welcome image
     private void welcomeScreen() {
-        welcomePanel = new WelcomePanel();
         add(welcomePanel, BorderLayout.WEST);
     }
 
     // MODIFIES: this
     // EFFECTS: make user panel
     private void makeUserPanel() {
-        add(user.makeUserPanel(), BorderLayout.CENTER);
-
+        add(userPanel, BorderLayout.CENTER);
     }
 
     // MODIFIES: this
@@ -220,8 +229,15 @@ public class FitnessAppGUI extends JFrame {
 
     // REQUIRES: mealLog has at least one entry
     // EFFECTS: print out all meals in mealLog;
-    private void viewPastMeals() {
-        System.out.println((foodLog.viewPastMeals()));
+    public void viewPastMeals() {
+        JPanel mealPanel = new JPanel();
+        mealPanel.setLayout(new FlowLayout());
+        mealPanel.setPreferredSize(new Dimension(200,100));
+        JTextArea textArea  = new JTextArea(foodLog.viewPastMeals());
+        textArea.setEditable(false);
+        textArea.setFont((new Font("TimesRoman", Font.PLAIN, 22)));
+        add(textArea,mealPanel);
+        add(mealPanel,BorderLayout.CENTER);
     }
 
     // REQUIRES: user answers the question nicely
@@ -229,8 +245,8 @@ public class FitnessAppGUI extends JFrame {
     // EFFECTS: make a new Training();
     public void makeNewTraining() {
         add(trainingPanel.firstQuestion(),BorderLayout.CENTER);
-        add(trainingPanel.secondQuestion(),BorderLayout.CENTER);
-        add(trainingPanel.thirdQuestion(),BorderLayout.CENTER);
+/*        add(trainingPanel.secondQuestion(),BorderLayout.CENTER);
+        add(trainingPanel.thirdQuestion(),BorderLayout.CENTER);*/
     }
 
     // REQUIRES: trainingLog has at least one entry
@@ -247,7 +263,6 @@ public class FitnessAppGUI extends JFrame {
         loadWeightLog();
     }
 
-    // MODIFIES: this
     // EFFECTS: save logs to file
     public void saveFiles() {
         saveFoodLog();

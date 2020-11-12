@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import model.*;
-import ui.panels.User;
 import ui.tools.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
