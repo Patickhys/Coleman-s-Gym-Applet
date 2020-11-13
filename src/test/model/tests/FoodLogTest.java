@@ -89,14 +89,10 @@ public class FoodLogTest {
         assertTrue(3 == jsonArray.length());
         assertEquals(day1.toJson().toString(),jsonArray.get(0).toString());
     }
- /*   @Test
-    void testUnusedMethods() {
-        FoodLog test = new FoodLog(null);
-        test.addEntry(new Weight(0,0));
-        assertTrue(test.getLogSize()==0);
-        test.addEntry(new Training("",0,0));
-        assertTrue(test.getLogSize()==0);
-        assertTrue(test.viewAllMeasurements()==null);
-        assertTrue(test.analyzeTrend()==null);
-    }*/
+
+    @Test
+    void testUserName() {
+        log.setUserName("Pat");
+        assertEquals(log.getName(),"Pat");
+    }
 }

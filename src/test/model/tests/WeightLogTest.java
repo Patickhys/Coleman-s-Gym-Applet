@@ -84,4 +84,10 @@ public class WeightLogTest {
         assertTrue(3 == jsonArray.length());
         assertEquals(day1.toJson().toString(),jsonArray.get(0).toString());
     }
+
+    @Test
+    void testUserName() {
+        log.setUserName("Pat");
+        assertEquals(log.getName(),"Pat");
+    }
 }

@@ -86,4 +86,9 @@ public class TrainingLogTest {
         assertEquals(BenchPress.toJson().toString(),jsonArray.get(0).toString());
     }
 
+    @Test
+    void testUserName() {
+        log.setUserName("Pat");
+        assertEquals(log.getName(),"Pat");
+    }
 }
