@@ -11,7 +11,7 @@ import java.util.List;
 
 public class WeightLog extends  Log {
     public ArrayList<Weight> log;
-    String userName;
+    private String userName;
 
     public WeightLog() {
         log = new ArrayList<>();
@@ -29,15 +29,15 @@ public class WeightLog extends  Log {
         log.add(m);
     }
 
-/*
-    @Override
-    public void addEntry(Food food) {}
 
-    @Override
-    public void addEntry(Training training) {}
-*/
+    // MODIFIES: this
+    // EFFECTS: set this.userName = userName
 
-    // REQUIRES: assume the log has at least one entry
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+// REQUIRES: assume the log has at least one entry
     // EFFECTS: return an analysis of the measurements logged so far
 
     public String analyzeTrend() {
@@ -68,6 +68,8 @@ public class WeightLog extends  Log {
         return num;
     }
 
+
+
     // REQUIRES: log has at least one entry
     // EFFECTS: return a string made up of all weight reports from the log
     public String viewAllMeasurements() {
@@ -88,7 +90,7 @@ public class WeightLog extends  Log {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", "Weigh Log for " + userName);
+        json.put("name", "Weight Log for " + userName);
         json.put("Entries", entriesToJson());
         return json;
     }

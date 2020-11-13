@@ -37,6 +37,7 @@ public class AddAWeightTool extends Tool {
         // EFFECTS:
         @Override
         public void actionPerformed(ActionEvent e) {
+            fitnessApp.makeNewWeight();
         }
     }
 }

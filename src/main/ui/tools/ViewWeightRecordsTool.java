@@ -37,6 +37,7 @@ public class ViewWeightRecordsTool extends Tool {
         // EFFECTS:
         @Override
         public void actionPerformed(ActionEvent e) {
+            fitnessApp.viewPastMeasurements();
         }
     }
 }

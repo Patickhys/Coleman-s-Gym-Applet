@@ -8,8 +8,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class TrainingLog extends Log {
-    ArrayList<Training> log;
-    String name;
+    private ArrayList<Training> log;
+    private String userName;
 
     // MODIFIES: this
     // EFFECTS: make a new TrainingLog
@@ -21,7 +21,7 @@ public class TrainingLog extends Log {
     // EFFECTS: make a new TrainingLog with the User's name
     public TrainingLog(String userName) {
         log = new ArrayList<>();
-        this.name = userName;
+        this.userName = userName;
         ;
     }
 
@@ -80,19 +80,25 @@ public class TrainingLog extends Log {
         return allTrainings;
     }
 
+    // MODIFIES: this
+    // EFFECTS: set this.userName = userName
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     // EFFECTS: returns an unmodifiable list of foods in this log
     public List<Training> getTrainings() {
         return Collections.unmodifiableList(log);
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", "Training Log for " + name);
+        json.put("name", "Training Log for " + userName);
         json.put("Entries", entriesToJson());
         return json;
     }

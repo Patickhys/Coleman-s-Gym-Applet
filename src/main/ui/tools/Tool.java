@@ -61,13 +61,5 @@ public abstract class Tool {
         parent.add(button);
     }
 
-    // EFFECTS: sets this Tool's active field to true
-    public void activate() {
-        active = true;
-    }
 
-    // EFFECTS: sets this Tool's active field to false
-    public void deactivate() {
-        active = false;
-    }
 }

@@ -25,10 +25,12 @@ public class FitnessAppGUI extends JFrame {
     private static final String JSON_STORE_FOOD = "./data/savedFoodLog.json";
     private static final String JSON_STORE_TRAINING = "./data/savedTrainingLog.json";
     private static final String JSON_STORE_WEIGHT = "./data/savedWeightLog.json";
-    private static User user;
+
+    private User user;
     public TrainingLog trainingLog;
     public FoodLog foodLog;
     public WeightLog weightLog;
+
     private JsonWriter jsonWriterFood;
     private JsonReader jsonReaderFood;
     private JsonWriter jsonWriterTraining;
@@ -37,20 +39,25 @@ public class FitnessAppGUI extends JFrame {
     private JsonReader jsonReaderWeight;
     private List<Tool> tools;
 
-    private BoxLayout boxLayout;
+    private BoxLayout layOut;
 
     private JPanel activePanel;
     private JPanel welcomePanel;
-    private TrainingPanel trainingPanel;
+
+    private AddAMealPanel addAMealPanel;
+    private AddATrainingPanel addATrainingPanel;
+    private AddAWeightPanel addAWeightPanel;
     private UserPanel userPanel;
+
     private PastMealsPanel pastMealsPanel;
+    private PastTrainingPanel pastTrainingPanel;
+    private PastWeightsPanel pastWeightsPanel;
 
     // EFFECTS: make a new App GUI
     public FitnessAppGUI() {
         initializeFields();
         initializeGraphics();
         initializeLogs();
-
     }
 
     // MODIFIES: this
@@ -65,10 +72,14 @@ public class FitnessAppGUI extends JFrame {
         jsonReaderWeight = new JsonReader(JSON_STORE_WEIGHT);
         tools = new ArrayList<>();
         user = new User();
-        userPanel = new UserPanel();
+        userPanel = new UserPanel(this);
         welcomePanel = new WelcomePanel();
-        trainingPanel = new TrainingPanel();
+        addAMealPanel = new AddAMealPanel(this);
+        addATrainingPanel = new AddATrainingPanel(this);
+        addAWeightPanel = new AddAWeightPanel(this);
         pastMealsPanel = new PastMealsPanel();
+        pastTrainingPanel = new PastTrainingPanel();
+        pastWeightsPanel = new PastWeightsPanel();
         activePanel = new JPanel();
     }
 
@@ -86,12 +97,15 @@ public class FitnessAppGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS:  draws the JFrame window where this FitnessApp will operate
     private void initializeGraphics() {
-        boxLayout = new BoxLayout(getContentPane(),BoxLayout.Y_AXIS);
-        setLayout(boxLayout);
+        layOut = new BoxLayout(getContentPane(),1);
+        setLayout(layOut);
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
         welcomeScreen();
-        makeUserPanel();
+        activePanel.setVisible(true);
+        activePanel.setPreferredSize(new Dimension(0,0));
         createTools();
+        makeUserPanel();
+        add(activePanel,layOut);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -101,28 +115,48 @@ public class FitnessAppGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: display a welcome image
     private void welcomeScreen() {
-        add(welcomePanel, boxLayout);
+        add(welcomePanel, layOut);
     }
 
     // MODIFIES: this
     // EFFECTS: make user panel show up
-    private void makeUserPanel() {
-        remove(activePanel);
+    public void makeUserPanel() {
         activePanel = userPanel.makeUserPanel();
-        add(activePanel, boxLayout);
-        repaint();
-    }
-
-
-    // REQUIRES: the enter button is clicked
-    // MODIFIES: this
-    // EFFECTS: give the user the input name
-    public static void submitUserName(String name) {
-        user.giveName(name);
+        refreshActivePanel();
     }
 
     // MODIFIES: this
-    // EFFECTS:  a helper method which declares and instantiates all tools
+    // EFFECTS: set user to the given user
+    public void setUser(String name, int height) {
+        user.setNameAndHeight(name,height);
+        setNamesForLogs();
+    }
+
+    // EFFECTS: getter for the user height
+    public double getUserHeight() {
+        return user.getHeight();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: give each log a username
+    private void setNamesForLogs() {
+        foodLog.setUserName(user.getName());
+        trainingLog.setUserName(user.getName());
+        weightLog.setUserName(user.getName());
+    }
+
+     // MODIFIES: this
+     // EFFECTS: revalidate and repaint the active panel
+    private void refreshActivePanel() {
+        activePanel.setVisible(true);
+        add(activePanel,layOut);
+        activePanel.revalidate();
+        activePanel.repaint();
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: a helper method which declares and instantiates all tools
     private void createTools() {
         JPanel toolArea = new JPanel();
         toolArea.setLayout(new GridLayout(4, 2));
@@ -153,114 +187,55 @@ public class FitnessAppGUI extends JFrame {
         tools.add(loadTool);
     }
 
-    // REQUIRES: an option must be valid string that describe an user option
-    // EFFECTS: a helpful method for submenus
-    private void processSecondaryMenu(String option1, String option2) {
-        System.out.println("Please select an option!");
-        System.out.println(option1);
-        System.out.println(option2);
-    }
-
-    // EFFECTS: a sub-menu for trainings
-    private void trainingMenu() {
-        processSecondaryMenu("1. Enter a training session", "2. View my training history");
-        Scanner option = new Scanner(System.in);
-        int choice = option.nextInt();
-        if (choice == 1) {
-            makeNewTraining();
-        } else if (choice == 2) {
-            viewPastTraining();
-        }
-    }
-
-
-    // EFFECTS: a sub-menu for nutrition
-    public void nutritionMenu() {
-        processSecondaryMenu("1. Enter a meal", "2. View my meals");
-        Scanner option = new Scanner(System.in);
-        int choice = option.nextInt();
-        if (choice == 1) {
-            makeNewMeal();
-        } else if (choice == 2) {
-            viewPastMeals();
-        }
-    }
-
-    // EFFECTS: a sub-menu for measurements
-    private void measurementMenu() {
-        processSecondaryMenu("1. Enter a measurement", "2. View my measurements");
-        Scanner option = new Scanner(System.in);
-        int choice = option.nextInt();
-        if (choice == 1) {
-            makeMeasurement();
-        } else if (choice == 2) {
-            viewPastMeasurements();
-        }
-    }
-
-    // REQUIRES: weightLog has at least one entry
-    // EFFECTS: help method that prints out Measurement analysis
-    private void viewPastMeasurements() {
-        System.out.println((weightLog.viewAllMeasurements()));
-        System.out.println(weightLog.analyzeTrend());
-    }
 
     // REQUIRES: user answers the question nicely
     // MODIFIES: this
-    // EFFECTS: make a new Weight();
-    private void makeMeasurement() {
-        Scanner answer = new Scanner(System.in);
-        System.out.println("How much do you weight in kg");
-        double userWeight = answer.nextInt();
-        Weight newEntry = new Weight(userWeight, user.getHeight());
-        weightLog.addEntry(newEntry);
-    }
-
-    // REQUIRES: user answers the question nicely
-    // MODIFIES: this
-    // EFFECTS: make a new Food();
+    // EFFECTS: make a new Food and add it to food log
     public void makeNewMeal() {
-        JTextArea prompt = new JTextArea(5, 20);
-        add(prompt, boxLayout);
-
-        Scanner answer = new Scanner(System.in);
-        System.out.println("How much carbs in grams did you eat?");
-        int carbs = answer.nextInt();
-        answer = new Scanner(System.in);
-        System.out.println("How much protein in grams did you eat?");
-        int protein = answer.nextInt();
-        answer = new Scanner(System.in);
-        System.out.println("How much fat in grams did you eat?");
-        int fat = answer.nextInt();
-        Food newMeal = new Food(carbs, protein, fat);
-        foodLog.addEntry(newMeal);
-    }
-
-    // REQUIRES: mealLog has at least one entry
-    // EFFECTS: print out all meals in mealLog;
-    public void viewPastMeals() {
-        remove(boxLayout.getTarget());
-        activePanel = pastMealsPanel.makeMealPanel(foodLog);
-        add(activePanel,boxLayout);
-        repaint();
+        activePanel = addAMealPanel.questionPanel();
+        refreshActivePanel();
     }
 
 
     // REQUIRES: user answers the question nicely
     // MODIFIES: this
-    // EFFECTS: make a new Training();
+    // EFFECTS: make a new Training and add it to Training log
     public void makeNewTraining() {
-        remove(activePanel);
-        repaint();
-        add(trainingPanel.firstQuestion(),boxLayout);
-/*        add(trainingPanel.secondQuestion(),BorderLayout.CENTER);
-        add(trainingPanel.thirdQuestion(),BorderLayout.CENTER);*/
+        activePanel = addATrainingPanel.questionPanel();
+        refreshActivePanel();
     }
 
-    // REQUIRES: trainingLog has at least one entry
+    // REQUIRES: user answers the question nicely
+    // MODIFIES: this
+    // EFFECTS: make a new weight and add it to weight log
+    public void makeNewWeight() {
+        activePanel = addAWeightPanel.questionPanel();
+        refreshActivePanel();
+    }
+
+
+    // REQUIRES: mealLog is not null
+    // MODIFIES: this
+    // EFFECTS: print out all meals in mealLog in the activePanel;
+    public void viewPastMeals() {
+        activePanel = pastMealsPanel.makeMealLogPanel(foodLog);
+        refreshActivePanel();
+    }
+
+    // REQUIRES: trainingLog is not null
+    // MODIFIES: this
     // EFFECTS: print out all trainings in mealLog;
-    private void viewPastTraining() {
-        System.out.println(trainingLog.viewPastTraining());
+    public void viewPastTraining() {
+        activePanel = pastTrainingPanel.makeTrainingPanel(trainingLog);
+        refreshActivePanel();
+    }
+
+    // REQUIRES: weightLog is not null
+    // MODIFIES: this
+    // EFFECTS: help method that prints out Measurement analysis
+    public void viewPastMeasurements() {
+        activePanel = pastWeightsPanel.makeWeightsLogPanel(weightLog);
+        refreshActivePanel();
     }
 
     // MODIFIES: this
@@ -277,6 +252,7 @@ public class FitnessAppGUI extends JFrame {
         saveTrainingLog();
         saveWeightLog();
     }
+
 
     // EFFECTS: saves the foodLog to file
     private void saveFoodLog() {
@@ -296,7 +272,7 @@ public class FitnessAppGUI extends JFrame {
             jsonWriterTraining.open();
             jsonWriterTraining.write(trainingLog);
             jsonWriterTraining.close();
-            System.out.println("Saved " + trainingLog.getName() + " to " + JSON_STORE_TRAINING);
+            System.out.println("Saved TrainingLog");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file");
         }
@@ -308,7 +284,7 @@ public class FitnessAppGUI extends JFrame {
             jsonWriterWeight.open();
             jsonWriterWeight.write(weightLog);
             jsonWriterWeight.close();
-            System.out.println("Saved " + weightLog.getName() + " to " + JSON_STORE_WEIGHT);
+            System.out.println("Saved WeightLog");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file");
         }

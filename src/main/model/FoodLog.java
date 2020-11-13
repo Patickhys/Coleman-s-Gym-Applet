@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FoodLog extends Log {
     public ArrayList<Food> log;
-    String name;
+    private String userName;
 
     /*// MODIFIES: this
     // EFFECTS: make a new FoodLog
@@ -25,9 +25,9 @@ public class FoodLog extends Log {
     // MODIFIES: this
     // EFFECTS: make a new FoodLog with the user's name
 
-    public FoodLog(String name) {
+    public FoodLog(String userName) {
         log = new ArrayList<>();
-        this.name = name;
+        this.userName = userName;
     }
 
     // EFFECTS: return the total calories in the log
@@ -46,7 +46,7 @@ public class FoodLog extends Log {
 
     // EFFECTS: return the name of this log
     public String getName() {
-        return name;
+        return userName;
     }
 
     // EFFECTS: return the entry in the given position, begins at 0
@@ -63,26 +63,12 @@ public class FoodLog extends Log {
         log.add(c);
     }
 
-    /*@Override
-    public void addEntry(Training training) {
-
+    // MODIFIES: this
+    // EFFECTS: set this.userName = userName
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    @Override
-    public void addEntry(Weight weight) {
-
-    }
-
-    @Override
-    public String viewAllMeasurements() {
-        return null;
-    }
-
-    @Override
-    public String analyzeTrend() {
-        return null;
-    }
-*/
 
     // EFFECTS: return the average Calories consumed per day and
     public double findDailyCalories() {
@@ -111,7 +97,7 @@ public class FoodLog extends Log {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", name  + "'s food log");
+        json.put("name", " Training Log for " + userName);
         json.put("Entries", entriesToJson());
         return json;
     }

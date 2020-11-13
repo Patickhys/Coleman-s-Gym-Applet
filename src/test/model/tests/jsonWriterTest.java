@@ -100,7 +100,7 @@ public class jsonWriterTest extends JsonTest{
             writer.close();
             JsonReader reader = new JsonReader("./data/testWriterWeightLog.json");
             weightLog = reader.readWeightLog();
-            assertEquals("Weigh Log for Patrick", weightLog.getName());
+            assertEquals("Weight Log for Patrick", weightLog.getName());
             List<Weight> weights = weightLog.getWeights();
             assertEquals(2, weights.size());
         } catch (IOException e) {

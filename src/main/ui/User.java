@@ -15,7 +15,7 @@ public class User {
 
 
     // MODIFIES:this
-    // EFFECTS: construct a new user with a name and a height
+    // EFFECTS: construct a new user with a name and a height in cm
     public User(String name, int height) {
         this.name = name;
         this.height = height;
@@ -38,8 +38,9 @@ public class User {
     // MODIFIES: this
     // EFFECTS: set the input as this.name
 
-    public void giveName(String name) {
+    public void setNameAndHeight(String name,int height) {
         this.name = name;
+        this.height = height;
     }
 
     // getters

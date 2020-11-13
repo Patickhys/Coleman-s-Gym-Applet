@@ -1,4 +1,8 @@
 {
-    "name": "null's food log",
-    "Entries": []
+    "name": " Training Log for Patrick",
+    "Entries": [{
+        "Carbs": 20,
+        "Fat": 20,
+        "Protein": 50
+    }]
 }
