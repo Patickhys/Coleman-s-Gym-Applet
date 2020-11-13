@@ -36,7 +36,7 @@ public class jsonWriterTest extends JsonTest{
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyLog.json");
             foodLog = (FoodLog) reader.readFoodLog();
-            assertEquals("Patrick's food log", foodLog.getName());
+            assertEquals("Food Log for Patrick", foodLog.getName());
             assertEquals(0, foodLog.getLogSize());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
@@ -56,7 +56,7 @@ public class jsonWriterTest extends JsonTest{
 
             JsonReader reader = new JsonReader("./data/testWriterFoodLog.json");
             foodLog = (FoodLog) reader.readFoodLog();
-            assertEquals("Patrick's food log", foodLog.getName());
+            assertEquals("Food Log for Patrick", foodLog.getName());
             List<Food> foods = foodLog.getFoods();
             assertEquals(2, foods.size());
             checkFood(10, 20,30, foods.get(0));

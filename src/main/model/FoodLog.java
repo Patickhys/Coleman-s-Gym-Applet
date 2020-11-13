@@ -97,7 +97,7 @@ public class FoodLog extends Log {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", " Training Log for " + userName);
+        json.put("name", "Food Log for " + userName);
         json.put("Entries", entriesToJson());
         return json;
     }
