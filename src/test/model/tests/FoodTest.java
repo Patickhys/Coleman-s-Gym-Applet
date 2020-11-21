@@ -33,7 +33,52 @@ public class FoodTest {
     }
 
     @Test
-    void testEatAMeal(){
+    void testConstructorNegativeParam(){
+        try {
+            myDiet = new Food(-1,0,0);
+            fail();
+        } catch (NumberFormatException e) {
+            // expected
+        }
+        try {
+            myDiet = new Food(1,-1,0);
+            fail();
+        } catch (NumberFormatException e) {
+            // expected
+        }
+        try {
+            myDiet = new Food(1,1,-1);
+            fail();
+        } catch (NumberFormatException e) {
+            // expected
+        }
+    }
+
+
+    @Test
+    void testEatAMealAllOk(){
+        try {
+            myDiet.addAMeal(rice,chicken,avocado);
+            assertEquals(rice,myDiet.getCarbs());
+            assertEquals(chicken,myDiet.getProtein());
+            assertEquals(avocado,myDiet.getFat());
+        } catch (NumberFormatException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testEatAMealExceptionExpected(){
+        try {
+            myDiet.addAMeal(-rice,chicken,avocado);
+            fail();
+        } catch (NumberFormatException e) {
+            // expected
+        }
+    }
+
+    @Test
+    void testEatAMealNegativeInput(){
         myDiet.addAMeal(rice,chicken,avocado);
         assertEquals(rice,myDiet.getCarbs());
         assertEquals(chicken,myDiet.getProtein());

@@ -20,3 +20,7 @@ A user can be anyone who is looking to start building their strength or anyone w
 - As a user, I want to be able to reload my file to update them again.
 
 
+## Phase 4: Task 2
+
+In model.entries, Classes Food, Training and Weight all have a robust constructor.
+In addition, Food.addAMeal(int carbs, int protein, int fat) throws a NumberFormatException when one of the param given is negative so it has a robust design.

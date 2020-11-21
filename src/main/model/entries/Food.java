@@ -12,25 +12,31 @@ public class Food implements Writable,Entry {
     private int protein;                // protein consumed in grams
     private int fat;                    // fats consumed in grams
 
-
-
-    // REQUIRES: all int must be non-negative
+    
     // MODIFIES: this
     // EFFECTS: make a new DailyFoodIntake, assuming the user has consumed nothing yet
-    public Food(int carbs, int protein, int fat) {
+    // throws NumberFormatException if the param contains negative numbers
+    public Food(int carbs, int protein, int fat) throws NumberFormatException {
+        if (carbs < 0 || protein < 0 || fat < 0) {
+            throw new NumberFormatException();
+        }
         this.carbs = carbs;
         this.protein = protein;
         this.fat = fat;
     }
 
 
-    // REQUIRES: carbs, protein and fat all must be strictly non-negative.
     // MODIFIES: this
     // EFFECTS: add the macro-nutrients consumed to the total food intake
-    public void addAMeal(int carbs, int protein, int fat) {
-        this.carbs += carbs;
-        this.protein += protein;
-        this.fat += fat;
+    // throws NumberFormatException if the param contains negative numbers
+    public void addAMeal(int carbs, int protein, int fat) throws NumberFormatException {
+        if (carbs < 0 || protein < 0 || fat < 0) {
+            throw new NumberFormatException();
+        } else {
+            this.carbs += carbs;
+            this.protein += protein;
+            this.fat += fat;
+        }
     }
 
 

@@ -45,8 +45,8 @@ public class WeightLog implements Log {
     public String analyzeTrend() {
         String result = "";
         int lastPos = log.size() - 1;
-        double firstWeight = log.get(0).weightInKg;
-        double lastWeight = log.get(lastPos).weightInKg;
+        double firstWeight = log.get(0).getWeightInKg();
+        double lastWeight = log.get(lastPos).getWeightInKg();
         double progress = firstWeight - lastWeight;
         if (progress > 0) {
             result = "You lost " + progress + "kg, Keep up the good work!";

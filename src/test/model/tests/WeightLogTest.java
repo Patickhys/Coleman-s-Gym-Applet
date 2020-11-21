@@ -35,14 +35,14 @@ public class WeightLogTest {
 
     @Test
     void testAnalyzeTrendLosingWeight(){
-        double lostWeight = day1.weightInKg - day3.weightInKg;
+        double lostWeight = day1.getWeightInKg() - day3.getWeightInKg();
         String result =  "You lost " + lostWeight + "kg, Keep up the good work!";
         assertEquals(result, log.analyzeTrend());
     }
     @Test
     void testAnalyzeTrendGainingWeight(){
         log.addEntry(day4);
-        double gainWeight = day4.weightInKg - day1.weightInKg;
+        double gainWeight = day4.getWeightInKg() - day1.getWeightInKg();
         String result = "You gained " + gainWeight + "kg, Don't give up!";
         assertEquals(result, log.analyzeTrend());
     }

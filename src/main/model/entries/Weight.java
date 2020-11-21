@@ -1,18 +1,31 @@
 // Represents weight and height measurements provided by the user
 
 package model.entries;
+
 import org.json.JSONObject;
 import persistence.Writable;
 
 
 public class Weight implements Writable, Entry {
-    public double weightInKg;
-    public double heightInCm;
+    private double weightInKg;
+    private double heightInCm;
 
+
+    // getters
+    public double getWeightInKg() {
+        return weightInKg;
+    }
+
+    public double getHeightInCm() {
+        return heightInCm;
+    }
 
     // REQUIRES: weight to be in kg and height to be in cm, both > 0
     // EFFECTS: make a new measurement
-    public Weight(double weight, double height) {
+    public Weight(double weight, double height) throws NumberFormatException {
+        if (weight < 0 || height < 0) {
+            throw new NumberFormatException();
+        }
         weightInKg = weight;
         heightInCm = height;
     }

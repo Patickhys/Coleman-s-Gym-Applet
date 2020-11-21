@@ -9,10 +9,13 @@ public class Training implements Writable,Entry {
     public int calories;
     public int duration; // in minutes
 
-    // REQUIRES: calories and duration must be > 0
     // MODIFIES: this
     // EFFECTS: make a new Training with name calories and duration
-    public Training(String name, int calories, int duration) {
+    // throws NumberFormatException if the param contains negative numbers
+    public Training(String name, int calories, int duration) throws NumberFormatException {
+        if (calories < 0 || duration < 0) {
+            throw new NumberFormatException();
+        }
         this.name = name;
         this.calories = calories;
         this.duration = duration;

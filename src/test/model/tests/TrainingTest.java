@@ -4,7 +4,8 @@ import model.entries.Training;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 public class TrainingTest {
     Training BenchPress;
@@ -17,6 +18,23 @@ public class TrainingTest {
         Rowing = new Training("Rowing", 360, 30);
         Yoga = new Training("Yoga", 120,60);
     }
+
+    @Test
+    void testConstructorNegativeParam(){
+        try {
+            BenchPress = new Training("BP", -50,10);
+            fail();
+        } catch (NumberFormatException e){
+            // expected
+        }
+        try {
+            BenchPress = new Training("BP", 50,-10);
+            fail();
+        } catch (NumberFormatException e) {
+            // expected
+        }
+    }
+
     @Test
     void testFindIntensity(){
         double BPIntensity = BenchPress.calories / BenchPress.duration * HalfHour;
