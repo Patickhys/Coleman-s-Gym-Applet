@@ -1,7 +1,8 @@
+// Represents a panel that shows all the meals in the current WeightLog
+
 package ui.panels;
 
 import model.logs.WeightLog;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

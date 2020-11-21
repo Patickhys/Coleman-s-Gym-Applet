@@ -1,3 +1,5 @@
+// Represents a panel that shows all the meals in the current Foodlog
+
 package ui.panels;
 
 import model.logs.FoodLog;

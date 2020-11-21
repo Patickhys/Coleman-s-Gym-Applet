@@ -1,4 +1,5 @@
 // REFERENCE: code in this package refers to JsonSerializationDemo
+// Represents a writer that writes JSON representation of workroom to file
 
 package persistence;
 
@@ -9,14 +10,12 @@ import org.json.JSONObject;
 
 import java.io.*;
 
-// Represents a writer that writes JSON representation of workroom to file
+
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
     private String destination;
-    private static final String JSON_STORE_FOOD = "./data/savedFoodLog.json";
-    private static final String JSON_STORE_TRAINING = "./data/savedTrainingLog.json";
-    private static final String JSON_STORE_WEIGHT = "./data/savedWeightLog.json";
+
 
     // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {

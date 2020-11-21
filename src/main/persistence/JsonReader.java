@@ -1,4 +1,5 @@
 // REFERENCE: code in this package refers to JsonSerializationDemo
+// Represents a reader that reads workroom from JSON data stored in file
 
 package persistence;
 
@@ -17,13 +18,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-// Represents a reader that reads workroom from JSON data stored in file
+
 public class JsonReader {
     private String source;
-/*    private static final String JSON_STORE_FOOD = "./data/savedFoodLog.json";
-    private static final String JSON_STORE_TRAINING = "./data/savedTrainingLog.json";
-    private static final String JSON_STORE_WEIGHT = "./data/savedWeightLog.json";*/
 
+    // REQUIRES: the source must ba valid destination
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
         this.source = source;
@@ -53,10 +52,6 @@ public class JsonReader {
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseWeightLog(jsonObject);
     }
-
-
-
-
 
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
@@ -90,7 +85,6 @@ public class JsonReader {
         return log;
     }
 
-    // MODIFIES: FoodLog
     // EFFECTS: parses thingies from JSON object and adds them to workroom
     private void addFoodEntries(FoodLog log, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Entries");
@@ -101,7 +95,6 @@ public class JsonReader {
     }
 
 
-    // MODIFIES: TrainingLog
     // EFFECTS: parses thingies from JSON object and adds them to workroom
     private void addTrainingEntries(TrainingLog log, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Entries");
@@ -111,7 +104,6 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: WeightLog
     // EFFECTS: parses thingies from JSON object and adds them to workroom
     private void addWeightEntries(WeightLog log, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Entries");

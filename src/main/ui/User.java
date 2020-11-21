@@ -1,5 +1,6 @@
-package ui;
+// Represents a user that has a name and a height
 
+package ui;
 
 import java.util.Scanner;
 

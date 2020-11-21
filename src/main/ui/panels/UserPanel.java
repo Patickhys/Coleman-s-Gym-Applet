@@ -1,7 +1,8 @@
+// Represents a panel that prompts the user to make a new User
+
 package ui.panels;
 
 import ui.FitnessAppGUI;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,9 +44,6 @@ public class UserPanel extends JPanel {
         userPanel.add(enterButton);
         return userPanel;
     }
-
-
-
 
 
     // EFFECTS: submit an user input in the text area when the enter button is clicked

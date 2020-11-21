@@ -1,3 +1,5 @@
+// Represents a panel that prompts the user to add a Training to TrainingLog
+
 package ui.panels;
 
 import model.entries.Training;
@@ -22,6 +24,9 @@ public class AddATrainingPanel extends JPanel {
     private JTextField answerField3 = new JTextField("Enter the duration of your exercise in min", 10);
     private FitnessAppGUI fitnessAppGUI;
 
+    // REQUIRES: fitnessAppGUI
+    // MODIFIES: this
+    // EFFECTS: make a AddATrainingPanel
     public AddATrainingPanel(FitnessAppGUI fitnessAppGUI) {
         currentPanel = new JPanel();
         enterButton = new JButton("Enter");

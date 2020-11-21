@@ -1,14 +1,15 @@
+// Represents a log of measurements
+
 package model.logs;
 
 import model.entries.Weight;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// Represents a log of measurements, maximum one per day
+
 
 public class WeightLog implements Log {
     public ArrayList<Weight> log;
@@ -88,6 +89,7 @@ public class WeightLog implements Log {
         return Collections.unmodifiableList(log);
     }
 
+    // EFFECTS: return this as a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -96,14 +98,13 @@ public class WeightLog implements Log {
         return json;
     }
 
+    // EFFECTS: returns entries in this log as a JSON array
     @Override
     public JSONArray entriesToJson() {
         JSONArray jsonArray = new JSONArray();
-
         for (Weight weight : log) {
             jsonArray.put(weight.toJson());
         }
-
         return jsonArray;
     }
 

@@ -1,3 +1,5 @@
+// Represents a panel that shows the welcoming image of Ronnie Coleman
+
 package ui.panels;
 
 import javax.swing.*;

@@ -1,3 +1,5 @@
+// Represents a panel that prompts the user to add a meal to FoodLog
+
 package ui.panels;
 
 import model.entries.Food;
@@ -22,6 +24,9 @@ public class AddAMealPanel extends JPanel {
     private JTextField answerField3 = new JTextField("Enter your fat intake in grams", 10);
     private FitnessAppGUI fitnessAppGUI;
 
+    // REQUIRES: fitnessAppGUI
+    // MODIFIES: this
+    // EFFECTS: make a AddAMealPanel
     public AddAMealPanel(FitnessAppGUI fitnessAppGUI) {
         currentPanel = new JPanel();
         enterButton = new JButton("Enter");

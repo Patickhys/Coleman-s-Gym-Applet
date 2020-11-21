@@ -1,3 +1,5 @@
+// Represents a panel that prompts the user to add a weight to WeightLog
+
 package ui.panels;
 
 import model.entries.Weight;
@@ -16,6 +18,9 @@ public class AddAWeightPanel extends JPanel {
     private JTextField answerField1 = new JTextField("Enter your weight in kg", 10);
     private FitnessAppGUI fitnessAppGUI;
 
+    // REQUIRES: fitnessAppGUI
+    // MODIFIES: this
+    // EFFECTS: make a AddAWeightPanel
     public AddAWeightPanel(FitnessAppGUI fitnessAppGUI) {
         currentPanel = new JPanel();
         enterButton = new JButton("Enter");

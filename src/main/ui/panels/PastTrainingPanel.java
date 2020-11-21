@@ -1,8 +1,8 @@
+// Represents a panel that shows all the meals in the current TrainingLog
+
 package ui.panels;
 
-
 import model.logs.TrainingLog;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
