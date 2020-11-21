@@ -1,10 +1,10 @@
-package model;
+package model.entries;
 
 import org.json.JSONObject;
 import persistence.Writable;
 
 // Presents an exercise that has a name, calories burnt, and duration in minutes
-public class Training implements Writable {
+public class Training implements Writable,Entry {
     public String name;
     public int calories;
     public int duration; // in minutes
@@ -27,7 +27,7 @@ public class Training implements Writable {
     }
 
     // EFFECTS: return a string that describes the exercise
-    public String reportExercise() {
+    public String report() {
         String exercise = "You did " + name + " for " + duration + " minutes. It burned " + calories + " calories.";
         return exercise;
     }

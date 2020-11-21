@@ -1,30 +1,25 @@
-package model;
+// Represents a log of daily food intakes
 
+package model.logs;
+
+import model.entries.Food;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 
-// Represents a log of daily food intakes, each entry is one day
+public class FoodLog implements Log, Writable {
 
-public class FoodLog extends Log {
     public ArrayList<Food> log;
     private String userName;
-
-    /*// MODIFIES: this
-    // EFFECTS: make a new FoodLog
-
-    public FoodLog() {
-        log = new ArrayList<>();
-    }*/
 
     // REQUIRES: a valid userName from FitnessApp
     // MODIFIES: this
     // EFFECTS: make a new FoodLog with the user's name
-
     public FoodLog(String userName) {
         log = new ArrayList<>();
         this.userName = userName;
@@ -57,12 +52,12 @@ public class FoodLog extends Log {
 
     // REQUIRES: a valid Daily Calories
     // MODIFIES: this
-    // EFFECTS: add a DailyCalories to the intake log, Update TotalCalories and numLogs
-
+    // EFFECTS: add a DailyCalories to the intake log
     public void addEntry(Food c) {
         log.add(c);
     }
 
+    // Requires: a string that is an userName
     // MODIFIES: this
     // EFFECTS: set this.userName = userName
     public void setUserName(String userName) {
@@ -80,7 +75,7 @@ public class FoodLog extends Log {
         String allMeals = "";
         int number = 1;
         for (Food f : log) {
-            allMeals = allMeals + number + ". " + f.reportMeal() + "\n";
+            allMeals = allMeals + number + ". " + f.report() + "\n";
             number++;
         }
         int cal = getTotalCalories();
@@ -94,6 +89,7 @@ public class FoodLog extends Log {
     }
 
 
+    // EFFECTS: returns this as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -102,6 +98,7 @@ public class FoodLog extends Log {
         return json;
     }
 
+    // EFFECTS: returns entries in this log as a JSON array
     @Override
     public JSONArray entriesToJson() {
         JSONArray jsonArray = new JSONArray();

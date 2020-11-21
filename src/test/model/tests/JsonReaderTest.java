@@ -1,6 +1,6 @@
 package model.tests;
 
-import model.FoodLog;
+import model.logs.FoodLog;
 import org.junit.jupiter.api.Test;
 import persistence.JsonReader;
 import persistence.JsonWriter;

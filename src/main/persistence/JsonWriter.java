@@ -2,10 +2,9 @@
 
 package persistence;
 
-import model.FoodLog;
-import model.Log;
-import model.TrainingLog;
-import model.WeightLog;
+import model.logs.FoodLog;
+import model.logs.TrainingLog;
+import model.logs.WeightLog;
 import org.json.JSONObject;
 
 import java.io.*;

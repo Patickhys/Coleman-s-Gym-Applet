@@ -1,7 +1,6 @@
 package ui.panels;
 
-import model.FoodLog;
-import model.WeightLog;
+import model.logs.WeightLog;
 
 import javax.swing.*;
 import java.awt.*;

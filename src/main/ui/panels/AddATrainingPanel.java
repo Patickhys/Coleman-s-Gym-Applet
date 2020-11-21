@@ -1,13 +1,12 @@
 package ui.panels;
 
-import model.Training;
+import model.entries.Training;
 import ui.FitnessAppGUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class AddATrainingPanel extends JPanel {
     private final String question1 = "What exercise did you do?";

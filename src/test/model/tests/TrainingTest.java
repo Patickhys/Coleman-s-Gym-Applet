@@ -1,6 +1,6 @@
 package model.tests;
 
-import model.Training;
+import model.entries.Training;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,7 +30,7 @@ public class TrainingTest {
     void testReportExercise(){
         String result = "You did " + BenchPress.name + " for " + BenchPress.duration + " minutes. It burned "
                 + BenchPress.calories + " calories.";
-        assertEquals(result, BenchPress.reportExercise());
+        assertEquals(result, BenchPress.report());
     }
 
     @Test

@@ -2,7 +2,12 @@
 
 package persistence;
 
-import model.*;
+import model.entries.Food;
+import model.entries.Training;
+import model.entries.Weight;
+import model.logs.FoodLog;
+import model.logs.TrainingLog;
+import model.logs.WeightLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

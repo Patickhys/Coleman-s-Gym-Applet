@@ -1,6 +1,6 @@
 package ui.panels;
 
-import model.Food;
+import model.entries.Food;
 import ui.FitnessAppGUI;
 
 import javax.swing.*;

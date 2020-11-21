@@ -1,15 +1,11 @@
 package model.tests;
 
-import model.Food;
-import model.FoodLog;
-import model.Training;
-import model.Weight;
+import model.entries.Food;
+import model.logs.FoodLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -61,9 +57,9 @@ public class FoodLogTest {
         log.addEntry(day3);
         String result;
         int cal = log.getTotalCalories();
-        result = "1. " + day1.reportMeal() + "\n"
-                + "2. " + day2.reportMeal() + "\n"
-                + "3. " + day3.reportMeal() + "\n"
+        result = "1. " + day1.report() + "\n"
+                + "2. " + day2.report() + "\n"
+                + "3. " + day3.report() + "\n"
                 + "A total of " + cal + " calories." ;
         assertEquals(result, log.viewPastMeals());
     }

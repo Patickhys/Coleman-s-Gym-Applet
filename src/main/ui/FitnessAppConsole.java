@@ -4,28 +4,31 @@ package ui;
 //Represents a new FitnessApp, initials the app
 
 
+import model.entries.Food;
+import model.entries.Training;
+import model.entries.Weight;
+import model.logs.FoodLog;
+import model.logs.TrainingLog;
+import model.logs.WeightLog;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+import ui.tools.Tool;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import model.*;
-import ui.tools.*;
-import persistence.JsonReader;
-import persistence.JsonWriter;
-
 public class FitnessAppConsole {
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 700;
-    private int userHeight;
-    private double userWeight;
-    public TrainingLog trainingLog;
-    public FoodLog foodLog;
-    public WeightLog weightLog;
-    private Scanner input;
     private static final String JSON_STORE_FOOD = "./data/savedFoodLog.json";
     private static final String JSON_STORE_TRAINING = "./data/savedTrainingLog.json";
     private static final String JSON_STORE_WEIGHT = "./data/savedWeightLog.json";
+    public TrainingLog trainingLog;
+    public FoodLog foodLog;
+    public WeightLog weightLog;
+    private int userHeight;
+    private double userWeight;
+    private Scanner input;
     private JsonWriter jsonWriterFood;
     private JsonReader jsonReaderFood;
     private JsonWriter jsonWriterTraining;

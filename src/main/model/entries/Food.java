@@ -1,4 +1,4 @@
-package model;
+package model.entries;
 
 // Represents the food intake of a person, composed of carbohydrates, protein and fats (in grams)
 
@@ -7,7 +7,7 @@ import persistence.Writable;
 
 
 
-public class Food implements Writable {
+public class Food implements Writable,Entry {
     private int carbs;                  // carbohydrates consumed in grams
     private int protein;                // protein consumed in grams
     private int fat;                    // fats consumed in grams
@@ -15,22 +15,24 @@ public class Food implements Writable {
 
 
     // REQUIRES: all int must be non-negative
+    // MODIFIES: this
     // EFFECTS: make a new DailyFoodIntake, assuming the user has consumed nothing yet
-
     public Food(int carbs, int protein, int fat) {
         this.carbs = carbs;
         this.protein = protein;
         this.fat = fat;
     }
+
+
     // REQUIRES: carbs, protein and fat all must be strictly non-negative.
     // MODIFIES: this
     // EFFECTS: add the macro-nutrients consumed to the total food intake
-
-    public void eatAMeal(int carbs, int protein, int fat) {
+    public void addAMeal(int carbs, int protein, int fat) {
         this.carbs += carbs;
         this.protein += protein;
         this.fat += fat;
     }
+
 
     // EFFECTS: return the total calories consumed by the user, applying the 4-4-9 rule here
     public int getCalories() {
@@ -53,7 +55,8 @@ public class Food implements Writable {
         return fat;
     }
 
-    public String reportMeal() {
+    // EFFECTS: produce a string that describe a meal
+    public String report() {
         int cal = getCalories();
         String meal = "You had " + carbs + "g of carbs, " + protein + "g of protein, and " +  fat + "g of fat."
                 + "A total of " + cal + " calories.";
@@ -61,6 +64,7 @@ public class Food implements Writable {
     }
 
     // EFFECTS: Make food into a JSONObject
+    @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Carbs", carbs);

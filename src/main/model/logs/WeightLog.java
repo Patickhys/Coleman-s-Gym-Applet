@@ -1,5 +1,6 @@
-package model;
+package model.logs;
 
+import model.entries.Weight;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 // Represents a log of measurements, maximum one per day
 
-public class WeightLog extends  Log {
+public class WeightLog implements Log {
     public ArrayList<Weight> log;
     private String userName;
 

@@ -1,7 +1,6 @@
 package model.tests;
 
-import model.Food;
-import org.json.JSONObject;
+import model.entries.Food;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +34,7 @@ public class FoodTest {
 
     @Test
     void testEatAMeal(){
-        myDiet.eatAMeal(rice,chicken,avocado);
+        myDiet.addAMeal(rice,chicken,avocado);
         assertEquals(rice,myDiet.getCarbs());
         assertEquals(chicken,myDiet.getProtein());
         assertEquals(avocado,myDiet.getFat());
@@ -43,7 +42,7 @@ public class FoodTest {
 
     @Test
     void testGetCalories(){
-        myDiet.eatAMeal(rice,chicken,avocado);
+        myDiet.addAMeal(rice,chicken,avocado);
         int calories = 4 * rice + 4 * chicken + 9 * avocado;
         assertEquals(calories,myDiet.getCalories());
     }
@@ -52,7 +51,7 @@ public class FoodTest {
     void testReportMeal(){
         int cal = myDiet.getCalories();
         String result = "You had 0g of carbs, 0g of protein, and 0g of fat." + "A total of " + cal + " calories.";
-        assertEquals(result,myDiet.reportMeal());
+        assertEquals(result,myDiet.report());
     }
 
     @Test

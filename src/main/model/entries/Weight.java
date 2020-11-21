@@ -1,12 +1,11 @@
-package model;
+// Represents weight and height measurements provided by the user
 
-// Represents various measurements provided by the user
-
-
+package model.entries;
 import org.json.JSONObject;
+import persistence.Writable;
 
 
-public class Weight {
+public class Weight implements Writable, Entry {
     public double weightInKg;
     public double heightInCm;
 

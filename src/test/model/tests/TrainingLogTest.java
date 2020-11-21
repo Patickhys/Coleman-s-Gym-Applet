@@ -1,7 +1,7 @@
 package model.tests;
 
-import model.Training;
-import model.TrainingLog;
+import model.entries.Training;
+import model.logs.TrainingLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,9 +55,9 @@ public class TrainingLogTest {
     @Test
     void testViewPastTraining(){
         String result = "";
-        result = "1. " + BenchPress.reportExercise() + "\n"
-                + "2. " + Rowing.reportExercise() + "\n"
-                + "3. " + Yoga.reportExercise() + "\n"
+        result = "1. " + BenchPress.report() + "\n"
+                + "2. " + Rowing.report() + "\n"
+                + "3. " + Yoga.report() + "\n"
                 + "A total of " + log.getTotalCalories() + " calories.";
         assertEquals(result, log.viewPastTraining());
     }

@@ -4,7 +4,9 @@ package ui;
 //Represents a new FitnessApp, initials the app
 
 
-import model.*;
+import model.logs.FoodLog;
+import model.logs.TrainingLog;
+import model.logs.WeightLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.panels.*;
@@ -16,7 +18,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class FitnessAppGUI extends JFrame {
 

@@ -1,8 +1,7 @@
 package model.tests;
 
-import model.TrainingLog;
-import model.Weight;
-import model.WeightLog;
+import model.entries.Weight;
+import model.logs.WeightLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;

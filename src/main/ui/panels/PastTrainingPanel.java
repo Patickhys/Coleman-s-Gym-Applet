@@ -1,7 +1,7 @@
 package ui.panels;
 
 
-import model.TrainingLog;
+import model.logs.TrainingLog;
 
 import javax.swing.*;
 import java.awt.*;

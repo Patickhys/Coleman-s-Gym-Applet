@@ -1,7 +1,6 @@
 package model.tests;
 
-import model.Food;
-import model.FoodLog;
+import model.entries.Food;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

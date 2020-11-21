@@ -1,5 +1,8 @@
-package model;
+// Represents a log of training entries
 
+package model.logs;
+
+import model.entries.Training;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -7,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TrainingLog extends Log {
+public class TrainingLog implements Log {
     private ArrayList<Training> log;
     private String userName;
 
@@ -17,12 +20,12 @@ public class TrainingLog extends Log {
         log = new ArrayList<>();
     }
 
+    // REQUIRES: a valid string for username
     // MODIFIES: this
     // EFFECTS: make a new TrainingLog with the User's name
     public TrainingLog(String userName) {
         log = new ArrayList<>();
         this.userName = userName;
-        ;
     }
 
     // REQUIRES: e must be a valid exercise
@@ -35,17 +38,14 @@ public class TrainingLog extends Log {
 
     // REQUIRES: pos must be 1 <= pos <= log.size()
     // EFFECTS: return the exercise at position given
-
     public Training getExerciseAtPos(int pos) {
         pos--;
-        Training result = log.get(pos);
-        return result;
+        return log.get(pos);
     }
 
     // EFFECTS: Return the size of this log
     public Integer getSize() {
-        int size = log.size();
-        return size;
+        return log.size();
     }
 
     // EFFECTS: Return the total calories from all the entries of this log
@@ -60,7 +60,7 @@ public class TrainingLog extends Log {
     // EFFECTS: Return the total calories from all the entries of this log
     public double getAvgIntensity() {
         double totalCal = 0;
-        double avgIntensity = 0;
+        double avgIntensity;
         for (Training e : log) {
             totalCal += e.findIntensity();
         }
@@ -70,14 +70,14 @@ public class TrainingLog extends Log {
 
     // EFFECTS: return a string that is a numbered report of all the trainings in the log
     public String viewPastTraining() {
-        String allTrainings = "";
+        StringBuilder allTrainings = new StringBuilder();
         int number = 1;
         for (Training e : log) {
-            allTrainings = allTrainings + number + ". " + e.reportExercise() + "\n";
+            allTrainings.append(number).append(". ").append(e.report()).append("\n");
             number++;
         }
-        allTrainings = allTrainings + "A total of " + getTotalCalories() + " calories.";
-        return allTrainings;
+        allTrainings.append("A total of ").append(getTotalCalories()).append(" calories.");
+        return allTrainings.toString();
     }
 
     // MODIFIES: this
@@ -95,6 +95,7 @@ public class TrainingLog extends Log {
         return userName;
     }
 
+    // EFFECTS: returns this as a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -103,14 +104,13 @@ public class TrainingLog extends Log {
         return json;
     }
 
+    // EFFECTS: returns entries in this log as a JSON array
     @Override
     public JSONArray entriesToJson() {
         JSONArray jsonArray = new JSONArray();
-
         for (Training t : log) {
             jsonArray.put(t.toJson());
         }
-
         return jsonArray;
     }
 

@@ -1,12 +1,16 @@
 package model.tests;
 
-import model.*;
+import model.entries.Food;
+import model.entries.Training;
+import model.entries.Weight;
+import model.logs.FoodLog;
+import model.logs.TrainingLog;
+import model.logs.WeightLog;
 import org.junit.jupiter.api.Test;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
