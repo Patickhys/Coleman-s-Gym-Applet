@@ -52,7 +52,7 @@ public class TrainingLog implements Log {
     public int getTotalCalories() {
         int totalCalories = 0;
         for (Training e : log) {
-            totalCalories += e.calories;
+            totalCalories += e.getCalories();
         }
         return totalCalories;
     }

@@ -6,8 +6,8 @@ import persistence.Writable;
 // Presents an exercise that has a name, calories burnt, and duration in minutes
 public class Training implements Writable,Entry {
     public String name;
-    public int calories;
-    public int duration; // in minutes
+    private int calories;
+    private int duration; // in minutes
 
     // MODIFIES: this
     // EFFECTS: make a new Training with name calories and duration
@@ -19,6 +19,19 @@ public class Training implements Writable,Entry {
         this.name = name;
         this.calories = calories;
         this.duration = duration;
+    }
+
+    // getters
+    public String getName() {
+        return name;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public int getDuration() {
+        return duration;
     }
 
     // REQUIRES: the exercise must be valid, ie: calories && duration > 0
@@ -44,4 +57,6 @@ public class Training implements Writable,Entry {
         json.put("Duration", duration);
         return json;
     }
+
+
 }

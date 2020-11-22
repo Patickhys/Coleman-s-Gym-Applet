@@ -34,14 +34,12 @@ public class WeightLog implements Log {
 
     // MODIFIES: this
     // EFFECTS: set this.userName = userName
-
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-// REQUIRES: assume the log has at least one entry
+    // REQUIRES: assume the log has at least one entry
     // EFFECTS: return an analysis of the measurements logged so far
-
     public String analyzeTrend() {
         String result = "";
         int lastPos = log.size() - 1;
@@ -59,7 +57,7 @@ public class WeightLog implements Log {
         return result;
     }
 
-
+    // getter
     public String getName() {
         return userName;
     }

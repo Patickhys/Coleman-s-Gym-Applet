@@ -15,8 +15,8 @@ public class TrainingLogTest {
     Training BenchPress = new Training("BenchPress",50, 10);
     Training Rowing = new Training("Rowing", 360, 30);
     Training Yoga = new Training("Yoga", 120,60);
-    int totalCal = BenchPress.calories + Rowing.calories + Yoga.calories;
-    int totalDuration = BenchPress.duration + Rowing.duration + Yoga.duration;
+    int totalCal = BenchPress.getCalories() + Rowing.getCalories() + Yoga.getCalories();
+    int totalDuration = BenchPress.getDuration() + Rowing.getDuration() + Yoga.getDuration();
     String userName = "Patrick";
 
     @BeforeEach

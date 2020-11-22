@@ -37,17 +37,17 @@ public class TrainingTest {
 
     @Test
     void testFindIntensity(){
-        double BPIntensity = BenchPress.calories / BenchPress.duration * HalfHour;
-        double rowingIntensity = Rowing.calories / Rowing.duration * HalfHour;
-        double yogaIntensity = Yoga.calories / Yoga.duration * HalfHour;
+        double BPIntensity = BenchPress.getCalories() / BenchPress.getDuration() * HalfHour;
+        double rowingIntensity = Rowing.getCalories() / Rowing.getDuration() * HalfHour;
+        double yogaIntensity = Yoga.getCalories() / Yoga.getDuration() * HalfHour;
         assertEquals(BPIntensity,BenchPress.findIntensity());
         assertEquals(rowingIntensity,Rowing.findIntensity());
         assertEquals(yogaIntensity,Yoga.findIntensity());
     }
     @Test
     void testReportExercise(){
-        String result = "You did " + BenchPress.name + " for " + BenchPress.duration + " minutes. It burned "
-                + BenchPress.calories + " calories.";
+        String result = "You did " + BenchPress.name + " for " + BenchPress.getDuration() + " minutes. It burned "
+                + BenchPress.getCalories() + " calories.";
         assertEquals(result, BenchPress.report());
     }
 
