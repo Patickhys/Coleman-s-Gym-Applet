@@ -20,6 +20,12 @@ public class TrainingTest {
     }
 
     @Test
+    void testGetters(){
+        assertEquals(50,BenchPress.getCalories());
+        assertEquals(10,BenchPress.getDuration());
+    }
+
+    @Test
     void testConstructorNegativeParam(){
         try {
             BenchPress = new Training("BP", -50,10);

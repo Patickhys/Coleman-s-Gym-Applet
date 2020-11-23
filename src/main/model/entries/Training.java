@@ -22,9 +22,6 @@ public class Training implements Writable,Entry {
     }
 
     // getters
-    public String getName() {
-        return name;
-    }
 
     public int getCalories() {
         return calories;

@@ -26,4 +26,4 @@ In model.entries, Classes Food, Training and Weight all have robust constructors
 In addition, Food.addAMeal(int carbs, int protein, int fat) throws a NumberFormatException when one of the param given is negative, so it has a robust design.
 
 ## Phase 4 : Task 3
-If given more time, I would like to further refactor my UI package so that classes related to JPanel can be tidied up and have reduced coupling. Preferably I would also want to introduce more detailed type hierarchy in my model package so that the code is more concise.
+If given more time, I would like to further refactor my UI package so that classes related to JPanel can be tidied up and have reduced coupling. Preferably I would also want to introduce a more detailed type hierarchy in my model package so that the code is more concise.

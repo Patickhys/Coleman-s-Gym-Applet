@@ -75,6 +75,18 @@ public class FoodTest {
         } catch (NumberFormatException e) {
             // expected
         }
+        try {
+            myDiet.addAMeal(rice,-chicken,avocado);
+            fail();
+        } catch (NumberFormatException e) {
+            // expected
+        }
+        try {
+            myDiet.addAMeal(rice,chicken,-avocado);
+            fail();
+        } catch (NumberFormatException e) {
+            // expected
+        }
     }
 
     @Test
