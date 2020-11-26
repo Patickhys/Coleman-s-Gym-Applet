@@ -1,8 +1,15 @@
 {
-    "name": " Training Log for Patrick",
-    "Entries": [{
-        "Carbs": 20,
-        "Fat": 20,
-        "Protein": 50
-    }]
+    "name": "Food Log for  Training Log for Patrick",
+    "Entries": [
+        {
+            "Carbs": 20,
+            "Fat": 20,
+            "Protein": 50
+        },
+        {
+            "Carbs": 100,
+            "Fat": 100,
+            "Protein": 500
+        }
+    ]
 }

@@ -1,3 +1,5 @@
+// A tool that prompts the user to add a weight
+
 package ui.tools;
 
 import ui.FitnessAppGUI;
@@ -32,7 +34,8 @@ public class AddAWeightTool extends Tool {
     }
 
 
-    public class WeightToolClickHandler implements ActionListener {
+    // Helper class that handles a click
+    private class WeightToolClickHandler implements ActionListener {
 
         // EFFECTS:
         @Override

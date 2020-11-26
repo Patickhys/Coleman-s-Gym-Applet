@@ -1,3 +1,5 @@
+// A tool that prompts the user to add a training
+
 package ui.tools;
 
 import ui.FitnessAppGUI;
@@ -29,7 +31,8 @@ public class AddATrainingTool extends Tool {
         button.addActionListener(new TrainingToolClickHandler());
     }
 
-    public class TrainingToolClickHandler implements ActionListener {
+    // Helper class that handles a click
+    private class TrainingToolClickHandler implements ActionListener {
 
         // EFFECTS: sets active tool to the Training tool
         //          called by the framework when the tool is clicked

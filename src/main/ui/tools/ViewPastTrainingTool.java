@@ -1,3 +1,5 @@
+// A tool that calls PastTrainingPanel
+
 package ui.tools;
 
 import ui.FitnessAppGUI;
@@ -32,9 +34,10 @@ public class ViewPastTrainingTool extends Tool {
     }
 
 
-    public class ViewTrainingLogClickHandler implements ActionListener {
+    // Helper class that handles a click
+    private class ViewTrainingLogClickHandler implements ActionListener {
 
-        // EFFECTS:
+        // EFFECTS: call viewPastTraining()
         @Override
         public void actionPerformed(ActionEvent e) {
             fitnessApp.viewPastTraining();

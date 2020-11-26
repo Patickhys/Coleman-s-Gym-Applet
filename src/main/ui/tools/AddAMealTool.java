@@ -1,3 +1,5 @@
+// A tool that prompts the user to add a meal
+
 package ui.tools;
 
 import ui.FitnessAppGUI;
@@ -30,6 +32,7 @@ public class AddAMealTool extends Tool {
 
 
 
+    // Helper class that handles a click
     private class FoodToolClickHandler implements ActionListener {
 
         // EFFECTS: sets active tool to the Food tool

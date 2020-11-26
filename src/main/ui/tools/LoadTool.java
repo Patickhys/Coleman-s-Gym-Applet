@@ -1,3 +1,5 @@
+// A tool that prompts the user to load the saved file
+
 package ui.tools;
 
 import ui.FitnessAppGUI;
@@ -33,7 +35,8 @@ public class LoadTool extends Tool {
     }
 
 
-    public class LoadToolClickHandler implements ActionListener {
+    // Helper class that handles a click
+    private class LoadToolClickHandler implements ActionListener {
 
         // EFFECTS: sets active tool to the Training tool
         //          called by the framework when the tool is clicked

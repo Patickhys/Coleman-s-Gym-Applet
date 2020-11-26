@@ -1,3 +1,5 @@
+// A tool that calls PastMealsPanel
+
 package ui.tools;
 
 import ui.FitnessAppGUI;
@@ -32,7 +34,8 @@ public class ViewPastMealsTool extends Tool {
     }
 
 
-    public class MealLogClickHandler implements ActionListener {
+    // Helper class that handles a click
+    private class MealLogClickHandler implements ActionListener {
 
         // EFFECTS: call viewPastMeals()
         @Override

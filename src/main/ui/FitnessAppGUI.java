@@ -261,7 +261,6 @@ public class FitnessAppGUI extends JFrame {
             jsonWriterFood.open();
             jsonWriterFood.write(foodLog);
             jsonWriterFood.close();
-            System.out.println("Saved FoodLog");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file");
         }
@@ -273,7 +272,6 @@ public class FitnessAppGUI extends JFrame {
             jsonWriterTraining.open();
             jsonWriterTraining.write(trainingLog);
             jsonWriterTraining.close();
-            System.out.println("Saved TrainingLog");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file");
         }
@@ -285,7 +283,6 @@ public class FitnessAppGUI extends JFrame {
             jsonWriterWeight.open();
             jsonWriterWeight.write(weightLog);
             jsonWriterWeight.close();
-            System.out.println("Saved WeightLog");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file");
         }
@@ -296,7 +293,6 @@ public class FitnessAppGUI extends JFrame {
     private void loadFoodLog() {
         try {
             foodLog = jsonReaderFood.readFoodLog();
-            System.out.println("Loaded " + foodLog.getName() + " from " + JSON_STORE_FOOD);
         } catch (IOException e) {
             System.out.println("Unable to read from file");
         }
@@ -307,7 +303,6 @@ public class FitnessAppGUI extends JFrame {
     private void loadTrainingLog() {
         try {
             trainingLog = jsonReaderTraining.readTrainingLog();
-            System.out.println("Loaded " + trainingLog.getName() + " from " + JSON_STORE_TRAINING);
         } catch (IOException e) {
             System.out.println("Unable to read from file");
         }
@@ -318,7 +313,6 @@ public class FitnessAppGUI extends JFrame {
     private void loadWeightLog() {
         try {
             weightLog = jsonReaderWeight.readWeightLog();
-            System.out.println("Loaded " + weightLog.getName() + " from " + JSON_STORE_WEIGHT);
         } catch (IOException e) {
             System.out.println("Unable to read from file");
         }

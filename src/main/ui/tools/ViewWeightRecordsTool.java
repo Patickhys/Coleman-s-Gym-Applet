@@ -1,3 +1,5 @@
+// A tool that calls PastWeightPanel
+
 package ui.tools;
 
 import ui.FitnessAppGUI;
@@ -31,10 +33,10 @@ public class ViewWeightRecordsTool extends Tool {
         return "View weight record";
     }
 
+    // Helper class that handles a click
+    private class ViewWeightLogClickHandler implements ActionListener {
 
-    public class ViewWeightLogClickHandler implements ActionListener {
-
-        // EFFECTS:
+        // EFFECTS: calls viewPastMeasurements()
         @Override
         public void actionPerformed(ActionEvent e) {
             fitnessApp.viewPastMeasurements();

@@ -1,3 +1,5 @@
+// A tool that prompts the user to save a file
+
 package ui.tools;
 
 import ui.FitnessAppGUI;
@@ -28,9 +30,8 @@ public class SaveTool extends  Tool {
     }
 
 
-
-
-    public class SaveToolClickHandler implements ActionListener {
+    // Helper class that handles a click
+    private class SaveToolClickHandler implements ActionListener {
 
         // EFFECTS: sets active tool to the Training tool
         //          called by the framework when the tool is clicked
