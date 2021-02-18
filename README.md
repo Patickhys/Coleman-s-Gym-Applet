@@ -3,7 +3,7 @@
 ## A personal workout app
 
 This application aims to provide advice on *beginner* to *intermediate* level strength training.
-A user can use this app to generate a personalised workout pregame based on their personal preference on the frequency, intensity and volume of their workouts.
+A user can use this app to track their daily workout program and their consumption of macronutrients.
 
 ## Target audience
 
